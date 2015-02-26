@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<title>Online Art Gallery</title>
 
     <!-- font-awesome-min css from maxCDN -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<!-- Bootstrap Core CSS  -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Bootstrap Core CSS  -->
     <link href="././assets/css/bootstrap.min.css" rel="stylesheet">
 	
 	
@@ -62,23 +62,85 @@
 					<li>
                         <a href="#">Featured artist</a>
                     </li>
-				</ul>
-				<!-- Search box -->
-				<div class="col-sm-3 col-md-3 pull-right">
-					<form class="navbar-form" role="search">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Find art..." name="q_art">
-							<div class="input-group-btn">
-									<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-							</div>
+		    </ul>
+	        
+				<!-- Register button -->
+				<button type="button" class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#registerNewCustomerModal">Register</button>
+				<!-- /Register button -->
+				
+				<!-- Login button -->
+				<button type="button" class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#registerNewCustomerModal">Login</button>
+				<!-- /Login button -->
+				
+				
+				<!-- RegisterModal -->
+				<div class="modal fade" data-backdrop="static" id="registerNewCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<!-- kruisje bovenaan -->
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<!-- /kruisje bovenaan -->
+							<h4 class="modal-title" id="titleModalLabel">Register as new customer</h4>
+						  </div>
+						  <div class="modal-body">
+								<form class="form-inline-table" method="POST" action="proces.php">
+									
+									<div class="form-group">
+										<label for="inputName">Name</label>
+										<input type="text" class="form-control" id="inputName" placeholder="Dimaggio">
+									</div>
+									
+									<div class="form-group">	
+										<label for="inputFirstName">First name</label>
+										<input type="text" class="form-control" id="inputFirstName" placeholder="Miles">
+									</div>
+									
+									<div class="form-group">	
+										<label for="inputEmail">Email</label>
+										<input type="email" class="form-control" id="inputEmail" placeholder="me@someplace.com">
+									</div>
+									
+									<div class="form-group">
+										<label for="InputPassword">Password</label>
+										<input type="password" class="form-control" id="InputPassword" placeholder="Password">
+									</div>
+									
+									<div class="form-group">
+										<label for="InputControlPassword1">Repeat password</label>
+										<input type="password" class="form-control" id="InputControlPassword1" placeholder="Password">
+									</div>
+									
+<img id="captcha" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQmRYUNSth8eqGr_wlaNa5MIXdMfu7PZ3RhjktnPkfBN9tk9yVGZQ" height="42" width="100" alt="CAPTCHA Image" />
+									<a href="#" onclick="document.getElementById('captcha').src = '././assets/library/vendor/securimage/securimage_show.php?' + Math.random(); return false" class="btn btn-info btn-sm">Show a Different Image</a><br/>
+									<div class="form-group" style="margin-top: 10px;">
+										<input type="text" class="form-control" name="captcha_code" id="captcha_code" placeholder="Prove you are not a machine..." />
+										<span class="help-block" style="display: none;">Prove you are not a machine...</span>	
+									</div>
+									
+							
 						</div>
-					</form>
-				</div> 
-			<!-- CMS login button -->
+						<div class="modal-footer">
+						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						</div>
+						</form>
+					  </div>
+					</div>
+				</div>
+				<!-- /RegisterModal -->    
+		<!-- Search box -->
+		    <div class="col-sm-3 col-md-3 pull-right">
+		    <form class="navbar-form" role="search">
+		    <div class="input-group">
+		    <input type="text" class="form-control" placeholder="Find art..." name="q_art">
+		    <div class="input-group-btn">
+		    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		    </div>
+		    </div>
+		    </form>
+		    </div> 
 			
-			<a class="btn btn-default btn-sm" href="#">
-			<i class="fa fa-sign-in"></i>Sign in
-			</a>
 		
             </div>
             <!-- /.navbar-collapse -->
