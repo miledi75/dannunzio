@@ -39,7 +39,7 @@
 */
 
 
-$route['news/(:any)'] = 'news/view/$1';
+$route['admin/(:any)'] = 'admin/view/$1';
 $route['news'] = 'news';
 
 $route['default_controller'] = 'pages/view';

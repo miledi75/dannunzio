@@ -15,9 +15,19 @@ class pages extends CI_Controller
 		$data['cat1'] = "Paintings";
 		$data['cat2'] = "Sculptures";
 		$data['cat3'] = "Lithos";
-		//$this->load->view('templates/header', $data);
-		$this->load->view('pages/'.$page, $data);
-		//$this->load->view('templates/footer', $data);
+		//test homepage
+		//don't load the header and footer template
+		if($page == "copyHome")
+		{
+			$this->load->view('pages/'.$page, $data);
+		}
+		else
+		{
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/'.$page, $data);
+			$this->load->view('templates/footer', $data);
+		}	
+		
 	}
 }
 
