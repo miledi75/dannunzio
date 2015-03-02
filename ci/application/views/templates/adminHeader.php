@@ -49,121 +49,68 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Who we are</a>
+                        <a href="<?php echo base_url('admin/manageArt');?>">Manage art collection</a>
                     </li>
                     <li>
-                        <a href="#">Location</a>
+                        <a href="<?php echo base_url('admin/manageCustomers');?>">Manage customers</a>
                     </li>
                     <li>
-                        <a href="#">Events</a>
+                        <a href="<?php echo base_url('admin/manageUsers');?>">Manage users</a>
                     </li>
 					<li>
-                        <a href="#">Gallery</a>
+                        <a href="<?php echo base_url('admin/manageShowrooms');?>">Manage showrooms</a>
                     </li>
 					<li>
-                        <a href="#">Featured artist</a>
+                        <a href="<?php echo base_url('admin/manageEvents');?>">Manage events</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('admin/manageSales');?>">Manage sales</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url('home');?>">Go to store</a>
                     </li>
 		    </ul>
 	        
-				<!-- Register button -->
-				<button type="button" class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#registerNewCustomerModal">Register</button>
-				<!-- /Register button -->
-				
-				<!-- Login button -->
-				<button type="button" class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#registerNewCustomerModal">Login</button>
-				<!-- /Login button -->
 				
 				
-				<!-- RegisterModal -->
-				<div class="modal fade" data-backdrop="static" id="registerNewCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<!-- Logout button -->
+				<button type="button" class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#logOutConfirmationModal">Logout</button>
+				<!-- /Logout button -->
+			</div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- end of navigation -->
+<!-- modal forms -->
+<!-- LogoutModal -->
+				<div class="modal fade" data-backdrop="static" id="logOutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
 						  <div class="modal-header">
 							<!-- kruisje bovenaan -->
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							<!-- /kruisje bovenaan -->
-							<h4 class="modal-title" id="titleModalLabel">Register as new customer</h4>
+							<h4 class="modal-title" id="titleModalLabel">Logout from admin section</h4>
 						  </div>
 						  <div class="modal-body">
-								<form class="form-inline-table" method="POST" action="proces.php">
-									
-									<div class="form-group">
-										<label for="inputName">Name</label>
-										<input type="text" class="form-control" id="inputName" placeholder="Dimaggio">
-									</div>
-									
-									<div class="form-group">	
-										<label for="inputFirstName">First name</label>
-										<input type="text" class="form-control" id="inputFirstName" placeholder="Miles">
-									</div>
-									
-									<div class="form-group">	
-										<label for="inputEmail">Email</label>
-										<input type="email" class="form-control" id="inputEmail" placeholder="me@someplace.com">
-									</div>
-									
-									<div class="form-group">
-										<label for="InputPassword">Password</label>
-										<input type="password" class="form-control" id="InputPassword" placeholder="Password">
-									</div>
-									
-									<div class="form-group">
-										<label for="InputControlPassword1">Repeat password</label>
-										<input type="password" class="form-control" id="InputControlPassword1" placeholder="Password">
-									</div>
-									
-<img id="captcha" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQmRYUNSth8eqGr_wlaNa5MIXdMfu7PZ3RhjktnPkfBN9tk9yVGZQ" height="42" width="100" alt="CAPTCHA Image" />
-									<a href="#" onclick="document.getElementById('captcha').src = '././assets/library/vendor/securimage/securimage_show.php?' + Math.random(); return false" class="btn btn-info btn-sm">Show a Different Image</a><br/>
-									<div class="form-group" style="margin-top: 10px;">
-										<input type="text" class="form-control" name="captcha_code" id="captcha_code" placeholder="Prove you are not a machine..." />
-										<span class="help-block" style="display: none;">Prove you are not a machine...</span>	
-									</div>
-									
-							
-						</div>
+							<form class="form-inline-table" method="POST" action="proces.php">
+							<p>Would you like to log out?</p>						
+						  </div>
 						<div class="modal-footer">
-						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="submit" class="btn btn-default">Yes</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						</div>
 						</form>
 					  </div>
 					</div>
 				</div>
-				<!-- /RegisterModal -->    
-		<!-- Search box -->
-		    <div class="col-sm-3 col-md-3 pull-right">
-		    <form class="navbar-form" role="search">
-		    <div class="input-group">
-		    <input type="text" class="form-control" placeholder="Find art..." name="q_art">
-		    <div class="input-group-btn">
-		    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		    </div>
-		    </div>
-		    </form>
-		    </div> 
-			
-		
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+<!-- /LogoutModal -->
 
+<!-- /modal forms -->
+    
+    
+    
+    
 <!-- Page Content -->
-<!-- start of side panel -->    
-    <div class="container">
 
-        <div class="row">
-        <p class="lead"><?= $shopName ;?></p>
-        </div>
-        <div class="row">
-
-            <div class="col-md-3">
-                
-                <div class="list-group">
-                    <a href="#" class="list-group-item"><?= $cat1 ;?></a>
-                    <a href="#" class="list-group-item"><?= $cat2 ;?></a>
-                    <a href="#" class="list-group-item"><?= $cat3 ;?></a>
-                </div>
-            </div>
-<!-- end of the side panel -->
