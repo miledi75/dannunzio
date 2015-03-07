@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<title>Online Art Gallery</title>
+   	<title>Online Art Gallery</title>
 
     <!-- font-awesome-min css from maxCDN -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -43,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Home</a>
+                <a class="navbar-brand" href="<?php echo base_url('admin/home');?>">Home</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -67,7 +66,7 @@
                         <a href="<?php echo base_url('admin/manageSales');?>">Manage sales</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('home');?>">Go to store</a>
+                        <a href="<?php echo base_url('pages/home');?>">Go to store</a>
                     </li>
 		    </ul>
 	        
@@ -94,7 +93,7 @@
 							<h4 class="modal-title" id="titleModalLabel">Logout from admin section</h4>
 						  </div>
 						  <div class="modal-body">
-							<form class="form-inline-table" method="POST" action="proces.php">
+							<form class="form-inline-table" method="POST" action="<?php echo base_url();?>">
 							<p>Would you like to log out?</p>						
 						  </div>
 						<div class="modal-footer">

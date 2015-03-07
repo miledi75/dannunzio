@@ -1,7 +1,7 @@
 <?php
 class pages extends CI_Controller
 {
-	public function view($page='home')
+	/*public function view($page='home')
 	{
 		if(! file_exists(APPPATH.'views/pages/'.$page.'.php'))
 		{
@@ -28,7 +28,64 @@ class pages extends CI_Controller
 			$this->load->view('templates/footer', $data);
 		}	
 		
+	}*/
+	
+	public function landing()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$this->load->view('pages/landing', $data);
+	}
+	
+	
+	public function home()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['cat1'] = "Paintings";
+		$data['cat2'] = "Sculptures";
+		$data['cat3'] = "Lithos";
+		//test homepage
+		//don't load the header and footer template
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/home', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+	public function paintings()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['cat1'] = "Paintings";
+		$data['cat2'] = "Sculptures";
+		$data['cat3'] = "Lithos";
+		$data['artefactType'] = "Our Paintings";
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/paintings', $data);
+		//$this->load->view('pages/copyHome', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+	public function sculptures()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['cat1'] = "Paintings";
+		$data['cat2'] = "Sculptures";
+		$data['cat3'] = "Lithos";
+		$data['artefactType'] = "Our Sculptures";
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/sculptures', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+	public function lithos()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['cat1'] = "Paintings";
+		$data['cat2'] = "Sculptures";
+		$data['cat3'] = "Lithos";
+		$data['artefactType'] = "Our Litho's";
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/lithos', $data);
+		$this->load->view('templates/footer', $data);
 	}
 }
-
 ?>

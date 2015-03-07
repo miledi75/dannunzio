@@ -9,19 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+   
 	<title>Online Art Gallery</title>
-
-    <!-- font-awesome-min css from maxCDN -->
+	<!-- font-awesome-min css from maxCDN -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- Bootstrap Core CSS  -->
-    <link href="././assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/bootstrap.min.css');?>" rel="stylesheet">
 	
 	
     <!-- Custom CSS -->
-    <link href="././assets/css/shop-homepage.css" rel="stylesheet">
-    
-
+    <link href="<?php echo base_url('assets/css/shop-homepage.css');?>" rel="stylesheet">
+   
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,7 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Home</a>
+                <a class="navbar-brand" href="<?php echo base_url('pages/home');?>">Home</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -64,18 +62,95 @@
 					<li>
                         <a href="#">Featured artist</a>
                     </li>
+                    <li>
+                        <a href="<?php echo base_url('admin/home');?>">Admin panel</a>
+                    </li>
 		    </ul>
 	        
-				<!-- Register button -->
-				<button type="button" class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#registerNewCustomerModal">Register</button>
-				<!-- /Register button -->
-				
 				<!-- Login button -->
-				<button type="button" class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#registerNewCustomerModal">Login</button>
+				<button type="button" class="btn btn-default navbar-btn pull-right" data-toggle="modal" data-target="#loginModal">Login</button>
 				<!-- /Login button -->
 				
 				
-				<!-- RegisterModal -->
+				    
+		<!-- Search box -->
+		    <div class="col-sm-3 col-md-3 pull-right">
+		    <form class="navbar-form" role="search">
+		    <div class="input-group">
+		    <input type="text" class="form-control" placeholder="Find art..." name="q_art">
+		    <div class="input-group-btn">
+		    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		    </div>
+		    </div>
+		    </form>
+		    </div> 
+			
+		
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+<!-- Page Content -->
+<!-- start of side panel -->    
+    <div class="container">
+
+        <div class="row">
+        <p class="lead"><?= $shopName ;?></p>
+        </div>
+        <div class="row">
+			<div class="col-md-3">
+                <div class="list-group">
+                    <a href="<?php echo base_url('pages/paintings')?>" class="list-group-item"><?= $cat1 ;?></a>
+                    <a href="<?php echo base_url('pages/sculptures')?>" class="list-group-item"><?= $cat2 ;?></a>
+                    <a 	href="<?php echo base_url('pages/lithos')?>" class="list-group-item"><?= $cat3 ;?></a>
+                </div>
+            </div>
+<!-- end of the side panel -->
+            
+<!-- Modal forms -->
+
+<!-- loginModal -->            
+<div class="modal fade" data-backdrop="static" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!-- kruisje bovenaan -->
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<!-- /kruisje bovenaan -->
+				<h4 class="modal-title" id="titleModalLabel">Login</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-inline-table" method="POST" action="<?= base_url('admin/processLogin'); ?>">
+					<div class="form-group">
+						<label for="inputName">Your login</label>
+						<input type="text" class="form-control" id="inputLogin">
+					</div>
+									
+					<div class="form-group">	
+						<label for="inputFirstName">Password</label>
+						<input type="password" class="form-control" id="inputPassword">
+					</div>
+				
+				<div class="form-group">	
+						<label for="btnNewUser">First time here?</label>
+						<button type="button" class="btn btn-info btn-sm form-control" id="btnNewUser" data-dismiss="modal" data-toggle="modal" data-target="#registerNewCustomerModal">
+						New user
+						</button>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /loginModal -->
+
+<!-- RegisterNewCustomerModal -->
 				<div class="modal fade" data-backdrop="static" id="registerNewCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -130,41 +205,5 @@
 					  </div>
 					</div>
 				</div>
-				<!-- /RegisterModal -->    
-		<!-- Search box -->
-		    <div class="col-sm-3 col-md-3 pull-right">
-		    <form class="navbar-form" role="search">
-		    <div class="input-group">
-		    <input type="text" class="form-control" placeholder="Find art..." name="q_art">
-		    <div class="input-group-btn">
-		    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-		    </div>
-		    </div>
-		    </form>
-		    </div> 
-			
-		
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-<!-- Page Content -->
-<!-- start of side panel -->    
-    <div class="container">
-
-        <div class="row">
-        <p class="lead"><?= $shopName ;?></p>
-        </div>
-        <div class="row">
-
-            <div class="col-md-3">
-                
-                <div class="list-group">
-                    <a href="#" class="list-group-item"><?= $cat1 ;?></a>
-                    <a href="#" class="list-group-item"><?= $cat2 ;?></a>
-                    <a href="#" class="list-group-item"><?= $cat3 ;?></a>
-                </div>
-            </div>
-<!-- end of the side panel -->
+<!-- /RegisterNewCustomerModal -->
+<!-- /Modal forms -->

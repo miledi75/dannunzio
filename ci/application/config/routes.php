@@ -39,11 +39,11 @@
 */
 
 
-$route['admin/(:any)'] = 'admin/view/$1';
-$route['news'] = 'news';
+$route['admin/(:any)'] = 'admin/$1';
+//$route['news'] = 'news';
 
-$route['default_controller'] = 'pages/view';
-$route['(:any)'] = 'pages/view/$1';
+$route['default_controller'] = 'pages/home';
+$route['pages/(:any)'] = 'pages/$1';
 
 
 
