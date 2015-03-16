@@ -97,7 +97,7 @@
 							<p>Would you like to log out?</p>						
 						  </div>
 						<div class="modal-footer">
-						<button type="submit" class="btn btn-default">Yes</button>
+						<button type="submit" class="btn btn-success">Yes</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						</div>
 						</form>

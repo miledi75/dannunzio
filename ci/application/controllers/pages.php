@@ -43,6 +43,7 @@ class pages extends CI_Controller
 		$data['cat1'] = "Paintings";
 		$data['cat2'] = "Sculptures";
 		$data['cat3'] = "Lithos";
+
 		//test homepage
 		//don't load the header and footer template
 		$this->load->view('templates/header', $data);
@@ -56,7 +57,7 @@ class pages extends CI_Controller
 		$data['cat1'] = "Paintings";
 		$data['cat2'] = "Sculptures";
 		$data['cat3'] = "Lithos";
-		$data['artefactType'] = "Our Paintings";
+
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/paintings', $data);
@@ -70,7 +71,7 @@ class pages extends CI_Controller
 		$data['cat1'] = "Paintings";
 		$data['cat2'] = "Sculptures";
 		$data['cat3'] = "Lithos";
-		$data['artefactType'] = "Our Sculptures";
+
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/sculptures', $data);
 		$this->load->view('templates/footer', $data);
@@ -82,9 +83,63 @@ class pages extends CI_Controller
 		$data['cat1'] = "Paintings";
 		$data['cat2'] = "Sculptures";
 		$data['cat3'] = "Lithos";
-		$data['artefactType'] = "Our Litho's";
+	
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/lithos', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+	public function information()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['cat1'] = "Paintings";
+		$data['cat2'] = "Sculptures";
+		$data['cat3'] = "Lithos";
+	
+		
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/information', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+
+	public function location()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['cat1'] = "Paintings";
+		$data['cat2'] = "Sculptures";
+		$data['cat3'] = "Lithos";
+	
+	
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/location', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+
+	public function events()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['cat1'] = "Paintings";
+		$data['cat2'] = "Sculptures";
+		$data['cat3'] = "Lithos";
+	
+	
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/events', $data);
+		$this->load->view('templates/footer', $data);
+	}
+	
+	public function artists()
+	{
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['cat1'] = "Paintings";
+		$data['cat2'] = "Sculptures";
+		$data['cat3'] = "Lithos";
+	
+	
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/artists', $data);
 		$this->load->view('templates/footer', $data);
 	}
 }

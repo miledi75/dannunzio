@@ -1,5 +1,5 @@
 <!-- start of side panel -->    
-    <div class="container">
+<div class="container">
         <div class="row">
         	<div class="lead col-md-3">Manage art</div>
             <!-- Search box -->
@@ -41,12 +41,12 @@
         </thead>
         <tbody>
           <tr>
-            <td>Toys in the attic</td>
+            <td>Horses series 1</td>
             <td>Luca Di Marco</td>
-            <td>Oil painting</td>
+            <td>Painting</td>
             <td>Impressionism</td>
             <td>March 2014</td>
-            <td>1365</td>
+            <td>240.99</td>
             <td>
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -60,12 +60,12 @@
             </td>
           </tr>
           <tr>
-            <td>The sunshine</td>
+            <td>Horses series 2</td>
             <td>Mina Di Marco</td>
-            <td>Oil painting</td>
+            <td>Painting</td>
             <td>Impressionism</td>
             <td>Feb 2014</td>
-            <td>1865</td>
+            <td>250.66</td>
             <td>
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -79,12 +79,12 @@
             </td>
           </tr>
           <tr>
-            <td>Bedtime stories</td>
-            <td>Mina Di Marco</td>
-            <td>Sculpture</td>
+            <td>Horses series 3</td>
+            <td>Luca Di Marco</td>
+            <td>Painting</td>
             <td>Impressionism</td>
             <td>Feb 2014</td>
-            <td>2065</td>
+            <td>310.56</td>
             <td>
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -98,12 +98,12 @@
             </td>
           </tr>
           <tr>
-            <td>The geometer</td>
-            <td>Nazzaro Franciotti</td>
-            <td>Lithography</td>
+            <td>Horses series 3</td>
+            <td>Luca Di Marco</td>
+            <td>Painting</td>
             <td>Expressionism</td>
             <td>Feb 2015</td>
-            <td>365</td>
+            <td>325.12</td>
             <td>
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -120,9 +120,11 @@
       </table>
       </div>
  
-<!-- end art object table -->
+
    </div>     
+<!-- end art object table -->
 </div>
+<!-- end of container -->
 
 <!-- modal forms -->
 
@@ -185,15 +187,15 @@
 				 </div>
 				 <div class="form-group">
 					 <label for="imgArtObject">Art image</label>
-					 <span class="btn btn-default btn-file btn-sm">
+					 <span class="btn btn-info btn-file btn-sm">
 	    			 Browse <input id="imgArtObject" class="form-control" type="file">
 					 </span>
 				 </div>
 				 
 			  </div>
 			  <div class="modal-footer">
-				 <button type="submit" class="btn btn-default">Add to collection</button>
-				 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				 <button type="submit" class="btn btn-success">Add to collection</button>
+				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			  </div>
 			</form>
 		</div>
@@ -217,7 +219,7 @@
 				 
 				 <div class="form-group">
 					<label for="inputTitle">Artwork title</label>
-					<input type="text" class="form-control input-sm" id="inputTitle" value="Toys in the attic">
+					<input type="text" class="form-control input-sm" id="inputTitle" value="Horses series 1">
 				 </div>
 				 
 				 <div class="form-group">
@@ -234,7 +236,7 @@
 					<label for="selArtifactType">Artifact type</label>
 					<select class="form-control input-sm" id="selArtifactType">
 				        <option>Lithography</option>
-				        <option selected>Oil painting</option>
+				        <option selected>painting</option>
 				        <option>Sculpture</option>
 				        <option>Vincenzo Pavone</option>
 				    </select>
@@ -256,18 +258,18 @@
 				 </div>
 				 <div class="form-group">
 				      <label for="inputPrice">Price</label>
-				      <input id="inputPrice" class="form-control input-sm" value="1654 Euro">
+				      <input id="inputPrice" class="form-control input-sm" value="240.99 Euro">
 				 </div>
 				 <div class="form-group">
 					 <label for="imgArtObject">Update image</label>
-					 <span class="btn btn-default btn-file btn-sm">
+					 <span class="btn btn-info btn-file btn-sm">
 	    			 Browse <input id="imgArtObject" class="form-control" type="file">
 					 </span>
 				 </div>
 				 
 			  </div>
 			  <div class="modal-footer">
-				 <button type="submit" class="btn btn-default">Save edits</button>
+				 <button type="submit" class="btn btn-success">Save edits</button>
 				 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			  </div>
 			</form>

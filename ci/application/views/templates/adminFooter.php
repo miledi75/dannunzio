@@ -62,10 +62,10 @@
 	              <!-- kruisje bovenaan -->
 				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				  <!-- /kruisje bovenaan -->
-				  <h4 class="modal-title" id="titleModalLabel">Info</h4>
+				  <h4 class="modal-title" id="titleModalLabel">View image</h4>
 			  </div>
 			  <div class="modal-body">
-			  	<img src="http://ohsobella.com/wp-content/uploads/2012/08/francoise-nielly-art-2.jpg"/>
+			  	<img src="<?php echo base_url('assets/images/art/1.jpg')?>"/>
 			  </div>
 			  <div class="modal-footer">
 			  	 <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
