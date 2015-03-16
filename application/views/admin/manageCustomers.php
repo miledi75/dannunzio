@@ -17,7 +17,7 @@
      <div class="row">
 		 <div class="col-md-3">
 		     <div class="list-group">
-		     	<a href="#" class="list-group-item" data-toggle="modal" data-target="#addNewArtObjectModal"><?= $cat1 ;?></a>
+		     	<a href="#" class="list-group-item" data-toggle="modal" data-target="#createUserModal"><?= $cat1 ;?></a>
 		     </div>
 	     </div>
      </div>
@@ -99,6 +99,89 @@
 </div>
 
 <!-- /deleteUserModal -->
+
+<!-- createUserModal -->
+
+<div class="modal fade" data-backdrop="static" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Add new User</h4>
+			  </div>
+			  <div class="modal-body">
+				 <form class="form-inline-table" method="POST" action="<?=base_url('processUser/newUser');?>">
+				 
+				 <div class="form-group">
+					<label for="inputName">Name:</label>
+					<input type="text" class="form-control input-sm"  name="name" id="inputName" placeholder="Name...">
+				 </div>
+				 
+				 <div class="form-group">
+					<label for="inputSurname">Surname:</label>
+					<input type="text" class="form-control input-sm" name="surname" id="inputSurname" placeholder="Surname...">
+				 </div>
+				 
+				  <div class="form-group">
+					<label for="inputEmail">Email:</label>
+					<input type="text" class="form-control input-sm" name="email" id="inputEmail" placeholder="Email...">
+				 </div>
+				 
+				 <div class="form-group">
+					<label for="inputCell">Cell phone:</label>
+					<input type="text" class="form-control input-sm" name="cell" id="inputCell" placeholder="Phone...">
+				 </div>
+				 
+				
+				 <div class="form-group">
+				      <label for="inputUserName">Username:</label>
+				      <input type="text" name="username"id="inputUserName" class="form-control input-sm" placeholder="Username...">
+				 </div>
+				 <div class="form-group">
+					 <label for="inputPassword">Password:</label>
+				      <input type="password" name="password" id="inputPassword" class="form-control input-sm">
+				 </div>
+				 
+				 <div class="form-group">
+					 <label for="inputPassword2">Retype Password:</label>
+				      <input type="password" name="password2" id="inputPassword2" class="form-control input-sm">
+				 </div>
+				 
+				 <div class="form-group">
+					 <label for="inputstreet">Street:</label>
+				      <input type="text" name="street" id="inputstreet" class="form-control input-sm">
+				 </div>
+				 <div class="form-group">
+					 <label for="inputNumber">Number:</label>
+					 <input type="text" name="number" id="inputNumber" class="form-control input-sm">
+				 </div>
+				 <div class="form-group">
+					 <label for="inputPostalCode">Postal code:</label>
+					 <input type="text" name="postalcode" id="inputPostalCode" class="form-control input-sm">
+				 </div>
+				 <div class="form-group">
+					 <label for="inputTown">Town:</label>
+					 <input type="text" name="town" id="inputTown" class="form-control input-sm">
+				 </div>
+				 
+				  <div class="form-group">
+					 <label for="inputCountry">Country:</label>
+					 <input type="text" name="country" id="inputCountry" class="form-control input-sm">
+				 </div>
+			  </div>
+			  <div class="modal-footer">
+				 <button type="submit" class="btn btn-success">Create User</button>
+				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			  </div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<!-- /createUserModal -->
 
 <!-- /user modals -->
 
