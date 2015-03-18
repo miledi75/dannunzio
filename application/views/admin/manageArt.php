@@ -24,8 +24,30 @@
  
 <!-- end of the side panel -->
 
+
+        
 <!-- Begin art objects table -->
+        
 <div class="row">
+	<!-- NOTIFICATIONS -->
+	<?php if ($artObjectCreated): ?>
+		<div class="col-md-3">  
+			<div class="alert alert-success alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					Art object added succesfully!
+			</div>
+		</div>
+	<?php endif; ?>
+	
+	<?php if ($artObjectCreatedFailed): ?>
+		<div class="col-md-3">  
+			<div class="alert alert-danger alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					Art object creation failed!
+			</div>
+		</div>
+	<?php endif; ?>
+<!-- /NOTIFICATIONS -->
 <div class="col-md-12">          
       <table class="table table-hover">
         <thead>
@@ -132,6 +154,7 @@
 
 <div class="modal fade" data-backdrop="static" id="addNewArtObjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
+		<form class="form-inline-table" method="POST" action="<?=base_url('processArtObject/newArtObject')?>" enctype="multipart/form-data">
 		<div class="modal-content">
 			  <div class="modal-header">
 	              <!-- kruisje bovenaan -->
@@ -139,56 +162,52 @@
 				  <!-- /kruisje bovenaan -->
 				  <h4 class="modal-title" id="titleModalLabel">Add new art object</h4>
 			  </div>
+			  
 			  <div class="modal-body">
-				 <form class="form-inline-table" method="POST" action="process.php">
-				 
 				 <div class="form-group">
 					<label for="inputTitle">Artwork title</label>
-					<input type="text" class="form-control input-sm" id="inputTitle" placeholder="Sunflowers...">
+					<input type="text" name="title" class="form-control input-sm" id="inputTitle" placeholder="Sunflowers...">
 				 </div>
 				 
 				 <div class="form-group">
 					<label for="selArtist">Artist name</label>
-					<select class="form-control input-sm" id="selArtist">
-				        <option>Luca Di Marco</option>
-				        <option>Mina Di Marco</option>
-				        <option>Nazzaro Franciotti</option>
-				        <option>Vincenzo Pavone</option>
+					<select name="artist" class="form-control input-sm" id="selArtist">
+				        <?php foreach ($artists as $artist): ?>
+				        <option value="<?=$artist->user_id?>"><?=$artist->name?> <?=$artist->surname?></option>
+				        <?php endforeach; ?>
 				    </select>
 				 </div>
 				 
 				 <div class="form-group">
 					<label for="selArtifactType">Artifact type</label>
-					<select class="form-control input-sm" id="selArtifactType">
-				        <option>Lithography</option>
-				        <option>Oil painting</option>
-				        <option>Sculpture</option>
-				        <option>Vincenzo Pavone</option>
+					<select name="artifact" class="form-control input-sm" id="selArtifactType">
+				        <?php foreach ($artifacts as $artifact): ?>
+				        <option value="<?=$artifact->artefact_type_id?>"><?=$artifact->artefact_type?></option>
+				        <?php endforeach; ?>
 				    </select>
 				 </div>
 				 
 				 <div class="form-group">
-					<label for="selArtMovement">Artifact type</label>
-					<select class="form-control input-sm" id="selArtMovement">
-				        <option>Expressionism</option>
-				        <option>Impressionism</option>
-				        <option>Popart</option>
-				        <option>Postmodern art</option>
+					<label for="selArtPeriod">Period</label>
+					<select name="period" class="form-control input-sm" id="selArtPeriod">
+				       <?php foreach ($periods as $period): ?>
+				        <option value="<?=$period->art_period_id?>"><?=$period->art_period?></option>
+				        <?php endforeach; ?>
 				    </select>
 				 </div>
 				 
 				 <div class="form-group">
 				      <label for="input-month">Date	</label>
-				      <input id="input-month" class="form-control input-sm" type="month" value="2015-03">
+				      <input name="date" id="input-month" class="form-control input-sm" type="month" value="2015-03">
 				 </div>
 				 <div class="form-group">
 				      <label for="inputPrice">Price</label>
-				      <input id="inputPrice" class="form-control input-sm">
+				      <input type="text" name="price" id="inputPrice" class="form-control input-sm">
 				 </div>
 				 <div class="form-group">
 					 <label for="imgArtObject">Art image</label>
 					 <span class="btn btn-info btn-file btn-sm">
-	    			 Browse <input id="imgArtObject" class="form-control" type="file">
+	    			 Browse <input id="imgArtObject" class="form-control" type="file" name="image">
 					 </span>
 				 </div>
 				 

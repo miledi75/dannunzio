@@ -123,9 +123,12 @@
         <div class="row">
 			<div class="col-md-3">
                 <div class="list-group">
-                    <a href="<?php echo base_url('pages/paintings')?>" class="list-group-item"><?= $cat1 ;?></a>
-                    <a href="<?php echo base_url('pages/sculptures')?>" class="list-group-item"><?= $cat2 ;?></a>
-                    <a 	href="<?php echo base_url('pages/lithos')?>" class="list-group-item"><?= $cat3 ;?></a>
+                    
+					<?php foreach ($types as $type): ?>
+						<a href="<?php echo base_url("pages/$type->artefact_type")?>" class="list-group-item"><?= $type->artefact_type ;?></a>
+					<?php endforeach; ?>
+                    
+                    
                 </div>
             </div>
             

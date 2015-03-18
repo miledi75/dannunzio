@@ -83,6 +83,7 @@
     <!-- end of navigation -->
 <!-- modal forms -->
 <!-- LogoutModal -->
+				<form class="form-inline-table" method="POST" action="<?php echo base_url();?>">
 				<div class="modal fade" data-backdrop="static" id="logOutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -92,24 +93,23 @@
 							<!-- /kruisje bovenaan -->
 							<h4 class="modal-title" id="titleModalLabel">Logout from admin section</h4>
 						  </div>
+						  
 						  <div class="modal-body">
-							<form class="form-inline-table" method="POST" action="<?php echo base_url();?>">
 							<p>Would you like to log out?</p>						
 						  </div>
 						<div class="modal-footer">
 						<button type="submit" class="btn btn-success">Yes</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						</div>
-						</form>
+						
 					  </div>
 					</div>
 				</div>
+				</form>
 <!-- /LogoutModal -->
 
 <!-- /modal forms -->
     
-    
-    
-    
+
 <!-- Page Content -->
 

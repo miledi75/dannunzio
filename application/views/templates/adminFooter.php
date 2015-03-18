@@ -28,8 +28,6 @@
 
 <!-- GENERAL MODALS FOR ADMIN MODULE -->    
 
-    
-
 
 <!-- /deleteConfirmModal -->    
     

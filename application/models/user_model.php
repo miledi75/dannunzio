@@ -10,10 +10,39 @@ class User_model extends CI_Model {
 	/**
 	 * gets all the active users from the db
 	 */
-	public function get_users()
+	public function getArtists()
+	{
+	
+		$sql = "SELECT tbl_users.user_id,
+		tbl_user_data.surname,
+		tbl_user_data.name,
+		tbl_user_roles.user_role,
+		tbl_users.email
+		FROM (db_dannunzio.tbl_users tbl_users
+		INNER JOIN db_dannunzio.tbl_user_roles tbl_user_roles
+		ON (tbl_users.user_role_id = tbl_user_roles.user_role_id))
+		INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
+		ON (tbl_users.user_id = tbl_user_data.user_id)
+		WHERE (tbl_users.archived = 0)
+		AND
+		(tbl_users.user_role_id =4)";
+	
+		$query = $this->db->query($sql);
+	
+		return $query->result();
+	
+	}
+	
+	
+	
+	
+	/**
+	 * gets all the active users from the db
+	 */
+	public function getUsers($limit,$start)
 	{
 		
-		$sql = 'SELECT tbl_users.user_id,
+	$sql = "SELECT tbl_users.user_id,
        tbl_user_data.surname,
        tbl_user_data.name,
        tbl_user_roles.user_role,
@@ -23,7 +52,7 @@ class User_model extends CI_Model {
            ON (tbl_users.user_role_id = tbl_user_roles.user_role_id))
        INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
           ON (tbl_users.user_id = tbl_user_data.user_id)
-		AND (tbl_users.archived = 0)';
+		AND (tbl_users.archived = 0) LIMIT $limit offset $start";
 		
 		$query = $this->db->query($sql);
 		
@@ -32,11 +61,18 @@ class User_model extends CI_Model {
 	}
 	
 	/**
-	 * gets all the active customers from db
+	 * count all the users for pagination
 	 */
-	public function get_customers()
+	public function countUsers()
 	{
+		return $this->db->count_all("tbl_users");
+	}
 	
+	/**
+	 * count all the customers for pagination
+	 */
+	public function countCustomers()
+	{
 		//GETTING THE CUSTOMERS (BUYERS AND ARTISTS, 3 AND 4)
 		
 		$sql = 'SELECT tbl_users.user_id,
@@ -51,6 +87,31 @@ class User_model extends CI_Model {
           ON (tbl_users.user_id = tbl_user_data.user_id)
 		WHERE (tbl_users.user_role_id =? OR tbl_users.user_role_id =?)
 		AND (tbl_users.archived = 0)';
+		
+		$query = $this->db->query($sql,array(3,4));
+		
+		return $query->num_rows();
+	}
+	/**
+	 * gets all the active customers from db
+	 */
+	public function getCustomers($limit,$start)
+	{
+	
+		//GETTING THE CUSTOMERS (BUYERS AND ARTISTS, 3 AND 4)
+		$this->db->limit($limit,$start);
+		$sql = "SELECT tbl_users.user_id,
+       tbl_user_data.surname,
+       tbl_user_data.name,
+       tbl_user_roles.user_role,
+       tbl_users.email
+  		FROM (db_dannunzio.tbl_users tbl_users
+        INNER JOIN db_dannunzio.tbl_user_roles tbl_user_roles
+           ON (tbl_users.user_role_id = tbl_user_roles.user_role_id))
+       INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
+          ON (tbl_users.user_id = tbl_user_data.user_id)
+		WHERE (tbl_users.user_role_id =? OR tbl_users.user_role_id =?)
+		AND (tbl_users.archived = 0) LIMIT $limit offset $start";
 		
 		$query = $this->db->query($sql,array(3,4));
 		
@@ -86,7 +147,6 @@ class User_model extends CI_Model {
 				
 				return $query_user_data;
 			}
-			
 		}
 	}
 }

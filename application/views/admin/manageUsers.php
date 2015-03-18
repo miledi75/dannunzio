@@ -121,15 +121,15 @@
 	              <!-- kruisje bovenaan -->
 				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				  <!-- /kruisje bovenaan -->
-				  <h4 class="modal-title" id="titleModalLabel">Add new Customer</h4>
+				  <h4 class="modal-title" id="titleModalLabel">Add new User</h4>
 			  </div>
 			  <form class="form-inline-table" method="POST" action="<?=base_url('processUser/newUser');?>">
 			  <div class="modal-body">
 				 <div class="form-group">
 					<label for="inputType">User type:</label>
 					<select class="form-control input-sm"  name="user_role_id" id="inputType" >
-						<option value="3">Artist</option>
-						<option value="4">Buyer</option>
+						<option value="1">Admin</option>
+						<option value="2">Subadmin</option>
 					</select>
 				 </div>
 				 <div class="form-group">

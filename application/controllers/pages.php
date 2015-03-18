@@ -1,34 +1,22 @@
 <?php
 class pages extends CI_Controller
 {
-	/*public function view($page='home')
+	
+	private $artifacts;
+	
+	
+	/**
+	 * initialize online store variables by artefact type
+	 */
+	public function __construct()
 	{
-		if(! file_exists(APPPATH.'views/pages/'.$page.'.php'))
-		{
-			echo APPPATH.'views/pages/'.$page.'.php';
-			//no page
-			show_404();
-		}
+		parent::__construct();
+		// Your own constructor code
+		//LOAD ARTEFACT MODEL
+		$this->load->model('artifact_model');
+		$this->artifacts = $this->artifact_model->getArtifacts();
 		
-		$data['title'] = ucfirst($page); // Capitalize the first letter
-		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
-		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
-		//test homepage
-		//don't load the header and footer template
-		if($page == "copyHome")
-		{
-			$this->load->view('pages/'.$page, $data);
-		}
-		else
-		{
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/'.$page, $data);
-			$this->load->view('templates/footer', $data);
-		}	
-		
-	}*/
+	}
 	
 	public function landing()
 	{
@@ -40,12 +28,15 @@ class pages extends CI_Controller
 	public function home()
 	{
 		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
+		$data['types'] = $this->artifacts;
+		/**$data['cat1'] = "Paintings";
 		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
-
+		$data['cat3'] = "Lithos";**/
+		
+		
 		//test homepage
 		//don't load the header and footer template
+		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/home', $data);
 		$this->load->view('templates/footer', $data);
@@ -53,11 +44,13 @@ class pages extends CI_Controller
 	
 	public function paintings()
 	{
+		$this->load->model('artobject_model');
+		$paintings = $this->artobject_model->getArtObjectsByArtefactType(1);
+		
+		
 		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
-		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
-
+		$data['types'] = $this->artifacts;
+		$data['paintings'] = $paintings;
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/paintings', $data);
@@ -68,9 +61,7 @@ class pages extends CI_Controller
 	public function sculptures()
 	{
 		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
-		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
+		$data['types'] = $this->artifacts;
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/sculptures', $data);
@@ -80,9 +71,7 @@ class pages extends CI_Controller
 	public function lithos()
 	{
 		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
-		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
+		$data['types'] = $this->artifacts;
 	
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/lithos', $data);
@@ -92,9 +81,7 @@ class pages extends CI_Controller
 	public function information()
 	{
 		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
-		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
+		$data['types'] = $this->artifacts;
 	
 		
 		$this->load->view('templates/header', $data);
@@ -106,9 +93,7 @@ class pages extends CI_Controller
 	public function location()
 	{
 		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
-		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
+		$data['types'] = $this->artifacts;
 	
 	
 		$this->load->view('templates/header', $data);
@@ -120,10 +105,7 @@ class pages extends CI_Controller
 	public function events()
 	{
 		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
-		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
-	
+		$data['types'] = $this->artifacts;
 	
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/events', $data);
@@ -133,9 +115,7 @@ class pages extends CI_Controller
 	public function artists()
 	{
 		$data['shopName'] = "D'annunzio art gallery";
-		$data['cat1'] = "Paintings";
-		$data['cat2'] = "Sculptures";
-		$data['cat3'] = "Lithos";
+		$data['types'] = $this->artifacts;
 	
 	
 		$this->load->view('templates/header', $data);

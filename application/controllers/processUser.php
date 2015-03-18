@@ -36,19 +36,28 @@ class processUser extends CI_Controller
 		$postalcode = $this->input->post('postalcode');
 		$town = $this->input->post('town');
 		$country = $this->input->post('country');
+		$user_role_id = $this->input->post('user_role_id');
 		
-		var_dump($postVars);
 		
-		$N_user = array('userName' => $username,'password' => $password, 'email' => $email, 'user_role_id' => 3);
 		
-		$N_address = array('street' => 'langestraat','number' => 69, 'postal_code' => '9000', 'town' => 'Ghent', 'country' => 'BE');
+		$N_user = array('userName' => $username,'password' => $password, 'email' => $email, 'user_role_id' => $user_role_id);
 		
-		$N_user_data = array('name' => 'Kristof', 'surname' => 'Cleymans', 'cell_phone' => '046986532');
+		$N_address = array('street' => $street,'number' => $number, 'postal_code' => $postalcode, 'town' => $town, 'country' => $country);
+		
+		$N_user_data = array('name' => $name, 'surname' => $surname, 'cell_phone' => $cell);
 		
 		$insert = $this->user_model->insert_user($N_user,$N_address,$N_user_data);
 		if($insert)
 		{
-			echo "user inserted";
+			//ARTIST OR BUYER = REDIRECT TO CUSTOMER PAGE
+			if($user_role_id == 3 || $user_role_id == 4) 
+			{
+				redirect('/admin/manageCustomers/0/userCreated', 'refresh');
+			}
+			else //ADMIN OR SUBADMIN = REDIRECT TO USERS PAGE
+			{
+				redirect('/admin/manageCustomers/0/userCreated', 'refresh');
+			}
 		}
 	}
 }
