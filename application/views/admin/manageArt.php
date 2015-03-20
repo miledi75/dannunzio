@@ -31,7 +31,7 @@
 <div class="row">
 	<!-- NOTIFICATIONS -->
 	<?php if ($artObjectCreated): ?>
-		<div class="col-md-3">  
+		<div class="col-md-4">  
 			<div class="alert alert-success alert-dismissible" role="alert">
   				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   					Art object added succesfully!
@@ -40,13 +40,33 @@
 	<?php endif; ?>
 	
 	<?php if ($artObjectCreatedFailed): ?>
-		<div class="col-md-3">  
+		<div class="col-md-4">  
 			<div class="alert alert-danger alert-dismissible" role="alert">
   				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   					Art object creation failed!
 			</div>
 		</div>
+		
 	<?php endif; ?>
+	
+	<?php if ($artObjectDeleted): ?>
+		<div class="col-md-4">  
+			<div class="alert alert-success alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					Art object archived succesfully!
+			</div>
+		</div>
+	<?php endif; ?>
+	
+	<?php if ($artObjectDeletedFailed): ?>
+		<div class="col-md-4">  
+			<div class="alert alert-danger alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					Art object archivation failed!
+			</div>
+		</div>
+	<?php endif; ?>
+	
 <!-- /NOTIFICATIONS -->
 <div class="col-md-12">          
       <table class="table table-hover">
@@ -288,35 +308,38 @@
 		</div>
 	</div>
 </div>
-<?php endforeach;?>
+
 <!-- /editArtObjectModal -->
 
 <!-- deleteArtObjectModal -->
 
-<div class="modal fade" data-backdrop="static" id="deleteArtObjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="deleteArtObjectModal<?=$art_object->art_object_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			  <div class="modal-header">
-	              <!-- kruisje bovenaan -->
-				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <!-- /kruisje bovenaan -->
-				  <h4 class="modal-title" id="titleModalLabel">Delete art object?</h4>
-			  </div>
-			  <div class="modal-body">
-			  	<p>
-			  	Once you delete this art object it will no longer be available on the website! The system will put it in the archive
-			  	</p>
-			  </div>
-			  <div class="modal-footer">
-			  	<button type="submit" class="btn btn-danger" data-toggle="modal" data-dismiss="modal" data-target="#deleteConfirmModal">Proceed</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			  </div>
-		</div>
+		<form class="form-inline-table" method="POST" action="<?=base_url('/processArtObject/deleteArtObject')?>">
+			<input type="hidden" name="art_object_id" value="<?=$art_object->art_object_id?>">
+			<div class="modal-content">
+				  <div class="modal-header">
+		              <!-- kruisje bovenaan -->
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <!-- /kruisje bovenaan -->
+					  <h4 class="modal-title" id="titleModalLabel">Delete art object?</h4>
+				  </div>
+				  <div class="modal-body">
+				  	<p>
+				  	Once you delete this art object it will no longer be available on the website! The system will put it in the archive
+				  	</p>
+				  </div>
+				  <div class="modal-footer">
+				  	<button type="submit" class="btn btn-danger" >Proceed</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				  </div>
+			</div>
+		</form>
 	</div>
 </div>	
 
 <!-- /deleteArtObjectModal -->
-
+<?php endforeach;?>
 
 
 <!-- end of modal forms -->        

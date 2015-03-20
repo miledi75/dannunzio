@@ -39,6 +39,23 @@ class admin extends CI_Controller
 		{
 			$data['artObjectCreatedFailed'] = false;
 		}
+		if($action == 'artObjectDeleted')
+		{
+			$data['artObjectDeleted'] = true;
+		}
+		else
+		{
+			$data['artObjectDeleted'] = false;
+		}
+		
+		if($action == 'artObjectDeletedFailed')
+		{
+			$data['artObjectDeletedFailed'] = true;
+		}
+		else
+		{
+			$data['artObjectDeletedFailed'] = false;
+		}
 		
 		//LOAD THE DBASE MODELS
 		$this->load->model('artifact_model');

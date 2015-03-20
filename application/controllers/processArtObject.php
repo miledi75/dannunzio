@@ -1,7 +1,12 @@
 <?php
 class processArtObject extends CI_Controller
 {
-	
+	function __construct()
+	{
+		parent::__construct();
+		//LOAD THE MODEL
+		$this->load->model('artobject_model');
+	}
 	/*
 	 * ADDS A NEW ART OBJECT.
 	 * ALSO HANDLES IMAGE RESIZING
@@ -66,9 +71,6 @@ class processArtObject extends CI_Controller
 				//IF RESIZE IMAGE OK => STORE IN DATABASE
 				if($this->processImage($target_file,array('width' => 200, 'height' => 140)))
 				{
-					//LOAD THE MODEL
-					$this->load->model('artobject_model');
-					
 					//STORE THE DATA
 					$insert = $this->artobject_model->insertArtObject($N_art_object,$N_art_image);
 					if($insert)
@@ -115,4 +117,19 @@ class processArtObject extends CI_Controller
 		}
 	}
 	
+	/**
+	 * deletes artobject by archiving it
+	 */
+	public function deleteArtObject()
+	{
+		$art_object_id = $this->input->post('art_object_id');
+		if($this->artobject_model->deleteArtObject($art_object_id))
+		{
+			redirect('/admin/manageArt/artObjectDeleted', 'refresh');
+		}
+		else
+		{
+			redirect('/admin/manageArt/artObjectDeletedFailed', 'refresh');
+		}	
+	}
 }

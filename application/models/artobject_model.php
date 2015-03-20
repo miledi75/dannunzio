@@ -1,11 +1,21 @@
 <?php
 class Artobject_model extends CI_Model
 {
+	
+	/**
+	 * loads the database core class
+	 */
 	public function __construct()
 	{
 		$this->load->database();
 	}
 	
+	/**
+	 * inserts a new art object in the database
+	 * @param unknown $ar_artObject
+	 * @param unknown $ar_image
+	 * @return Ambigous <mixed, boolean, unknown, string>
+	 */
 	public function insertArtObject($ar_artObject, $ar_image)
 	{
 		$sql_artObject = $this->db->insert_string('tbl_art_objects', $ar_artObject);
@@ -46,7 +56,7 @@ class Artobject_model extends CI_Model
            				ON (tbl_art_objects.artefact_type_id = tbl_artefact_type.artefact_type_id))
        					INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
           				ON (tbl_art_objects.artist_id = tbl_user_data.user_id)
-						WHERE tbl_art_objects.artefact_type_id=?";
+						WHERE tbl_art_objects.artefact_type_id=? AND archived=0";
 		$query = $this->db->query($sqlArtObject,array($artefact_id));
 		return $query->result();
 	}
@@ -76,8 +86,20 @@ class Artobject_model extends CI_Model
         				INNER JOIN db_dannunzio.tbl_artefact_type tbl_artefact_type
            				ON (tbl_art_objects.artefact_type_id = tbl_artefact_type.artefact_type_id))
        					INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
-          				ON (tbl_art_objects.artist_id = tbl_user_data.user_id)";
+          				ON (tbl_art_objects.artist_id = tbl_user_data.user_id)
+						WHERE archived = 0";
 		$query = $this->db->query($sqlArtObject);
 		return $query->result();
 	}
+	
+	/**
+	 * archives an art object by setting the archived flag in the database to true
+	 * @param unknown $art_object_id
+	 * @return boolean
+	 */
+	public function deleteArtObject($art_object_id)
+	{
+		return $this->db->update('tbl_art_objects', array('archived' => 1), "art_object_id = $art_object_id");
+	}
+	
 }
