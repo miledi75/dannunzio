@@ -242,11 +242,32 @@ class admin extends CI_Controller
 	
 	public function manageShowrooms()
 	{
+		//LOAD THE DATABASE
+		
+		$this->load->model('showroom_model');
+		
+		//GET THE SHOWROOMS
+		$showrooms = $this->showroom_model->getAllShowrooms();
+		
+		//GET THE NR OF ARTOBJECTS IN A SHOWROOM
+		$ar_showrooms = array();
+		foreach ($showrooms as $showroom)
+		{
+			$nr_of_artObjects = $this->showroom_model->getNumberOfArtObjectsInShowroom($showroom->artefact_type_id);
+			
+			$ar_showrooms['showroom_name'] = $showroom->artefact_type;
+			$ar_showrooms['showroom_id'] = $showroom->artefact_type_id;
+			$ar_showrooms['showroom_nr_of_items'] = $nr_of_artObjects[0]->nr_of_artObjects;
+		}
+		
+		
+		
+		
 		$data['pageTitle'] = "Manage Showrooms";
 		$data['cat1'] = "New showroom";
 		$data['cat2'] = "empty";
 		$data['cat3'] = "empty";
-		
+		$data['showrooms'] = $ar_showrooms;
 
 		$this->load->view('templates/adminHeader', $data);
 		$this->load->view('admin/manageShowrooms');
