@@ -102,4 +102,9 @@ class Artobject_model extends CI_Model
 		return $this->db->update('tbl_art_objects', array('archived' => 1), "art_object_id = $art_object_id");
 	}
 	
+	public function editArtObject($ar_artObject)
+	{
+		return $this->db->update('tbl_art_objects', $ar_artObject, "art_object_id = ".$ar_artObject['art_object_id']);
+	}
+	
 }

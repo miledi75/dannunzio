@@ -67,6 +67,24 @@
 		</div>
 	<?php endif; ?>
 	
+	<?php if ($artObjectEdited): ?>
+		<div class="col-md-4">  
+			<div class="alert alert-success alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					Art object updated!
+			</div>
+		</div>
+	<?php endif; ?>
+	
+	<?php if ($artObjectEditedFailed): ?>
+		<div class="col-md-4">  
+			<div class="alert alert-danger alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					Art object update failed!
+			</div>
+		</div>
+	<?php endif; ?>
+	
 <!-- /NOTIFICATIONS -->
 <div class="col-md-12">          
       <table class="table table-hover">
@@ -97,7 +115,7 @@
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteArtObjectModal<?= $art_object->art_object_id?>">Delete</a></li>
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editNewArtObjectModal<?= $art_object->art_object_id?>">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewImageModal<?= $art_object->image_path?>">View Image</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewImageModal<?= $art_object->art_object_id?>">View Image</a></li>
 		        </ul>
 		      </div>
             </td>
@@ -120,7 +138,7 @@
 <div class="modal fade" data-backdrop="static" id="addNewArtObjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<form class="form-inline-table" method="POST" action="<?=base_url('processArtObject/newArtObject')?>" enctype="multipart/form-data">
-		<div class="modal-content">
+			<div class="modal-content">
 			  <div class="modal-header">
 	              <!-- kruisje bovenaan -->
 				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -199,6 +217,7 @@
 <div class="modal fade" data-backdrop="static" id="editNewArtObjectModal<?=$art_object->art_object_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		<form class="form-inline-table" method="POST" action="<?=base_url('processArtObject/EditArtObject')?>" enctype="multipart/form-data">
+		<input type="hidden" name="art_object_id" value="<?=$art_object->art_object_id?>" id="hiddenArtObjectId">
 		<div class="modal-content">
 			  <div class="modal-header">
 	              <!-- kruisje bovenaan -->
@@ -210,7 +229,7 @@
 			  <div class="modal-body">
 				 <div class="form-group">
 					<label for="inputTitle">Artwork title</label>
-					<input type="text" name="title" class="form-control input-sm" id="inputTitle" value=<?=$art_object->title?>>
+					<input type="text" name="title" class="form-control input-sm" id="inputTitle" value="<?=$art_object->title?>">
 				 </div>
 				 
 				 <div class="form-group">
@@ -339,7 +358,28 @@
 </div>	
 
 <!-- /deleteArtObjectModal -->
-<?php endforeach;?>
 
+<!-- viewImageModal -->
+<div class="modal fade" data-backdrop="static" id="viewImageModal<?=$art_object->art_object_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">View image</h4>
+			  </div>
+			  <div class="modal-body">
+			  	<img src="<?php echo base_url('/uploads/')."/$art_object->image_name"?>"/>
+			  </div>
+			  <div class="modal-footer">
+			  	 <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+			  </div>
+		</div>
+	</div>
+</div>
+<!-- /viewImageModal -->
+
+<?php endforeach;?>
 
 <!-- end of modal forms -->        

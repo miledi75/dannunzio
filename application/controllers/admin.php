@@ -39,6 +39,7 @@ class admin extends CI_Controller
 		{
 			$data['artObjectCreatedFailed'] = false;
 		}
+		
 		if($action == 'artObjectDeleted')
 		{
 			$data['artObjectDeleted'] = true;
@@ -55,6 +56,23 @@ class admin extends CI_Controller
 		else
 		{
 			$data['artObjectDeletedFailed'] = false;
+		}
+		
+		if($action == 'artObjectEditedFailed')
+		{
+			$data['artObjectEditedFailed'] = true;
+		}
+		else
+		{
+			$data['artObjectEditedFailed'] = false;
+		}
+		if($action == 'artObjectEdited')
+		{
+			$data['artObjectEdited'] = true;
+		}
+		else
+		{
+			$data['artObjectEdited'] = false;
 		}
 		
 		//LOAD THE DBASE MODELS

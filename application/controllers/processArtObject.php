@@ -132,4 +132,58 @@ class processArtObject extends CI_Controller
 			redirect('/admin/manageArt/artObjectDeletedFailed', 'refresh');
 		}	
 	}
+	
+	function editArtObject()
+	{
+		
+	
+		/** title
+			price
+			description
+			date
+			artist_id
+			artefact_type_id
+			art_period_id
+			art_object_id
+			archived
+		**/
+
+		//GETTING THE POST VARS
+		$title = $this->input->post('title');
+		$artist = $this->input->post('artist');
+		$artifact = $this->input->post('artifact');
+		$period = $this->input->post('period');
+		$date = $this->input->post('date');
+		$price = $this->input->post('price');
+		$description = $this->input->post('description');
+		$art_object_id = $this->input->post('art_object_id');
+		//$image = $_FILES;
+		
+		
+		//FILLING THE ARRAYS
+		
+		$editArtObject = array
+		(
+			
+			'art_object_id'		=> $art_object_id,
+			'price' 			=> $price,
+			'artist_id' 		=> $artist,
+			'artefact_type_id' 	=> $artifact,
+			'art_period_id' 	=> $period,
+			'title' 			=> $title,
+			'date'				=> $date,
+			'description'		=> $description
+		);
+		
+		
+		if($this->artobject_model->editArtObject($editArtObject))
+		{
+			redirect('/admin/manageArt/artObjectEdited', 'refresh');
+		}
+		else
+		{
+			redirect('/admin/manageArt/artObjectEditedFailed', 'refresh');
+		}	
+		
+	}
 }
