@@ -44,6 +44,7 @@ class admin extends CI_Controller
 		$this->load->model('artifact_model');
 		$this->load->model('period_model');
 		$this->load->model('user_model');
+		$this->load->model('artobject_model');
 		
 		
 		//GET ARTEFACT TYPE
@@ -55,13 +56,20 @@ class admin extends CI_Controller
 		//GET ARTIST
 		$artists = $this->user_model->getArtists();
 		
-		$data['pageTitle'] = "Manage art collection";
-		$data['cat1'] = "Add new art object";
-		$data['cat2'] = "empty";
-		$data['cat3'] = "empty";
-		$data['artifacts'] = $artifacts;
-		$data['periods'] = $periods;
-		$data['artists'] = $artists;
+		//GET THE ART OBJECT LIST
+		
+		$art_objects = $this->artobject_model->getAllArtObjects();
+		
+		
+		
+		$data['pageTitle']		= "Manage art collection";
+		$data['cat1'] 			= "Add new art object";
+		$data['cat2'] 			= "empty";
+		$data['cat3'] 			= "empty";
+		$data['artifacts'] 		= $artifacts;
+		$data['periods'] 		= $periods;
+		$data['artists'] 		= $artists;
+		$data['art_objects'] 	= $art_objects;
 		
 		$this->load->view('templates/adminHeader', $data);
 		$this->load->view('admin/manageArt');

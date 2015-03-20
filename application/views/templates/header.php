@@ -106,34 +106,25 @@
 
 <!-- Page Content -->
 <!-- start of side panel -->    
-    <div class="container">
+<div class="container">
 
-        
-        <!-- ShopName -->
-        <div class="row">
-        <div class="col-md-3">
-        <p class="lead"><?= $shopName ;?></p>
+<!-- ShopName -->
+	<div class="row">
+    	<div class="col-md-3">
+        	<p class="lead"><?= $shopName ;?></p>
    		</div>
-   		<!-- /shopName -->
-        
-       
-               
-        </div>
-   
-        <div class="row">
-			<div class="col-md-3">
-                <div class="list-group">
-                    
-					<?php foreach ($types as $type): ?>
-						<a href="<?php echo base_url("pages/$type->artefact_type")?>" class="list-group-item"><?= $type->artefact_type ;?></a>
-					<?php endforeach; ?>
-                    
-                    
-                </div>
+<!-- /shopName -->
+<!-- showroom links -->        
+	</div>
+   	<div class="row">
+		<div class="col-md-3">
+        	<div class="list-group">
+            	<?php foreach ($types as $type): ?>
+					<a href="<?php echo base_url("pages/store/$type->artefact_type_id")?>" class="list-group-item"><?= $type->artefact_type ;?></a>
+				<?php endforeach; ?>
             </div>
-            
-            
-            
+        </div>
+<!-- /showroom links -->
 <!-- end of the side panel -->
             
 <!-- Modal forms -->

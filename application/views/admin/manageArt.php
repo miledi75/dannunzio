@@ -27,7 +27,7 @@
 
         
 <!-- Begin art objects table -->
-        
+ 
 <div class="row">
 	<!-- NOTIFICATIONS -->
 	<?php if ($artObjectCreated): ?>
@@ -52,7 +52,7 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Art object</th>
+            <th>Art object title</th>
             <th>Artist</th>
             <th>Type</th>
             <th>Period</th>
@@ -62,85 +62,30 @@
           </tr>
         </thead>
         <tbody>
+          <?php foreach ($art_objects as $art_object): ?>
           <tr>
-            <td>Horses series 1</td>
-            <td>Luca Di Marco</td>
-            <td>Painting</td>
-            <td>Impressionism</td>
-            <td>March 2014</td>
-            <td>240.99</td>
+            <td><?= $art_object->title ?></td>
+            <td><?= $art_object->name." ".$art_object->surname ?></td>
+            <td><?= $art_object->artefact_type?></td>
+            <td><?= $art_object->art_period ?></td>
+            <td><?= $art_object->date ?></td>
+            <td><?= $art_object->price ?></td>
             <td>
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 		        <span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteArtObjectModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editNewArtObjectModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewImageModal">View Image</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteArtObjectModal<?= $art_object->art_object_id?>">Delete</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editNewArtObjectModal<?= $art_object->art_object_id?>">Edit</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewImageModal<?= $art_object->image_path?>">View Image</a></li>
 		        </ul>
 		      </div>
             </td>
           </tr>
-          <tr>
-            <td>Horses series 2</td>
-            <td>Mina Di Marco</td>
-            <td>Painting</td>
-            <td>Impressionism</td>
-            <td>Feb 2014</td>
-            <td>250.66</td>
-            <td>
-		      <div class="dropdown">
-		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-		        <span class="caret"></span></button>
-		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteArtObjectModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editNewArtObjectModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewImageModal">View Image</a></li>
-		        </ul>
-		      </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Horses series 3</td>
-            <td>Luca Di Marco</td>
-            <td>Painting</td>
-            <td>Impressionism</td>
-            <td>Feb 2014</td>
-            <td>310.56</td>
-            <td>
-		      <div class="dropdown">
-		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-		        <span class="caret"></span></button>
-		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteArtObjectModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editNewArtObjectModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewImageModal">View Image</a></li>
-		        </ul>
-		      </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Horses series 3</td>
-            <td>Luca Di Marco</td>
-            <td>Painting</td>
-            <td>Expressionism</td>
-            <td>Feb 2015</td>
-            <td>325.12</td>
-            <td>
-		      <div class="dropdown">
-		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-		        <span class="caret"></span></button>
-		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteArtObjectModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editNewArtObjectModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewImageModal">View Image</a></li>
-		        </ul>
-		      </div>
-            </td>
-          </tr>
+          <?php endforeach; ?>
         </tbody>
       </table>
-      </div>
+    </div>
  
 
    </div>     
@@ -204,6 +149,12 @@
 				      <label for="inputPrice">Price</label>
 				      <input type="text" name="price" id="inputPrice" class="form-control input-sm">
 				 </div>
+				 
+				 <div class="form-group">
+				      <label for="inputDescription">Short description</label>
+				      <input type="text" name="description" id="inputDescription" class="form-control input-sm">
+				 </div>
+				 
 				 <div class="form-group">
 					 <label for="imgArtObject">Art image</label>
 					 <span class="btn btn-info btn-file btn-sm">
@@ -220,12 +171,14 @@
 		</div>
 	</div>
 </div>
+
 <!-- /addNewArtObjectModal -->
 
 <!-- editArtObjectModal -->
-
-<div class="modal fade" data-backdrop="static" id="editNewArtObjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+<?php foreach ($art_objects as $art_object): ?>
+<div class="modal fade" data-backdrop="static" id="editNewArtObjectModal<?=$art_object->art_object_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<form class="form-inline-table" method="POST" action="<?=base_url('processArtObject/EditArtObject')?>" enctype="multipart/form-data">
 		<div class="modal-content">
 			  <div class="modal-header">
 	              <!-- kruisje bovenaan -->
@@ -233,69 +186,109 @@
 				  <!-- /kruisje bovenaan -->
 				  <h4 class="modal-title" id="titleModalLabel">Edit art object</h4>
 			  </div>
+			  
 			  <div class="modal-body">
-				 <form class="form-inline-table" method="POST" action="proces.php">
-				 
 				 <div class="form-group">
 					<label for="inputTitle">Artwork title</label>
-					<input type="text" class="form-control input-sm" id="inputTitle" value="Horses series 1">
+					<input type="text" name="title" class="form-control input-sm" id="inputTitle" value=<?=$art_object->title?>>
 				 </div>
 				 
 				 <div class="form-group">
 					<label for="selArtist">Artist name</label>
-					<select class="form-control input-sm" id="selArtist">
-				        <option>Luca Di Marco</option>
-				        <option selected>Mina Di Marco</option>
-				        <option>Nazzaro Franciotti</option>
-				        <option>Vincenzo Pavone</option>
+					<select name="artist" class="form-control input-sm" id="selArtist" autocomplete="off">
+				        <?php foreach ($artists as $artist)
+				        {
+				        	if($artist->name == $art_object->name)
+				        	{
+				        		?>
+				               	<option selected value="<?=$artist->user_id?>"><?=$artist->name?> <?=$artist->surname?></option>
+				        		<?php
+				        	}
+				        	else
+				        	{
+				        		?>
+				        		<option value="<?=$artist->user_id?>"><?=$artist->name?> <?=$artist->surname?></option>
+				        		<?php
+				        	}
+				        } ?>
 				    </select>
 				 </div>
 				 
 				 <div class="form-group">
 					<label for="selArtifactType">Artifact type</label>
-					<select class="form-control input-sm" id="selArtifactType">
-				        <option>Lithography</option>
-				        <option selected>painting</option>
-				        <option>Sculpture</option>
-				        <option>Vincenzo Pavone</option>
+					<select name="artifact" class="form-control input-sm" id="selArtifactType" autocomplete="off">
+				        <?php foreach ($artifacts as $artifact)
+				        {
+				        	
+				        	if($artifact->artefact_type == $art_object->artefact_type)
+				        	{
+				        		?>
+				               	<option value="<?=$artifact->artefact_type_id?>" selected><?=$artifact->artefact_type?></option>
+				        		<?php
+				        	}
+				        	else
+				        	{
+				        		?>
+				        		<option value="<?=$artifact->artefact_type_id?>"><?=$artifact->artefact_type?></option>
+				        		<?php
+				        	}
+				        }?>
 				    </select>
 				 </div>
 				 
 				 <div class="form-group">
-					<label for="selArtMovement">Artifact type</label>
-					<select class="form-control input-sm" id="selArtMovement">
-				        <option selected>Expressionism</option>
-				        <option>Impressionism</option>
-				        <option>Popart</option>
-				        <option>Postmodern art</option>
+					<label for="selArtPeriod">Period</label>
+					<select name="period" class="form-control input-sm" id="selArtPeriod" autocomplete="off">
+				       <?php foreach ($periods as $period)
+				       {
+				        	if($period->art_period == $art_object->art_period)
+				        	{
+						       	?>
+						        <option selected value="<?=$period->art_period_id?>"><?=$period->art_period?></option>
+					        	<?php
+				        	}
+				        	else
+				        	{
+
+				        		?>
+				      			<option value="<?=$period->art_period_id?>"><?=$period->art_period?></option>
+				        		<?php
+				        	}
+				       }?>
 				    </select>
 				 </div>
 				 
 				 <div class="form-group">
 				      <label for="input-month">Date	</label>
-				      <input id="input-month" class="form-control input-sm" type="month" value="2015-03">
+				      <input name="date" id="input-month" class="form-control input-sm" type="month" value="<?= $art_object->date?>">
 				 </div>
 				 <div class="form-group">
 				      <label for="inputPrice">Price</label>
-				      <input id="inputPrice" class="form-control input-sm" value="240.99 Euro">
+				      <input type="text" name="price" id="inputPrice" class="form-control input-sm" value="<?= $art_object->price?>">
 				 </div>
+				 
 				 <div class="form-group">
-					 <label for="imgArtObject">Update image</label>
+				      <label for="inputDescription">Short description</label>
+				      <input type="text" name="description" id="inputDescription" class="form-control input-sm" value="<?=$art_object->description?>">
+				 </div>
+				 
+				 <div class="form-group">
+					 <label for="imgArtObject">Art image</label>
 					 <span class="btn btn-info btn-file btn-sm">
-	    			 Browse <input id="imgArtObject" class="form-control" type="file">
+	    			 Browse <input id="imgArtObject" class="form-control" type="file" name="image">
 					 </span>
 				 </div>
 				 
 			  </div>
 			  <div class="modal-footer">
-				 <button type="submit" class="btn btn-success">Save edits</button>
-				 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				 <button type="submit" class="btn btn-success">Update art object</button>
+				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			  </div>
 			</form>
 		</div>
 	</div>
 </div>
-
+<?php endforeach;?>
 <!-- /editArtObjectModal -->
 
 <!-- deleteArtObjectModal -->

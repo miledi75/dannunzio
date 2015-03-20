@@ -1,18 +1,14 @@
 <?php
 class processArtObject extends CI_Controller
 {
+	
+	/*
+	 * ADDS A NEW ART OBJECT.
+	 * ALSO HANDLES IMAGE RESIZING
+	 * 
+	 */
 	public function newArtObject()
 	{
-		/**
-'title' => string '' (length=0)
-  'artist' => string '3' (length=1)
-  'artifact' => string '1' (length=1)
-  'period' => string '1' (length=1)
-  'date' => string '2015-03' (length=7)
-  'price' => string '' (length=0)
-  'image' => string '' (length=0)
-		 */
-		
 		//GETTING THE POST VARS
 		$title = $this->input->post('title');
 		$artist = $this->input->post('artist');
@@ -20,7 +16,9 @@ class processArtObject extends CI_Controller
 		$period = $this->input->post('period');
 		$date = $this->input->post('date');
 		$price = $this->input->post('price');
+		$description = $this->input->post('description');
 		$image = $_FILES;
+		
 		
 		//FILLING THE ARRAYS
 		
@@ -31,7 +29,8 @@ class processArtObject extends CI_Controller
 			'artefact_type_id' 	=> $artifact,
 			'art_period_id' 	=> $period,
 			'title' 			=> $title,
-			'date'				=> $date		
+			'date'				=> $date,
+			'description'		=> $description
 		);
 		
 		
@@ -61,21 +60,25 @@ class processArtObject extends CI_Controller
 		}
 		if($uploadOk)
 		{
-			//IF IMAGE UPLOADED => SAVE ART OBJECT TO DATABASE
+			//IF IMAGE UPLOADED => RESIZE IMAGE => SAVE ART OBJECT TO DATABASE
 			if (move_uploaded_file($image["image"]["tmp_name"], $target_file))
 			{
-				//LOAD THE MODEL
-				$this->load->model('artobject_model');
-				
-				//STORE THE DATA
-				$insert = $this->artobject_model->insertArtObject($N_art_object,$N_art_image);
-				if($insert)
+				//IF RESIZE IMAGE OK => STORE IN DATABASE
+				if($this->processImage($target_file,array('width' => 200, 'height' => 140)))
 				{
-					redirect('/admin/manageArt/artObjectCreated', 'refresh');
-				}
-				else 
-				{
-					redirect('/admin/manageArt/artObjectCreatedFailed', 'refresh');
+					//LOAD THE MODEL
+					$this->load->model('artobject_model');
+					
+					//STORE THE DATA
+					$insert = $this->artobject_model->insertArtObject($N_art_object,$N_art_image);
+					if($insert)
+					{
+						redirect('/admin/manageArt/artObjectCreated', 'refresh');
+					}
+					else
+					{
+						redirect('/admin/manageArt/artObjectCreatedFailed', 'refresh');
+					}	
 				}
 			}
 			else
@@ -84,4 +87,32 @@ class processArtObject extends CI_Controller
 			}	
 		}
 	}
+	
+	/**
+	 * process images to modify size
+	 * @param unknown $image, $ar_size
+	 */
+	public function processImage($path_to_image,$ar_size)
+	{
+		$config['image_library'] 	= 'gd';
+		$config['source_image'] 	= $path_to_image;
+		$config['create_thumb'] 	= FALSE;
+		$config['maintain_ratio'] 	= FALSE;
+		$config['width'] 			= $ar_size['width'];
+		$config['height'] 			= $ar_size['height'];
+		
+		
+		
+		$this->load->library('image_lib', $config);
+		
+		if ( ! $this->image_lib->resize())
+		{
+    		echo $this->image_lib->display_errors();
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
 }

@@ -19,6 +19,10 @@ class Artobject_model extends CI_Model
 		}
 	}
 	
+	/**
+	 * return all the artobjects by artefact/showroom
+	 * @param unknown $artefact_id
+	 */
 	public function getArtObjectsByArtefactType($artefact_id)
 	{
 		 $sqlArtObject = "SELECT tbl_art_objects.title,
@@ -29,7 +33,9 @@ class Artobject_model extends CI_Model
        						tbl_art_objects.price,
        						tbl_art_objects.date,
 							tbl_images.image_name,
-      						tbl_images.image_path
+      						tbl_images.image_path,
+		 					tbl_art_objects.description,
+		 					tbl_art_objects.art_object_id
   						FROM
 							 (((db_dannunzio.tbl_art_objects tbl_art_objects
           				INNER JOIN db_dannunzio.tbl_art_period tbl_art_period
@@ -42,6 +48,36 @@ class Artobject_model extends CI_Model
           				ON (tbl_art_objects.artist_id = tbl_user_data.user_id)
 						WHERE tbl_art_objects.artefact_type_id=?";
 		$query = $this->db->query($sqlArtObject,array($artefact_id));
+		return $query->result();
+	}
+	
+	/**
+	 * returns all the artobjects
+	 */
+	public function getAllArtObjects()
+	{
+		$sqlArtObject = "SELECT tbl_art_objects.title,
+       						tbl_user_data.name,
+       						tbl_user_data.surname,
+       						tbl_artefact_type.artefact_type,
+       						tbl_art_period.art_period,
+       						tbl_art_objects.price,
+       						tbl_art_objects.date,
+							tbl_images.image_name,
+      						tbl_images.image_path,
+		 					tbl_art_objects.description,
+							tbl_art_objects.art_object_id
+  						FROM
+							 (((db_dannunzio.tbl_art_objects tbl_art_objects
+          				INNER JOIN db_dannunzio.tbl_art_period tbl_art_period
+             			ON (tbl_art_objects.art_period_id = tbl_art_period.art_period_id))
+         				INNER JOIN db_dannunzio.tbl_images tbl_images
+            			ON (tbl_art_objects.art_object_id = tbl_images.art_object_id))
+        				INNER JOIN db_dannunzio.tbl_artefact_type tbl_artefact_type
+           				ON (tbl_art_objects.artefact_type_id = tbl_artefact_type.artefact_type_id))
+       					INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
+          				ON (tbl_art_objects.artist_id = tbl_user_data.user_id)";
+		$query = $this->db->query($sqlArtObject);
 		return $query->result();
 	}
 }

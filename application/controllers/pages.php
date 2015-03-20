@@ -42,10 +42,11 @@ class pages extends CI_Controller
 		$this->load->view('templates/footer', $data);
 	}
 	
-	public function paintings()
+	public function store($showroom)
 	{
+		
 		$this->load->model('artobject_model');
-		$paintings = $this->artobject_model->getArtObjectsByArtefactType(1);
+		$paintings = $this->artobject_model->getArtObjectsByArtefactType($showroom);
 		
 		
 		$data['shopName'] = "D'annunzio art gallery";
@@ -53,30 +54,12 @@ class pages extends CI_Controller
 		$data['paintings'] = $paintings;
 		
 		$this->load->view('templates/header', $data);
-		$this->load->view('pages/paintings', $data);
+		$this->load->view('pages/showroom', $data);
 		//$this->load->view('pages/copyHome', $data);
 		$this->load->view('templates/footer', $data);
 	}
 	
-	public function sculptures()
-	{
-		$data['shopName'] = "D'annunzio art gallery";
-		$data['types'] = $this->artifacts;
-
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/sculptures', $data);
-		$this->load->view('templates/footer', $data);
-	}
 	
-	public function lithos()
-	{
-		$data['shopName'] = "D'annunzio art gallery";
-		$data['types'] = $this->artifacts;
-	
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/lithos', $data);
-		$this->load->view('templates/footer', $data);
-	}
 	
 	public function information()
 	{
