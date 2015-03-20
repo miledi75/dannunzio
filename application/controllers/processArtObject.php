@@ -75,11 +75,11 @@ class processArtObject extends CI_Controller
 					$insert = $this->artobject_model->insertArtObject($N_art_object,$N_art_image);
 					if($insert)
 					{
-						redirect('/admin/manageArt/artObjectCreated', 'refresh');
+						redirect('/admin/manageArt/0/artObjectCreated', 'refresh');
 					}
 					else
 					{
-						redirect('/admin/manageArt/artObjectCreatedFailed', 'refresh');
+						redirect('/admin/manageArt/0/artObjectCreatedFailed', 'refresh');
 					}	
 				}
 			}
@@ -125,11 +125,11 @@ class processArtObject extends CI_Controller
 		$art_object_id = $this->input->post('art_object_id');
 		if($this->artobject_model->deleteArtObject($art_object_id))
 		{
-			redirect('/admin/manageArt/artObjectDeleted', 'refresh');
+			redirect('/admin/manageArt/0/artObjectDeleted', 'refresh');
 		}
 		else
 		{
-			redirect('/admin/manageArt/artObjectDeletedFailed', 'refresh');
+			redirect('/admin/manageArt/0/artObjectDeletedFailed', 'refresh');
 		}	
 	}
 	
@@ -178,11 +178,11 @@ class processArtObject extends CI_Controller
 		
 		if($this->artobject_model->editArtObject($editArtObject))
 		{
-			redirect('/admin/manageArt/artObjectEdited', 'refresh');
+			redirect('/admin/manageArt/0/artObjectEdited', 'refresh');
 		}
 		else
 		{
-			redirect('/admin/manageArt/artObjectEditedFailed', 'refresh');
+			redirect('/admin/manageArt/0/artObjectEditedFailed', 'refresh');
 		}	
 		
 	}

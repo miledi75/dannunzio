@@ -18,7 +18,7 @@ class admin extends CI_Controller
 		$this->load->view('templates/adminFooter', $data);
 	}
 	
-	public function manageArt($action = 'nothing')
+	public function manageArt($page=0,$action='nothing')
 	{
 		//HANDLE NOTIFICATIONS
 		
@@ -74,6 +74,7 @@ class admin extends CI_Controller
 		{
 			$data['artObjectEdited'] = false;
 		}
+		// END NOTIFICATIONS
 		
 		//LOAD THE DBASE MODELS
 		$this->load->model('artifact_model');
@@ -91,11 +92,36 @@ class admin extends CI_Controller
 		//GET ARTIST
 		$artists = $this->user_model->getArtists();
 		
+		
+		
+		//SET UP THE PAGINATION
+		
+		//COUNTING THE ART OBJECTS
+		
+		$num_of_artObjects = $this->artobject_model->countArtObjects();
+		
+		$this->load->library('pagination');
+		
+		
+		$config['base_url'] = base_url('/admin/manageArt/');
+		$config['total_rows'] = $num_of_artObjects;
+		$config['per_page'] = 8;
+		$config["uri_segment"] = 3;
+		$choice = $config["total_rows"] / $config["per_page"];
+		$config["num_links"] = round($choice);
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		
+		
 		//GET THE ART OBJECT LIST
 		
-		$art_objects = $this->artobject_model->getAllArtObjects();
+		$art_objects = $this->artobject_model->getAllArtObjects($config["per_page"], $page);
 		
 		
+		//CREATE THE PAGES LINKS
+		$data["links"] = $this->pagination->create_links();
+		//END PAGINATION SETUP
 		
 		$data['pageTitle']		= "Manage art collection";
 		$data['cat1'] 			= "Add new art object";
@@ -122,7 +148,8 @@ class admin extends CI_Controller
 		
 		$this->load->library('pagination');
 		
-		$config['base_url'] = 'http://localhost/ci/admin/manageCustomers/';
+		
+		$config['base_url'] = base_url('/admin/manageCustomers/');
 		$config['total_rows'] = $num_of_customers;
 		$config['per_page'] = 8;
 		$config["uri_segment"] = 3;
@@ -142,6 +169,7 @@ class admin extends CI_Controller
 		$data['cat2'] = "empty";
 		$data['cat3'] = "empty";
 		
+		//CREATE THE PAGES LINKS
 		$data["links"] = $this->pagination->create_links();
 		
 		if($action =='userCreated')
@@ -155,7 +183,7 @@ class admin extends CI_Controller
 	
 		
 			
-		
+		//LOAD THE VIEWS
 		$this->load->view('templates/adminHeader', $data);
 		$this->load->view('admin/manageCustomers');
 		

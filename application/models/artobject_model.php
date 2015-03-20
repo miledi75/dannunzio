@@ -63,8 +63,9 @@ class Artobject_model extends CI_Model
 	
 	/**
 	 * returns all the artobjects
+	 * uses limit and offset for pagination
 	 */
-	public function getAllArtObjects()
+	public function getAllArtObjects($limit,$start)
 	{
 		$sqlArtObject = "SELECT tbl_art_objects.title,
        						tbl_user_data.name,
@@ -87,7 +88,7 @@ class Artobject_model extends CI_Model
            				ON (tbl_art_objects.artefact_type_id = tbl_artefact_type.artefact_type_id))
        					INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
           				ON (tbl_art_objects.artist_id = tbl_user_data.user_id)
-						WHERE archived = 0";
+						WHERE archived = 0 LIMIT $limit OFFSET $start";
 		$query = $this->db->query($sqlArtObject);
 		return $query->result();
 	}
@@ -102,9 +103,18 @@ class Artobject_model extends CI_Model
 		return $this->db->update('tbl_art_objects', array('archived' => 1), "art_object_id = $art_object_id");
 	}
 	
+	/**
+	 * updates the artobject
+	 * @param unknown $ar_artObject
+	 */
 	public function editArtObject($ar_artObject)
 	{
 		return $this->db->update('tbl_art_objects', $ar_artObject, "art_object_id = ".$ar_artObject['art_object_id']);
+	}
+	
+	function countArtObjects()
+	{
+		return $this->db->count_all("tbl_art_objects");
 	}
 	
 }

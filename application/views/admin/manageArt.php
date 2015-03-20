@@ -123,8 +123,9 @@
           <?php endforeach; ?>
         </tbody>
       </table>
+      <p><?=$links?></p>
     </div>
- 
+ 	
 
    </div>     
 <!-- end art object table -->
