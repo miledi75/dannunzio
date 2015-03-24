@@ -58,6 +58,9 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
+    
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?php echo base_url('assets/js/ajaxFunctions.js');?>"></script>
 </body>
 
 </html>

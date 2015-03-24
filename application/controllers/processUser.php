@@ -1,6 +1,11 @@
 <?php
 class processUser extends CI_Controller
 {
+	
+	/**
+	 * ads a new user to the system
+	 * this function gets called from the admin section
+	 */
 	function newUser()
 	{
 		/**POST VARS
@@ -59,5 +64,40 @@ class processUser extends CI_Controller
 				redirect('/admin/manageCustomers/0/userCreated', 'refresh');
 			}
 		}
+	}
+	
+	
+	function processLogin($login, $password)
+	{
+		//LOAD THE LIBRARY
+		$this->load->model('user_model');
+		//LOOKUP USER CREDENTIALS
+		$credentials = $this->user_model->get_user_credentials($login,$password);
+		
+		
+		if(md5($password) == $credentials[0]->password)
+		{
+			$response = 1;
+			$newdata = array(
+					'username'  => $credentials[0]->userName,
+					'email'     => $credentials[0]->email,
+					'logged_in' => TRUE
+			);
+				
+			$this->session->set_userdata($newdata);
+		}
+		else
+		{
+			$response = 0;
+		}
+		
+		// we'll generate XML output
+		header('Content-Type: text/xml');
+		// generate XML header
+		echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+		// create the <response> element
+		echo '<response>';
+		echo $response;		
+		echo '</response>';
 	}
 }

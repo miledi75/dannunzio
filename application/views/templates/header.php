@@ -31,6 +31,10 @@
 
 <body>
 	
+	
+	<?php 
+	var_dump($this->session->all_userdata());
+	?>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -71,32 +75,41 @@
 				<!-- Login button 
 				<button type="button" class="btn btn-primary navbar-btn pull-right" data-toggle="modal" data-target="#loginModal">Login</button>
 				-->
-				<div class=" col-sm-1 col-md-1 pull-right">
-					<a class="btn btn-default navbar-btn" data-toggle="modal" data-target="#loginModal">
-					<i class="fa fa-user fa-fw"></i> Login
-					</a>
-				</div>
 				
-				<!-- /Login button -->
-				<!-- shoppingcart button -->
-				<div class=" col-sm-2 col-md-2 pull-right">
-           			<a class="btn btn-default navbar-btn" data-toggle="modal" data-target="#shoppingCartModal">
-  					<i class="fa fa-shopping-cart"> Your shoppingcart: 1</i>
-  					</a>
-            	</div>
-				<!-- /shoppingcart button -->
+			<?php if ($this->session->userdata('logged_in') == 1): ?>
+            	
+			<div class=" col-sm-1 col-md-1 pull-right" id="logoutButton">
+				<a class="btn btn-default navbar-btn" data-toggle="modal" data-target="#logoutModal">
+				<i class="fa fa-user fa-fw"></i> Logout
+			</a>
+			</div>
+			<?php else:?>
+			<div class=" col-sm-1 col-md-1 pull-right" id="loginButton">
+				<a class="btn btn-default navbar-btn" data-toggle="modal" data-target="#loginModal">
+				<i class="fa fa-user fa-fw"></i> Login
+			</a>
+			</div>
+			<?php endif;?>
+			<!-- /Login button -->
+			<!-- shoppingcart button -->
+			<div class=" col-sm-2 col-md-2 pull-right">
+           		<a class="btn btn-default navbar-btn" data-toggle="modal" data-target="#shoppingCartModal">
+  				<i class="fa fa-shopping-cart"> Your shoppingcart: 1</i>
+  			</a>
+            </div>
+			<!-- /shoppingcart button -->
 				    
-				<!-- Search box -->
-				<div class="col-sm-3 col-md-3 pull-right">
-					<form class="navbar-form" role="search">
-						<div class="input-group">
-						    <input type="text" class="form-control form-control" placeholder="Find art..." name="q_art">
-						    <div class="input-group-btn">
-						    	<button class="btn  btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-					    	</div>
-						</div>
-					</form>
-				</div> 
+			<!-- Search box -->
+			<div class="col-sm-3 col-md-3 pull-right">
+				<form class="navbar-form" role="search">
+					<div class="input-group">
+					    <input type="text" class="form-control form-control" placeholder="Find art..." name="q_art">
+					    <div class="input-group-btn">
+					    	<button class="btn  btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				    	</div>
+					</div>
+				</form>
+			</div> 
 </div>
 
 <!-- /.navbar-collapse -->
@@ -129,6 +142,31 @@
             
 <!-- Modal forms -->
 
+        
+<!-- logoutModal -->        
+<div class="modal fade" data-backdrop="static" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Info</h4>
+			  </div>
+			  <div class="modal-body">
+			  	<p>
+			  	Would you like to log out?
+			  	</p>
+			  </div>
+			  <div class="modal-footer">
+			  	 <button type="button" class="btn btn-info" onclick="processlogout()" data-dismiss="modal">Yes</button>
+			  	 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			  </div>
+		</div>
+	</div>
+</div>
+<!-- /logoutModal -->
+        
 <!-- shoppinCartModal -->
 <div class="modal fade" data-backdrop="static" id="shoppingCartModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -177,9 +215,6 @@
 	                        <td></td>
 	                    </tr>
 	                    <tr>
-	                        
-	                        
-	                        
 	                        <td class="col-md-1 text-right"><h4>Total:</h3></td>
 	                        <td class="col-md-1 text-left"><h4><strong>&euro; 247.93</strong></h3></td>
 	                        <td></td>
@@ -213,8 +248,9 @@
 				<!-- /kruisje bovenaan -->
 				<h4 class="modal-title" id="titleModalLabel">Login</h4>
 			</div>
+			
 			<div class="modal-body">
-				<form class="form-inline-table" method="POST" action="<?= base_url('admin/processLogin'); ?>">
+				
 					<div class="form-group">
 						<label for="inputName">Your login</label>
 						<input type="text" class="form-control" id="inputLogin">
@@ -231,16 +267,41 @@
 						New user
 						</button>
 				</div>
+				<div class="form-group">	
+					<div style="display:none" class="alert alert-danger alert-dismissible" role="alert" id="loginMessage"></div>		
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-success">Submit</button>
+				<button type="submit" class="btn btn-success" onclick="processLogin(this)">Submit</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			</div>
-			</form>
 		</div>
 	</div>
 </div>
 <!-- /loginModal -->
+
+<!-- loginConfirmmodal -->
+<div class="modal fade" data-backdrop="static" id="loginConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Info</h4>
+			  </div>
+			  <div class="modal-body">
+			  	<p>
+			  	You are logged in
+			  	</p>
+			  </div>
+			  <div class="modal-footer">
+			  	 <button type="button" class="btn btn-info" onclick="alert()">Ok</button>
+			  </div>
+		</div>
+	</div>
+</div>
+<!-- /loginConfirmModal -->
 
 <!-- RegisterNewCustomerModal -->
 <div class="modal fade" data-backdrop="static" id="registerNewCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
