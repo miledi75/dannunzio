@@ -72,9 +72,7 @@
                     </li>
             </ul>
 	        
-				<!-- Login button 
-				<button type="button" class="btn btn-primary navbar-btn pull-right" data-toggle="modal" data-target="#loginModal">Login</button>
-				-->
+				
 				
 			<?php if ($this->session->userdata('logged_in') == 1): ?>
             	
@@ -159,7 +157,7 @@
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
-			  	 <button type="button" class="btn btn-info" onclick="processlogout()" data-dismiss="modal">Yes</button>
+			  	 <button type="button" class="btn btn-info" onclick="redirect('http://localhost/ci/processUser/processLogout')">Yes</button>
 			  	 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			  </div>
 		</div>
@@ -296,7 +294,7 @@
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
-			  	 <button type="button" class="btn btn-info" onclick="alert()">Ok</button>
+			  	 <button type="button" class="btn btn-info" onclick="reloadPage()">Ok</button>
 			  </div>
 		</div>
 	</div>

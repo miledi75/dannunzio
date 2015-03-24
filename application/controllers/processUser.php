@@ -67,6 +67,11 @@ class processUser extends CI_Controller
 	}
 	
 	
+	/**
+	 * processes user login
+	 * @param unknown $login
+	 * @param unknown $password
+	 */
 	function processLogin($login, $password)
 	{
 		//LOAD THE LIBRARY
@@ -99,5 +104,11 @@ class processUser extends CI_Controller
 		echo '<response>';
 		echo $response;		
 		echo '</response>';
+	}
+	
+	public function processLogout()
+	{
+		$this->session->sess_destroy();
+		redirect('pages/home');
 	}
 }

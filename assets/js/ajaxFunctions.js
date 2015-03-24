@@ -124,12 +124,19 @@ function handleServerResponse()
 		  }
 	}
 	
-	/**
-	 * reloads the page
-	 */
-	function reload()
-	{
-		alert();
-		//location.reload(true);
-	}
+	
 }
+
+/**
+ * reloads the page
+ */
+function reloadPage()
+{
+	location.reload(true);
+}
+
+function redirect(url)
+{
+	window.location=url;
+}
+
