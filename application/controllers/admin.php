@@ -251,17 +251,16 @@ class admin extends CI_Controller
 		
 		//GET THE NR OF ARTOBJECTS IN A SHOWROOM
 		$ar_showrooms = array();
+		$i = 0;
 		foreach ($showrooms as $showroom)
 		{
 			$nr_of_artObjects = $this->showroom_model->getNumberOfArtObjectsInShowroom($showroom->artefact_type_id);
 			
-			$ar_showrooms['showroom_name'] = $showroom->artefact_type;
-			$ar_showrooms['showroom_id'] = $showroom->artefact_type_id;
-			$ar_showrooms['showroom_nr_of_items'] = $nr_of_artObjects[0]->nr_of_artObjects;
+			$ar_showrooms[$i]['showroom_name'] = $showroom->artefact_type;
+			$ar_showrooms[$i]['showroom_id'] = $showroom->artefact_type_id;
+			$ar_showrooms[$i]['showroom_nr_of_items'] = $nr_of_artObjects[0]->nr_of_artObjects;
+			$i++;
 		}
-		
-		
-		
 		
 		$data['pageTitle'] = "Manage Showrooms";
 		$data['cat1'] = "New showroom";
