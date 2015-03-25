@@ -67,9 +67,11 @@
                         <a href="<?php echo base_url('pages/location');?>">Location</a>
                     </li>
                     
+                    <?php if($this->session->userdata('role') == 'admin'|| $this->session->userdata('role') == 'subadmin'):?>
                     <li>
                         <a href="<?php echo base_url('admin/home');?>">Admin panel</a>
                     </li>
+                    <?php endif;?>
             </ul>
 	        
 				

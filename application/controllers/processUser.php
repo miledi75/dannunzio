@@ -88,8 +88,26 @@ class processUser extends CI_Controller
 					'email'     => $credentials[0]->email,
 					'logged_in' => TRUE
 			);
-				
+			
 			$this->session->set_userdata($newdata);
+			//SETTING THE USER ROLE IN THE SESSION
+			$role = $credentials[0]->user_role_id;
+			switch($role)
+			{
+				case 1:
+					//ADMIN
+					$this->session->set_userdata('role', 'admin');
+					break;
+				case 2:
+					$this->session->set_userdata('role', 'subadmin');
+					break;
+				case 3:
+					$this->session->set_userdata('role', 'buyer');
+					break;
+				case 4:
+					$this->session->set_userdata('role', 'artist');
+					break;
+			}
 		}
 		else
 		{

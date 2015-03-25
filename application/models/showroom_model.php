@@ -3,16 +3,16 @@
 class Showroom_model extends CI_Model
 {
 	/**
-	 * loads the database core claass
-	 */
+	* loads the database core claass
+	*/
 	public function __construct()
 	{
 		$this->load->database();
 	}
 	
 	/**
-	 * returns all the showrooms
-	 */
+	* returns all the showrooms
+	*/
 	public function getAllShowrooms()
 	{
 		$query = $this->db->get('tbl_artefact_type');
@@ -20,9 +20,9 @@ class Showroom_model extends CI_Model
 	}
 	
 	/**
-	 * returns the number of art objects in each showroom
-	 * @param unknown $artefact_type_id
-	 */
+	* returns the number of art objects in each showroom
+	* @param unknown $artefact_type_id
+	*/
 	public function getNumberOfArtObjectsInShowroom($artefact_type_id)
 	{
 		$sql = "SELECT 

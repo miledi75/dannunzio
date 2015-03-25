@@ -152,9 +152,9 @@ class User_model extends CI_Model {
 	
 	public function get_user_credentials($login, $password)
 	{
-		$sql = "Select userName,password,email FROM tbl_users WHERE userName=?";
-		$query = $this->db->query($sql,array($login));
+		$sql = "Select * FROM tbl_users WHERE userName=?";
 		
+		$query = $this->db->query($sql,array($login));
 		return $query->result();
 	}
 }
