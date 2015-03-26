@@ -12,9 +12,9 @@ class pages extends CI_Controller
 	{
 		parent::__construct();
 		// Your own constructor code
-		//LOAD ARTEFACT MODEL
-		$this->load->model('artifact_model');
-		$this->artifacts = $this->artifact_model->getArtifacts();
+		//LOAD SHOWROOM MODEL
+		$this->load->model('showroom_model');
+		$this->artifacts = $this->showroom_model->getActiveShowrooms();
 		
 	}
 	

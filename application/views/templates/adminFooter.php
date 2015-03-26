@@ -25,7 +25,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url('assets/js/bootstrap.min.js');?>"></script>
-
+    <!-- ajax javascript functions -->
+	<script src="<?php echo base_url('assets/js/ajaxFunctions.js');?>"></script>
 <!-- GENERAL MODALS FOR ADMIN MODULE -->    
 
 

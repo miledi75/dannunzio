@@ -19,6 +19,13 @@ class Showroom_model extends CI_Model
 		return $query->result();
 	}
 	
+	public function getActiveShowrooms()
+	{
+		$this->db->where('state',1);
+		$query = $this->db->get('tbl_artefact_type');
+		return $query->result();
+	}
+	
 	/**
 	* returns the number of art objects in each showroom
 	* @param unknown $artefact_type_id
@@ -34,4 +41,67 @@ class Showroom_model extends CI_Model
 		$query = $this->db->query($sql,array('artefact_type_id' => $artefact_type_id));
 		return $query->result();
 	}
+	
+	/**
+	 * inserts a new showroom
+	 * @param unknown_type $showroom_name
+	 * @param unknown_type $state
+	 */
+	public function insert_showroom($showroom_name,$state)
+	{
+		$data = array(
+				'artefact_type' => $showroom_name,
+				'state'		=> $state
+		);
+		
+		return $this->db->insert('tbl_artefact_type', $data);
+	}
+	
+	/**
+	 * delete a showroom through archiving function
+	 * @param unknown_type $showroom_id
+	 * @param integer type $state
+	 * state = 0 inactive
+	 * state = 1 active
+	 * state = 2 archived
+	 */
+	public function updateStateOfShowroom($showroom_id, $state)
+	{
+		$data = array(
+				'state' => 2
+					);
+		
+		$this->db->where('artefact_type_id', $showroom_id);
+		return $this->db->update('tbl_artefact_type', $data);
+	}
+	
+	/**
+	 * updates the showroom name
+	 * @param unknown_type $showroom_id
+	 * @param unknown_type $showroom_name
+	 */
+	public function editShowroomName($showroom_id, $showroom_name)
+	{
+		$data = array(
+				'artefact_type' => $showroom_name
+		);
+		
+		$this->db->where('artefact_type_id', $showroom_id);
+		return $this->db->update('tbl_artefact_type', $data);
+	}
+	
+	/**
+	 * checks if showroom name exists
+	 * @param unknown_type $showroom_name
+	 */
+	public function checkIfShowroomNameExist($showroom_name)
+	{
+		$res = $this->db->where('artefact_type',$showroom_name);
+		return $this->db->get('tbl_artefact_type');
+	}
+	
+	
+	
+	
+	
 }

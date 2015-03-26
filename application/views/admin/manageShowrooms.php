@@ -1,21 +1,28 @@
 <!-- start of side panel -->
 <div class="container">
 <div class="row">
-<div class="lead col-md-3"><?php echo $pageTitle;?></div>
-	    
-     </div>
+	<div class="lead col-md-3"><?php echo $pageTitle;?></div>
+</div>
      <div class="row">
 		 <div class="col-md-3">
 		     <div class="list-group">
-		     	<a href="#" class="list-group-item" data-toggle="modal" data-target="#addNewShowroomModal"><?= $cat1 ;?></a>
+		     	<a href="#" class="list-group-item" data-toggle="modal" data-target="#createShowroomModal"><?= $cat1 ;?></a>
 		     </div>
 	     </div>
-     </div>
+	     <div class="col-md-4">
+		     <div class="alert alert-success alert-dismissible" role="alert" id="showroomMessage" style="display:none">
+		     	<button type="button" id="closeShowroomMessageButton" class="close"  aria-label="Close"><span aria-hidden="false">&times;</span></button>
+  			</div>
+	     </div>
+	 </div>
+
+	 
  
 <!-- end of the side panel -->
 
 <!-- Begin Showroom table -->
 <div class="row">
+
 <div class="col-md-12">          
       <table class="table table-hover table-responsive">
         <thead>
@@ -26,53 +33,24 @@
           <tr>
         </thead>
         <tbody>
+          <?php foreach($showrooms as $showroom):?>
           <tr>
-            <td>Paintings</td>
-            <td>5</td>
+            <td><?php echo $showroom['showroom_name'];?></td>
+            <td><?php echo $showroom['showroom_nr_of_items']?></td>
             <td>
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 		        <span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal">View Art objects</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteShowroomModal<?=$showroom['showroom_id']?>">Delete</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editShowroomModal<?=$showroom['showroom_id']?>">Edit</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#publishShowroomModal<?=$showroom['showroom_id']?>">Publish</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewArtObjectsModal<?=$showroom['showroom_id']?>">View Art objects</a></li>
 		      </ul>
 		      </div>
             </td>
           </tr>
-          
-          <tr>
-            <td>Sculptures</td>
-            <td>5</td>
-            <td>
-		      <div class="dropdown">
-		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-		        <span class="caret"></span></button>
-		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal">View Art objects</a></li>
-		      </ul>
-		      </div>
-            </td>
-          </tr>
-          
-          <tr>
-            <td>Lithography</td>
-            <td>5</td>
-            <td>
-		      <div class="dropdown">
-		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-		        <span class="caret"></span></button>
-		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal">View Art objects</a></li>
-		      </ul>
-		      </div>
-            </td>
-          </tr>
+          <?php endforeach;?>
         </tbody>
       </table>
       </div>
@@ -82,3 +60,76 @@
 <!-- end art object table -->
 </div>
 <!-- end of container -->
+
+<!-- Modal forms -->
+<!-- createShowroomModal-->
+<div class="modal fade" data-backdrop="static" id="createShowroomModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Add new showroom</h4>
+			  </div>
+			  <div class="modal-body">
+				 <div class="form-group">
+					<label for="inputName">Showroom Name:</label>
+					<input type="text" class="form-control input-sm"  autofocus name="showroom_name" id="inputShowroomName" placeholder="Showroom...">
+				 </div>
+				 
+				 <div class="form-group">
+					<label for="inputState">State:</label>
+					<select class="form-control input-sm"  name="state" id="selectState" >
+					<option value=1>Active</option>
+					<option value=0>Inactive</option>
+					</select>
+				 </div>
+				 
+				 <div class="form-group">
+				 	<div class="alert alert-danger alert-dismissible" role="alert" id="showroomMessageModal" style="display:none">
+		     		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;dfsdf</span></button>
+				  
+				  </div>
+				 </div>
+				 
+			  </div>
+			  <div class="modal-footer">
+				 <button type="submit" class="btn btn-success" onclick="processNewShowroom()">Create Showroom</button>
+				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			  </div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /createShowroomModal-->
+
+<!-- deleteShowroomModal -->
+<?php foreach($showrooms as $showroom):?>
+<div class="modal fade" data-backdrop="static" id="deleteShowroomModal<?=$showroom['showroom_id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Info</h4>
+			  </div>
+			  <div class="modal-body">
+			  	<p>
+			  	Would you like to delete this showroom?
+			  	</p>
+			  </div>
+			  <div class="modal-footer">
+			  	 <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="processDeleteShowroom(<?=$showroom['showroom_id']?>)">Yes</button>
+			  	 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			  </div>
+		</div>
+	</div>
+</div>
+<?php endforeach;?>
+<!-- /deleteShowroomModal -->
+
+
+
+<!-- /Modal forms -->
