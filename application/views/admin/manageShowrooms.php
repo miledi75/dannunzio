@@ -33,6 +33,8 @@
           <tr>
         </thead>
         <tbody>
+          <?php //var_dump($showrooms)?>
+
           <?php foreach($showrooms as $showroom):?>
           <tr>
             <td><?php echo $showroom['showroom_name'];?></td>
@@ -45,7 +47,7 @@
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteShowroomModal<?=$showroom['showroom_id']?>">Delete</a></li>
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editShowroomModal<?=$showroom['showroom_id']?>">Edit</a></li>
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#publishShowroomModal<?=$showroom['showroom_id']?>">Publish</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewArtObjectsModal<?=$showroom['showroom_id']?>">View Art objects</a></li>
+				  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewArtObjectsModal<?=$showroom['showroom_id']?>">View Art objects</a></li>
 		      </ul>
 		      </div>
             </td>

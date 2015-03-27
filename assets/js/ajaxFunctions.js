@@ -32,6 +32,32 @@ function createXmlHttpRequestObject()
     return xmlHttp;
 }
 
+/**
+ * generic ajax function
+ * @param url
+ * @param callBack
+ */
+function processUrl(url,callBack)
+{
+  	xmlHttp = createXmlHttpRequestObject();
+	//alert(xmlHttp.readyState);
+	// proceed only if the xmlHttp object isn't busy
+	if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
+	{
+		   	// CALL THE PROCESSLOGIN FUNCTION FROM THE PROCESUSER CONTROLLER
+		    xmlHttp.open("GET",url , true);  
+		    // define the method to handle server responses
+		    xmlHttp.onreadystatechange = handleServerResponseLogin;
+		    // make the server request
+		    xmlHttp.send(null);
+	}
+	else
+	{    
+		// if the connection is busy, try again after one second  
+	    setTimeout('process()', 1000);
+	}
+}
+
 
 /*
  * LOGIN AJAX
@@ -65,13 +91,8 @@ function processLogin()
 	   
 	   	//BUILD THE CONTROLLER URL
 	   	url = 'http://localhost/ci/processUser/processLogin/'+login+'/'+passWord;
-	   	
-	  	// CALL THE PROCESSLOGIN FUNCTION FROM THE PROCESUSER CONTROLLER
-	    xmlHttp.open("GET",url , true);  
-	    // define the method to handle server responses
-	    xmlHttp.onreadystatechange = handleServerResponseLogin;
-	    // make the server request
-	    xmlHttp.send(null);
+	   	//CALL THE PROCESSLOGIN FUNCTION FROM THE PROCESUSER CONTROLLER
+	  	processUrl(url,handleServerResponseLogin);
    }
    else
    {
