@@ -1,5 +1,11 @@
+
+/*
+ * GENERIC AJAX FUNCTIONS
+ */
+
+
 /**
- * creates Xmlhttp
+ * creates an xml http requestobject
  */
 function createXmlHttpRequestObject() 
 { 
@@ -33,7 +39,7 @@ function createXmlHttpRequestObject()
 }
 
 /**
- * generic ajax function
+ * processes the url
  * @param url
  * @param callBack
  */
@@ -58,6 +64,42 @@ function processUrl(url,callBack)
 	}
 }
 
+/*
+ * handles the server response and returns the response object
+ */
+function handleServerResponse()
+{
+	if (xmlHttp.readyState == 4) 
+	{
+		  // status of 200 indicates the transaction completed 
+		  //successfully
+		  if (xmlHttp.status == 200) 
+		  {
+		    // extract the XML retrieved from the server
+		    xmlResponse = xmlHttp.responseXML;
+		    
+		    // obtain the document element (the root element) of the XML 
+		    //structure
+		    xmlDocumentElement = xmlResponse.documentElement;
+		    // get the text message, which is in the first child of
+		    // the the document element
+		    response= xmlDocumentElement.firstChild.data;
+		    // return the response
+		    return response;
+		  }
+		// a HTTP status different than 200 signals an error
+		  else 
+		  {
+			  alert("There was a problem accessing the server: " +  
+		           xmlHttp.statusText);
+		  }
+	}
+}
+
+
+/*
+ * END OF GENERIC AJAX FUNCTIONS
+ */
 
 /*
  * LOGIN AJAX
@@ -106,51 +148,25 @@ function processLogin()
     setTimeout('process()', 1000);
 }
 
+
 /**
  * handles the user login response
  */
 function handleServerResponseLogin() 
 {
-	// move forward only if the transaction has completed
-	if (xmlHttp.readyState == 4) 
-	{
-		  // status of 200 indicates the transaction completed 
-		  //successfully
-		  if (xmlHttp.status == 200) 
-		  {
-		    // extract the XML retrieved from the server
-		    xmlResponse = xmlHttp.responseXML;
-		    
-		    // obtain the document element (the root element) of the XML 
-		    //structure
-		    xmlDocumentElement = xmlResponse.documentElement;
-		    // get the text message, which is in the first child of
-		    // the the document element
-		    response= xmlDocumentElement.firstChild.data;
-		    // display the data received from the server
-		    
-		    //WRONG PASSWORD
-		    if(response == 0)
-		    {
-		    	loginMessage.innerHTML = "Your password is incorrect!";
-				loginMessage.style.display = 'block';
-			}
-		    else if(response == 1)
-		    {
-		    	//GOOD PASSWORD
-		    	$('#loginModal').modal('hide');
-		    	$('#loginConfirmModal').modal('show');
-		    }
-		    // restart sequence
-		    
-		  } 
-		  // a HTTP status different than 200 signals an error
-		  else 
-		  {
-			  alert("There was a problem accessing the server: " +  
-		           xmlHttp.statusText);
-		  }
+	
+	response = handleServerResponse();
+	if(response == 0)
+    {
+    	loginMessage.innerHTML = "Your password is incorrect!";
+		loginMessage.style.display = 'block';
 	}
+    else if(response == 1)
+    {
+    	//GOOD PASSWORD
+    	$('#loginModal').modal('hide');
+    	$('#loginConfirmModal').modal('show');
+    }
 	
 	
 }
