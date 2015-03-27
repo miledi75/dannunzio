@@ -24,7 +24,7 @@
 <div class="row">
 
 <div class="col-md-12">          
-      <table class="table table-hover table-responsive">
+      <table id="showroomTable" class="table table-hover table-responsive">
         <thead>
           <tr>
             <th>Showroom</th>
@@ -36,10 +36,10 @@
           <?php //var_dump($showrooms)?>
 
           <?php foreach($showrooms as $showroom):?>
-          <tr>
-            <td><?php echo $showroom['showroom_name'];?></td>
-            <td><?php echo $showroom['showroom_nr_of_items']?></td>
-            <td>
+          <tr id="row<?=$showroom['showroom_id']?>">
+            <td id="showroom_name"><?php echo $showroom['showroom_name'];?></td>
+            <td id="nr_of_items"><?php echo $showroom['showroom_nr_of_items']?></td>
+            <td id="menu">
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 		        <span class="caret"></span></button>
@@ -64,6 +64,7 @@
 <!-- end of container -->
 
 <!-- Modal forms -->
+<div id="showroomModals">
 <!-- createShowroomModal-->
 <div class="modal fade" data-backdrop="static" id="createShowroomModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -132,6 +133,6 @@
 <?php endforeach;?>
 <!-- /deleteShowroomModal -->
 
-
+</div>
 
 <!-- /Modal forms -->

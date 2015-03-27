@@ -243,7 +243,7 @@ class admin extends CI_Controller
 		$this->load->model('showroom_model');
 		
 		//GET THE SHOWROOMS
-		$showrooms = $this->showroom_model->getAllShowrooms();
+		$showrooms = $this->showroom_model->getActiveShowrooms();
 		
 		//GET THE NR OF ARTOBJECTS IN A SHOWROOM
 		$ar_showrooms = array();

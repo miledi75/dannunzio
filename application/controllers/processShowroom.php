@@ -12,15 +12,18 @@ class processShowroom extends CI_Controller
 		
 		if($exists->num_rows >0)
 		{
-			$response = 2;
+			$response = 'EX';
 		}
 		else
 		{
 			//INSERT THE NEW SHOWROOM
 			$res = $this->showroom_model->insert_showroom($showroom_name,$state);
+		
 			if($res)
 			{
-				$response =  1;
+				//GET THE NEW ID
+				
+				$response =  $this->db->insert_id();
 			}
 			else
 			{
@@ -28,14 +31,7 @@ class processShowroom extends CI_Controller
 			}
 		}
 					
-		// generate XML output
-		header('Content-Type: text/xml');
-		// generate XML header
-		echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
-		// create the <response> element
-		echo '<response>';
-		echo $response;
-		echo '</response>';	
+		$this->generateResponse($response);
 		
 	}
 	
@@ -45,16 +41,27 @@ class processShowroom extends CI_Controller
 		
 		$this->load->model('showroom_model');
 		
-		$delete = $this->showroom_model->updateStateOfShowroom($showroom_id, 2);
+		$nrOfObjects = $this->showroom_model->getNumberOfArtObjectsInShowroom($showroom_id)[0]->nr_of_artObjects;
 		
-		if($delete)
+		//CHECK IF SHOWROOM HAS ARTOBJECTS
+		if($nrOfObjects == 0)
 		{
-			$response = 1;
+			$delete = $this->showroom_model->updateStateOfShowroom($showroom_id, 2);
+			
+			if($delete)
+			{
+				$response = 1;
+			}
+			else
+			{
+				$response = 0;
+			}	
 		}
-		else 
+		else
 		{
-			$response = 2;
+			$response = 3;
 		}
+		
 		$this->generateResponse($response);
 		
 	}
