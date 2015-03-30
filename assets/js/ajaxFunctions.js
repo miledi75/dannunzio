@@ -296,7 +296,7 @@ function buildRowNewShowroom(showroom_id)
 			  	 '<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="processDeleteShowroom('+showroom_id+')">Yes</button>'+
 			  	 '<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>'+
 			  '</div></div></div></div>';
-	alert(deleteModal);
+	
 	$('#showroomModals').append(deleteModal);
 	return newRow;
 	

@@ -1,6 +1,11 @@
 <?php
 class processShowroom extends CI_Controller
 {
+	/**
+	 * creates a new showroom
+	 * @param unknown $showroom_name
+	 * @param unknown $state
+	 */
 	public function newShowroom($showroom_name,$state)
 	{
 		//LOAD THE MODEL
@@ -35,6 +40,10 @@ class processShowroom extends CI_Controller
 		
 	}
 	
+	/**
+	 * deletes the showroom by archiving it
+	 * @param unknown $showroom_id
+	 */
 	public function deleteShowroom($showroom_id)
 	{
 		//LOAD THE MODEL
@@ -66,6 +75,11 @@ class processShowroom extends CI_Controller
 		
 	}
 	
+	
+	/**
+	 * generates the xml tags for the ajax response
+	 * @param unknown $response
+	 */
 	private function generateResponse($response)
 	{
 		// generate XML output

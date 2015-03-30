@@ -48,7 +48,11 @@
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteShowroomModal<?=$showroom['showroom_id']?>">Delete</a></li>
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editShowroomModal<?=$showroom['showroom_id']?>">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#publishShowroomModal<?=$showroom['showroom_id']?>">Publish</a></li>
+		          <?php if ($showroom['state'] == 'Not published'):?>
+		          	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#publishShowroomModal<?=$showroom['showroom_id']?>">Publish</a></li>
+				  <?php else:?>
+				 	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#unpublishShowroomModal<?=$showroom['showroom_id']?>">Unpublish</a></li>
+				  <?php endif;?>
 				  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewArtObjectsModal<?=$showroom['showroom_id']?>">View Art objects</a></li>
 		      </ul>
 		      </div>
@@ -134,6 +138,59 @@
 </div>
 <?php endforeach;?>
 <!-- /deleteShowroomModal -->
+
+<!-- publishShowroomModal -->
+<?php foreach($showrooms as $showroom):?>
+<div class="modal fade" data-backdrop="static" id="publishShowroomModal<?=$showroom['showroom_id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Info</h4>
+			  </div>
+			  <div class="modal-body">
+			  	<p>
+			  	Would you like to make this showroom accessible online?
+			  	</p>
+			  </div>
+			  <div class="modal-footer">
+			  	 <button type="button" class="btn btn-success" data-dismiss="modal" onclick="processPublishShowroom(<?=$showroom['showroom_id']?>)">Yes</button>
+			  	 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			  </div>
+		</div>
+	</div>
+</div>
+<?php endforeach;?>
+<!-- /publishShowroomModal -->
+
+<!-- publishShowroomModal -->
+<?php foreach($showrooms as $showroom):?>
+<div class="modal fade" data-backdrop="static" id="unpublishShowroomModal<?=$showroom['showroom_id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Info</h4>
+			  </div>
+			  <div class="modal-body">
+			  	<p>
+			  	Would you like to unpublish this showroom?
+			  	</p>
+			  </div>
+			  <div class="modal-footer">
+			  	 <button type="button" class="btn btn-success" data-dismiss="modal" onclick="processUnpublishShowroom(<?=$showroom['showroom_id']?>)">Yes</button>
+			  	 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			  </div>
+		</div>
+	</div>
+</div>
+<?php endforeach;?>
+<!-- /publishShowroomModal -->
+
 
 </div>
 
