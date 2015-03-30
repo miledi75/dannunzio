@@ -1,6 +1,14 @@
 <?php
 class processShowroom extends CI_Controller
 {
+	
+	function __construct()
+	{
+		parent::__construct();
+		//LOAD THE MODEL
+		$this->load->model('showroom_model');
+	}
+	
 	/**
 	 * creates a new showroom
 	 * @param unknown $showroom_name
@@ -10,7 +18,7 @@ class processShowroom extends CI_Controller
 	{
 		//LOAD THE MODEL
 		
-		$this->load->model('showroom_model');
+		//$this->load->model('showroom_model');
 		
 		//CHECK IF SHOWROOM EXISTS
 		$exists = $this->showroom_model->checkIfShowroomNameExist($showroom_name);
@@ -72,6 +80,11 @@ class processShowroom extends CI_Controller
 		}
 		
 		$this->generateResponse($response);
+		
+	}
+	
+	public function toggleShowroomState($showroom_id,$state)
+	{
 		
 	}
 	

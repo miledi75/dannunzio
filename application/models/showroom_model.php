@@ -32,6 +32,14 @@ class Showroom_model extends CI_Model
 		return $query->result();
 	}
 	
+	public function getPublishedShowrooms()
+	{
+		$this->db->where('state',1);
+		
+		$query = $this->db->get('tbl_artefact_type');
+		return $query->result();
+	}
+	
 	/**
 	* returns the number of art objects in each showroom
 	* @param unknown $artefact_type_id

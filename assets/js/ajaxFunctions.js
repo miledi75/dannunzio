@@ -267,7 +267,10 @@ function handleServerResponseNewShowroom()
 function buildRowNewShowroom(showroom_id)
 {
 	newRow = '<tr id="row'+showroom_id+'">'+
-	'<td id="showroom_name">'+showroom_name+'</td><td id="nr_of_items">0</td><td id="menu">'+
+	'<td id="showroom_name">'+showroom_name+'</td>'+
+	'<td id="nr_of_items">0</td>'+
+	'<td id="state">Published</td>'+
+	'<td id="menu">'+
 	'<div class="dropdown">'+
     '<button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">'+
     '<span class="caret"></span></button>'+
@@ -299,7 +302,6 @@ function buildRowNewShowroom(showroom_id)
 	
 	$('#showroomModals').append(deleteModal);
 	return newRow;
-	
 }
 
 /**

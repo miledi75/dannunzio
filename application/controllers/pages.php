@@ -46,12 +46,12 @@ class pages extends CI_Controller
 	{
 		
 		$this->load->model('artobject_model');
-		$paintings = $this->artobject_model->getArtObjectsByArtefactType($showroom);
+		$artObjects = $this->artobject_model->getArtObjectsByArtefactType($showroom);
 		
 		
 		$data['shopName'] = "D'annunzio art gallery";
 		$data['types'] = $this->artifacts;
-		$data['paintings'] = $paintings;
+		$data['artObjects'] = $artObjects;
 		
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/showroom', $data);
