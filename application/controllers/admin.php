@@ -255,6 +255,17 @@ class admin extends CI_Controller
 			$ar_showrooms[$i]['showroom_name'] = $showroom->artefact_type;
 			$ar_showrooms[$i]['showroom_id'] = $showroom->artefact_type_id;
 			$ar_showrooms[$i]['showroom_nr_of_items'] = $nr_of_artObjects[0]->nr_of_artObjects;
+			switch ($showroom->state)
+			{
+				case 1:
+					$ar_showrooms[$i]['state'] = 'Published';
+					break;
+				case 0:
+					$ar_showrooms[$i]['state'] = 'Not published';
+					break;
+							
+			}
+			
 			$i++;
 		}
 		

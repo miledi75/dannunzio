@@ -29,6 +29,7 @@
           <tr>
             <th>Showroom</th>
             <th>Nr of art objects</th>
+            <th>State</th>
             <th></th>
           <tr>
         </thead>
@@ -39,6 +40,7 @@
           <tr id="row<?=$showroom['showroom_id']?>">
             <td id="showroom_name"><?php echo $showroom['showroom_name'];?></td>
             <td id="nr_of_items"><?php echo $showroom['showroom_nr_of_items']?></td>
+            <td id="state"><?php echo $showroom['state']?></td>
             <td id="menu">
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">

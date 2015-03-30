@@ -19,9 +19,15 @@ class Showroom_model extends CI_Model
 		return $query->result();
 	}
 	
+	/*
+	 * gets all the non archived artobjects
+	 * 1 = published
+	 * 0 = not published
+	 */
 	public function getActiveShowrooms()
 	{
 		$this->db->where('state',1);
+		$this->db->or_where('state',0);
 		$query = $this->db->get('tbl_artefact_type');
 		return $query->result();
 	}
@@ -96,7 +102,8 @@ class Showroom_model extends CI_Model
 	 */
 	public function checkIfShowroomNameExist($showroom_name)
 	{
-		$res = $this->db->where('artefact_type',$showroom_name);
+		$this->db->where('artefact_type',$showroom_name);
+		$this->db->where('state',1);
 		return $this->db->get('tbl_artefact_type');
 	}
 	
