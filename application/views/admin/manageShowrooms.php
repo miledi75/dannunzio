@@ -40,7 +40,7 @@
           <tr id="row<?=$showroom['showroom_id']?>">
             <td id="showroom_name"><?php echo $showroom['showroom_name'];?></td>
             <td id="nr_of_items"><?php echo $showroom['showroom_nr_of_items']?></td>
-            <td id="state"><?php echo $showroom['state']?></td>
+            <td id="state<?=$showroom['showroom_id']?>"><?php echo $showroom['state']?></td>
             <td id="menu">
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
@@ -156,7 +156,7 @@
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
-			  	 <button type="button" class="btn btn-success" data-dismiss="modal" onclick="processPublishShowroom(<?=$showroom['showroom_id']?>)">Yes</button>
+			  	 <button type="button" class="btn btn-success" data-dismiss="modal" onclick="processToggleShowroomState(<?=$showroom['showroom_id']?>,1)">Yes</button>
 			  	 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			  </div>
 		</div>
@@ -165,7 +165,7 @@
 <?php endforeach;?>
 <!-- /publishShowroomModal -->
 
-<!-- publishShowroomModal -->
+<!-- unpublishShowroomModal -->
 <?php foreach($showrooms as $showroom):?>
 <div class="modal fade" data-backdrop="static" id="unpublishShowroomModal<?=$showroom['showroom_id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
@@ -182,14 +182,14 @@
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
-			  	 <button type="button" class="btn btn-success" data-dismiss="modal" onclick="processUnpublishShowroom(<?=$showroom['showroom_id']?>)">Yes</button>
+			  	 <button type="button" class="btn btn-success" data-dismiss="modal" onclick="processToggleShowroomState(<?=$showroom['showroom_id']?>,0)">Yes</button>
 			  	 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			  </div>
 		</div>
 	</div>
 </div>
 <?php endforeach;?>
-<!-- /publishShowroomModal -->
+<!-- /unpublishShowroomModal -->
 
 
 </div>

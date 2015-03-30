@@ -326,7 +326,7 @@ function processDeleteShowroom(id)
 	else
 	{
 		// if the connection is busy, try again after one second  
-		//setTimeout('process()', 1000);
+		setTimeout('process()', 1000);
 	}
 }
 
@@ -364,6 +364,67 @@ function handleServerResponseDeleteShowroom()
 		break;
 	} 
 
+}
+
+
+function processToggleShowroomState(showroom_id,state_id)
+{
+	//the showroom whose state needs to be changed
+	state = showroom_id;
+	xmlHttp = createXmlHttpRequestObject();
+	
+	if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
+	{
+		
+		url = "http://"+location.host+"/ci/processShowroom/toggleShowroomState/"+showroom_id+'/'+state_id;
+
+		
+		processUrl(url,handleServerResponseToggleShowroomState);
+		
+	}
+	else
+	{
+		// if the connection is busy, try again after one second  
+		setTimeout('process()', 1000);
+	}
+}
+
+function handleServerResponseToggleShowroomState()
+{
+//GET THE RESPONSE
+	
+	response = handleServerResponse();
+	
+	//GET THE MESSAGE DIV ID
+	message = document.getElementById('showroomMessage');
+	
+	//building the td id from the global variable state 
+	//which in this case holds the showroom_id whose state needs to be changed
+	showroom_id = '#state'+state;
+	
+	if($(showroom_id).html() == 'Published')
+	{
+		$(showroom_id).html('Not published');
+	}
+	else
+	{
+		$(showroom_id).html('Published');
+	}
+	
+	
+	switch(response)
+	{
+    case '1':
+    	message.innerHTML = "Showroom state updated!";
+		message.style.display = 'block';
+		
+		
+		break;
+    case '0':
+    	message.innerHTML = "there was a problem!";
+		message.style.display = 'block';	
+		break;
+	}	
 }
 
 /*

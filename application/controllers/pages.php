@@ -14,7 +14,7 @@ class pages extends CI_Controller
 		// Your own constructor code
 		//LOAD SHOWROOM MODEL
 		$this->load->model('showroom_model');
-		$this->artifacts = $this->showroom_model->getActiveShowrooms();
+		$this->artifacts = $this->showroom_model->getPublishedShowrooms();
 		
 	}
 	

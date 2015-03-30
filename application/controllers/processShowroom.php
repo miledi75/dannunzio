@@ -16,10 +16,6 @@ class processShowroom extends CI_Controller
 	 */
 	public function newShowroom($showroom_name,$state)
 	{
-		//LOAD THE MODEL
-		
-		//$this->load->model('showroom_model');
-		
 		//CHECK IF SHOWROOM EXISTS
 		$exists = $this->showroom_model->checkIfShowroomNameExist($showroom_name);
 		
@@ -54,10 +50,6 @@ class processShowroom extends CI_Controller
 	 */
 	public function deleteShowroom($showroom_id)
 	{
-		//LOAD THE MODEL
-		
-		$this->load->model('showroom_model');
-		
 		$nrOfObjects = $this->showroom_model->getNumberOfArtObjectsInShowroom($showroom_id)[0]->nr_of_artObjects;
 		
 		//CHECK IF SHOWROOM HAS ARTOBJECTS
@@ -85,7 +77,9 @@ class processShowroom extends CI_Controller
 	
 	public function toggleShowroomState($showroom_id,$state)
 	{
+		$res = $this->showroom_model->updateStateOfShowroom($showroom_id,$state);
 		
+		$this->generateResponse($res);
 	}
 	
 	

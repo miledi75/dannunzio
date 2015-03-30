@@ -82,11 +82,12 @@ class Showroom_model extends CI_Model
 	public function updateStateOfShowroom($showroom_id, $state)
 	{
 		$data = array(
-				'state' => 2
+				'state' => $state
 					);
 		
 		$this->db->where('artefact_type_id', $showroom_id);
-		return $this->db->update('tbl_artefact_type', $data);
+		$this->db->update('tbl_artefact_type', $data);
+		return $this->db->affected_rows();
 	}
 	
 	/**
@@ -101,7 +102,8 @@ class Showroom_model extends CI_Model
 		);
 		
 		$this->db->where('artefact_type_id', $showroom_id);
-		return $this->db->update('tbl_artefact_type', $data);
+		$this->db->update('tbl_artefact_type', $data);
+		return $this->db->affected_rows();
 	}
 	
 	/**
