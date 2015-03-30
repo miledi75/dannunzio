@@ -405,13 +405,19 @@ function handleServerResponseToggleShowroomState()
 	if($(showroom_id).html() == 'Published')
 	{
 		$(showroom_id).html('Not published');
+		$('#publishMenu'+state).attr('data-target','#publishShowroomModal'+state);
+		$('#publishMenu'+state).text('Publish');
+		
 	}
 	else
 	{
 		$(showroom_id).html('Published');
+		$('#publishMenu'+state).attr('data-target','#unpublishShowroomModal'+state);
+		$('#publishMenu'+state).text('Unpublish');
+		//$(showroom_id).html('Unpublish');
 	}
 	
-	
+	//alert($('#publishMenu'+state).text());
 	switch(response)
 	{
     case '1':

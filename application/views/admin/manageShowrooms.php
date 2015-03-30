@@ -49,9 +49,9 @@
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteShowroomModal<?=$showroom['showroom_id']?>">Delete</a></li>
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editShowroomModal<?=$showroom['showroom_id']?>">Edit</a></li>
 		          <?php if ($showroom['state'] == 'Not published'):?>
-		          	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#publishShowroomModal<?=$showroom['showroom_id']?>">Publish</a></li>
+		          	<li role="presentation"><a id="publishMenu<?=$showroom['showroom_id']?>" role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#publishShowroomModal<?=$showroom['showroom_id']?>">Publish</a></li>
 				  <?php else:?>
-				 	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#unpublishShowroomModal<?=$showroom['showroom_id']?>">Unpublish</a></li>
+				 	<li role="presentation"><a id="publishMenu<?=$showroom['showroom_id']?>" role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#unpublishShowroomModal<?=$showroom['showroom_id']?>">Unpublish</a></li>
 				  <?php endif;?>
 				  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewArtObjectsModal<?=$showroom['showroom_id']?>">View Art objects</a></li>
 		      </ul>
