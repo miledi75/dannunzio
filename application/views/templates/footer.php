@@ -36,7 +36,7 @@
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
-			  	 <button type="button" class="btn btn-info" data-dismiss="modal">Yes</button>
+			  	 <button id="addItemButton" type="button" class="btn btn-info" data-dismiss="modal">Yes</button>
 			  	 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
 			  </div>
 		</div>

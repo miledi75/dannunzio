@@ -94,7 +94,7 @@
 			<!-- shoppingcart button -->
 			<div class=" col-sm-2 col-md-2 pull-right">
            		<a class="btn btn-default navbar-btn" data-toggle="modal" data-target="#shoppingCartModal">
-  				<i class="fa fa-shopping-cart"> Your shoppingcart: 1</i>
+  				<i id="shoppingCartCounter" class="fa fa-shopping-cart"> Your shoppingcart: 1</i>
   			</a>
             </div>
 			<!-- /shoppingcart button -->

@@ -8,6 +8,44 @@ var showroomToDeleteId;
 var showroom_name;
 var state;
 
+
+
+
+/**
+ * SHOPPING CART FUNCTIONS
+ */
+
+/**
+ * Adds the chosen item to the shoppinCart
+ */
+function addItemToShoppingcart(title,artist,price)
+{
+	var art_title = title;
+	var art_artist = artist;
+	var art_price = price;
+	$('#addToCartConfirmModal').modal('show');
+	$('#addItemButton').unbind().click(
+		function()
+		{
+			counter = $('#shoppingCartCounter').html();
+			cartCounter = +counter.charAt( counter.length-1 );
+			cartCounter++;
+			$('#shoppingCartCounter').html('Your shoppingcart: '+cartCounter);
+			
+		}
+	);
+}
+
+
+
+
+
+
+
+
+
+
+
 /**
  * creates an xml http requestobject
  */
