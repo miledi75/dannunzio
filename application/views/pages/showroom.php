@@ -1,16 +1,16 @@
 <?php
-
+//var_dump($artObjects);
 ?>
 <div class="col-md-9">
 
 <?php 
 foreach ($artObjects as $artObject)
 {
-	$artist = "Luca DiMarco";
-	$title =  $artObject->title; 
-	$price =  $artObject->price;
+	$artist 		= "Luca DiMarco";
+	$title 			=  $artObject->title; 
+	$price 			=  $artObject->price;
+	$art_object_id 	= $artObject->art_object_id;
 ?>
-	
 	<div class="col-sm-4 col-lg-4 col-md-4">
 	    	<div class="thumbnail">
 	        	<img src="<?php echo base_url('uploads')."/".$artObject->image_name;?>" alt="">
@@ -21,7 +21,7 @@ foreach ($artObjects as $artObject)
 	                </h4>
 	                <p>
 	                <?php echo $artObject->description?>
-	               <a class="btn btn-info btn-sm" onclick="addItemToShoppingcart('<?=$title?>','<?=$artist?>','<?=$price?>')">
+	               <a class="btn btn-info btn-sm" onclick="addItemToShoppingcart('<?=$title?>','<?=$artist?>','<?=$price?>','<?=$art_object_id?>')">
 	               <i class="fa fa-shopping-cart"></i>
 	                Add
 	                </a>

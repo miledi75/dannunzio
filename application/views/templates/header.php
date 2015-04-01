@@ -94,7 +94,7 @@
 			<!-- shoppingcart button -->
 			<div class=" col-sm-2 col-md-2 pull-right">
            		<a class="btn btn-default navbar-btn" data-toggle="modal" data-target="#shoppingCartModal">
-  				<i id="shoppingCartCounter" class="fa fa-shopping-cart"> Your shoppingcart: 1</i>
+  				<i id="shoppingCartCounter" class="fa fa-shopping-cart"> Your shoppingcart: 0</i>
   			</a>
             </div>
 			<!-- /shoppingcart button -->
@@ -177,9 +177,10 @@
 				<!-- /kruisje bovenaan -->
 				<h4 class="modal-title" id="titleModalLabel">Your shopping cart</h4>
 			</div>
+			<form id="shoppingCartForm" method="POST" action="<?=base_url('sales/processSale');?>">
 			<div class="modal-body">
-		    	<div class="row">
-                    <table class="table table-hover table-responsive">
+		    		
+                    <table id="shoppingCartTable" class="table table-hover table-responsive">
         		        <thead>
                 		    <tr>
                         		<th>Product</th>
@@ -189,48 +190,24 @@
                 		</thead>
                 		<tbody>
               
-                    	<tr>
-                        	<td class="col-md-6">
-                        		<div class="media">
-	                            	<div class="media-body">
-	                               		<h4 class="media-heading"><a href="#">Horses series 1</a></h4>
-	                                	<h5 class="media-heading"> by <a href="#">Luca Di Marco</a></h5>
-	                                	
-	                            	</div>
-                        		</div>
-                        	</td>
-                        	<td class="col-md-1 text-left"><strong>&euro; 240.99</strong></td>
-                        	<td class="col-md-1">
-                        		<button type="button" class="btn btn-sm btn-danger">
-                            	<span class="fa fa-remove"></span> Remove
-                        		</button>
-                        	</td>
-                    	</tr>
-	                    
-	                    <tr>
-	                        
-	                        
-	                        <td class="col-md-1 text-right"><h5>Estimated shipping:</h5></td>
-	                        <td class="col-md-1 text-left"><h5><strong>&euro; 6.94</strong></h5></td>
-	                        <td></td>
-	                    </tr>
-	                    <tr>
+                    	<tr id="shoppingCartTotal" style="display:none">
 	                        <td class="col-md-1 text-right"><h4>Total:</h3></td>
-	                        <td class="col-md-1 text-left"><h4><strong>&euro; 247.93</strong></h3></td>
+	                        <td class="col-md-1 text-left"><h4><strong>&euro; <div id="totalShoppingCart">0</div></strong></h3></td>
 	                        <td></td>
 	                    </tr>
 					</tbody>
             	</table>
         	</div>
-		</div>
+		
 		<div class="modal-footer">
 			<button type="button" data-dismiss="modal" class="btn btn-info">
 	    		<span class="fa fa-shopping-cart"></span> Continue Shopping
 	        </button>
-	    <a href="<?php echo base_url('pages/checkout');?>" class="btn btn-success">
-	    	Checkout <span class="fa fa-play"></span>
+	    <button type="submit" class="btn btn-success">
+	    	Checkout <span class="fa fa-play"></span></button>
 	    </a>
 		</div>
+		</form>
 	</div>
 </div>
 </div>

@@ -18,25 +18,88 @@ var state;
 /**
  * Adds the chosen item to the shoppinCart
  */
-function addItemToShoppingcart(title,artist,price)
+function addItemToShoppingcart(title,artist,price,object_id)
 {
-	var art_title = title;
-	var art_artist = artist;
-	var art_price = price;
+	var art_title 		= title;
+	var art_artist 		= artist;
+	var art_price 		= price;
+	var art_object_id 	= object_id;
 	$('#addToCartConfirmModal').modal('show');
 	$('#addItemButton').unbind().click(
 		function()
 		{
-			counter = $('#shoppingCartCounter').html();
-			cartCounter = +counter.charAt( counter.length-1 );
-			cartCounter++;
-			$('#shoppingCartCounter').html('Your shoppingcart: '+cartCounter);
+			
+			//ADD THE ITEM TO THE SHOPPINGCART MODAL
+			updateShoppingCartCounter(1);
+			$('#shoppingCartTable').prepend(addNewRowToShoppingCartTable(title,artist,price,art_object_id));
+			//CALCULATE AND UPDATE TOTAL
+			updateTotal(price);
+			$('#totalShoppingCart').html(total);
+			//DISPLAY THE TOTAL ROW
+			$('#shoppingCartTotal').css("display", "block");
 			
 		}
 	);
 }
 
+/**
+ * updates the shoppingcartcounter
+ * @param nr
+ */
+function updateShoppingCartCounter(nr)
+{
+	counter = $('#shoppingCartCounter').html();
+	cartCounter = +counter.charAt( counter.length-1 );
+	cartCounter += nr;
+	//RAISE THE COUNTER
+	$('#shoppingCartCounter').html('Your shoppingcart: '+cartCounter);
+}
 
+/**
+ * updates the total in the shoppingcart modal form
+ * @param amount
+ */
+function updateTotal(amount)
+{
+	//CALCULATE TOTAL
+	total = $('#totalShoppingCart').html().trim();
+	total = parseInt(total);
+	total += parseInt(amount);
+	$('#totalShoppingCart').html(total);
+}
+
+function deleteRowFromShoppingCart(id)
+{
+	amount = parseInt($('#price'+id).html());
+	
+	amount -= amount*2;
+	alert(amount);
+	updateTotal(amount);
+	$('#item'+id).remove();
+	updateShoppingCartCounter(-1);
+}
+
+function addNewRowToShoppingCartTable(title, artist, price,art_object_id)
+{
+	row ='<tr id=item' + art_object_id + '>' +
+		 '<td class="col-md-6">' +
+         '<div class="media">' +
+         '<div class="media-body">' +
+         '<h4 class="media-heading"><a href="#"><div id="title' + art_object_id + '">' + title + '</div></a></h4>' +
+         '<h5 class="media-heading"> by <a href="#"><div id="artist' + art_object_id + '">' + artist + '</div></a></h5>' +
+         '</div>' +
+         '</div>' +
+         '</td>' +
+         '<td class="col-md-1 text-left"><strong>&euro; <div id="price' + art_object_id + '">' + price + '</div></strong></td>' +
+         '<td class="col-md-1">' +
+         '<button onclick="deleteRowFromShoppingCart(' + art_object_id + ')" type="button" class="btn btn-sm btn-danger">' +
+         '<span class="fa fa-remove"></span> Remove' +
+         '</button>' +
+         '</td>' +
+         '</tr>';
+	
+	return row;
+}
 
 
 
