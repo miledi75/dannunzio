@@ -29,6 +29,9 @@ function addItemToShoppingcart(title,artist,price,object_id)
 		function()
 		{
 			
+			//ADD TO THE SERVER SESSION
+			url = 'http://localhost/ci/application/processSales/addToShoppingCartSession';
+			$.post(url,{ title: art_title,artist: art_artist,price: art_price,id: art_object_id },function(data){alert(data);});
 			//ADD THE ITEM TO THE SHOPPINGCART MODAL
 			updateShoppingCartCounter(1);
 			$('#shoppingCartTable').prepend(addNewRowToShoppingCartTable(title,artist,price,art_object_id));

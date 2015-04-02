@@ -1,5 +1,5 @@
 <?php
-class sales extends CI_Controller
+class processSales extends CI_Controller
 {
 	function __construct()
 	{
@@ -12,8 +12,11 @@ class sales extends CI_Controller
 		$this->load->model('sales_model');
 	}
 	
-	function shoppingCartSession($art_object_id,$price,$title)
+	function addToShoppingCartSession()
 	{
+		
+		var_dump($this->input->post());
+		
 		$data = array(
 				'id'      => $art_object_id,
 				'qty'     => 1,
