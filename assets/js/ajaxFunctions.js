@@ -30,7 +30,7 @@ function addItemToShoppingcart(title,artist,price,object_id)
 		{
 			
 			//ADD TO THE SERVER SESSION
-			url = 'http://localhost/ci/application/processSales/addToShoppingCartSession';
+			url = 'http://localhost/dannunzio/processSales/addToShoppingCartSession';
 			$.post(url,{ title: art_title,artist: art_artist,price: art_price,id: art_object_id },function(data){alert(data);});
 			//ADD THE ITEM TO THE SHOPPINGCART MODAL
 			updateShoppingCartCounter(1);
@@ -73,8 +73,9 @@ function updateTotal(amount)
 
 function deleteRowFromShoppingCart(id)
 {
+	url = 'http://localhost/dannunzio/processSales/removeFromShoppingCartSession';
+	$.post(url,{ id: id },function(data){alert(data);});
 	amount = parseInt($('#price'+id).html());
-	
 	amount -= amount*2;
 	alert(amount);
 	updateTotal(amount);

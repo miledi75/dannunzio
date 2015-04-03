@@ -94,7 +94,7 @@
 			<!-- shoppingcart button -->
 			<div class=" col-sm-2 col-md-2 pull-right">
            		<a class="btn btn-default navbar-btn" data-toggle="modal" data-target="#shoppingCartModal">
-  				<i id="shoppingCartCounter" class="fa fa-shopping-cart"> Your shoppingcart: 0</i>
+  				<i id="shoppingCartCounter" class="fa fa-shopping-cart"> Your shoppingcart: <?=$this->cart->total_items()?></i>
   			</a>
             </div>
 			<!-- /shoppingcart button -->
@@ -187,6 +187,36 @@
                         		<th class="text-left">Price</th>
                         		<th> </th>
                     		</tr>
+                    		<?php if($this->cart->total_items()>0):?>
+                    		<?php foreach ($this->cart->contents() as $item):?>
+                    		<tr id="item<?=$item['id']?>">
+			 					<td class="col-md-6">
+	         						<div class="media">
+	         							<div class="media-body">
+	         								<h4 class="media-heading">
+	         									<a href="#">
+	         										<div id="title<?=$item['id']?>">
+	         										<?=$item['name']?>
+	         										</div>
+	         									</a>
+	         								</h4>
+	         								<h5 class="media-heading">
+	         								by <a href="#"><div id="artist<?=$item['id']?>"><?=$item['artist']?></div>
+	         								</a>
+	         								</h5>
+	         							</div>
+	         						</div>
+	         					</td>
+	         					<td class="col-md-1 text-left">
+	         						<strong>&euro; <div id="price<?=$item['id']?>"><?=$item['price']?></div></strong>
+	         					</td>
+	         					<td class="col-md-1">
+	         					<button onclick="deleteRowFromShoppingCart(<?=$item['id']?>)" type="button" class="btn btn-sm btn-danger">
+	         					<span class="fa fa-remove"></span> Remove</button>
+	         					</td>
+         					</tr>
+                    		<?php endforeach;?>
+                    		<?php endif;?>
                 		</thead>
                 		<tbody>
               
