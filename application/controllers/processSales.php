@@ -70,4 +70,35 @@ class processSales extends CI_Controller
 		}
 		echo $response;
 	}
+	
+	function checkoutSales()
+	{
+		//CHECK IF LOGGED IN
+		if ($this->session->userdata('logged_in') == 0)
+		{
+			$this->load->view('templates/header');
+			echo "You need to log in";
+			$this->load->view('templates/footer');
+			
+		}
+		else
+		{
+			//DISPLAY THE SUMMARY
+			$this->load->view('templates/header');
+			$this->load->view('pages/checkout');
+			$this->load->view('templates/footer');
+		}
+	}
+	
+	/**
+	 * returns the number of items in the shoppingcart
+	 */
+	function nrOfItemsInShoppingCart()
+	{
+		$response = $this->cart->total_items();
+
+		echo $response;
+	}
+	
+	
 }

@@ -177,10 +177,9 @@
 				<!-- /kruisje bovenaan -->
 				<h4 class="modal-title" id="titleModalLabel">Your shopping cart</h4>
 			</div>
-			<form id="shoppingCartForm" method="POST" action="<?=base_url('sales/processSale');?>">
+			<form id="shoppingCartForm" method="POST" action="<?=base_url('processSales/checkoutSales');?>">
 			<div class="modal-body">
-		    		
-                    <table id="shoppingCartTable" class="table table-hover table-responsive">
+		    		<table id="shoppingCartTable" class="table table-hover table-responsive">
         		        <thead>
                 		    <tr>
                         		<th>Product</th>
@@ -233,7 +232,7 @@
 			<button type="button" data-dismiss="modal" class="btn btn-info">
 	    		<span class="fa fa-shopping-cart"></span> Continue Shopping
 	        </button>
-	    <button type="submit" class="btn btn-success">
+	    <button type="su0bmit" class="btn btn-success">
 	    	Checkout <span class="fa fa-play"></span></button>
 	    </a>
 		</div>
