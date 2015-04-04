@@ -44,6 +44,19 @@ class Sales_model extends CI_Model
 		return $this->db->insert('tbl_sales', $data);
 	}
 	
+	/**
+	 * inserts the sale in the database for approval
+	 */
+	function insertSale($user_id,$art_object_id)
+	{
+		$data = array
+		(
+			'user_id' 		=> $user_id,
+			'art_object_id' => $art_object_id
+		);
+		return $this->db->insert('tbl_sale',$data);
+	}
+	
 	
 	
 }

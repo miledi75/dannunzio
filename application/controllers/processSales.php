@@ -8,11 +8,12 @@ class processSales extends CI_Controller
 	{
 		parent::__construct();
 		
-		//LOAD THE SHOPPINGCATR CLASS
-		//$this->load->library('cart');
-		
-		//LOAD THE MODEL
+		//LOAD THE MODELS
 		$this->load->model('sales_model');
+		
+		//LOAD SHOWROOM MODEL
+		$this->load->model('showroom_model');
+		$this->artifacts = $this->showroom_model->getPublishedShowrooms();
 	}
 	
 	/**
@@ -73,21 +74,14 @@ class processSales extends CI_Controller
 	
 	function checkoutSales()
 	{
-		//CHECK IF LOGGED IN
-		if ($this->session->userdata('logged_in') == 0)
-		{
-			$this->load->view('templates/header');
-			echo "You need to log in";
-			$this->load->view('templates/footer');
-			
-		}
-		else
-		{
-			//DISPLAY THE SUMMARY
-			$this->load->view('templates/header');
-			$this->load->view('pages/checkout');
-			$this->load->view('templates/footer');
-		}
+		
+		$data['shopName'] = "D'annunzio art gallery";
+		$data['types'] = $this->artifacts;
+		
+		//DISPLAY THE SUMMARY
+		$this->load->view('templates/header',$data);
+		$this->load->view('pages/checkout');
+		$this->load->view('templates/footer');
 	}
 	
 	/**
