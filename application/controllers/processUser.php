@@ -2,32 +2,37 @@
 class processUser extends CI_Controller
 {
 	
+	function __construct()
+	{
+		parent::__construct();
+		//LOAD DBASE MODEL
+		$this->load->model('user_model');
+		
+	}
+	
+	
 	/**
-	 * ads a new user to the system
+	 * Adds a new user from the online store
+	 */
+	function newUserFromStore()
+	{
+		var_dump($this->input->post());
+		
+		//GET POST VARS
+		
+		$name = $this->input->post('newFirstName');
+		$surname = $this->input->post('newName');
+		$email = $this->input->post('newEmail');
+		$password = $this->input->post('newPassword');
+		$controlPassword = $this->input->post('newControlPassword');
+		$captchaCode = $this->input->post('captcha_code');
+	}
+	/**
+	 * adds a new user to the system
 	 * this function gets called from the admin section
 	 */
 	function newUser()
 	{
-		/**POST VARS
-		 * array (size=12)
-  'name' => string 'KKris' (length=5)
-  'surname' => string 'cil' (length=3)
-  'email' => string 'cil@cil.com' (length=11)
-  'cell' => string '321654' (length=6)
-  'username' => string 'kris' (length=4)
-  'password' => string 'kris' (length=4)
-  'password2' => string 'kris' (length=4)
-  'street' => string 'kikvorsstraat' (length=13)
-  'number' => string '22' (length=2)
-  'postalcode' => string '9000' (length=4)
-  'town' => string 'gent' (length=4)
-  'country' => string 'be' (length=2)
-		 */
-				
-		//LOAD DBASE MODEL
-		$this->load->model('user_model');
-		
-		
 		//GET POST VARS
 		
 		$name = $this->input->post('name');

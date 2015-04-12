@@ -245,7 +245,7 @@ function processLogin()
 		   	loginMessage.style.display = 'none';
 		   
 		   	//BUILD THE CONTROLLER URL
-		   	url = 'http://localhost/ci/processUser/processLogin/'+login+'/'+passWord;
+		   	url = 'http://localhost/dannunzio/processUser/processLogin/'+login+'/'+passWord;
 		   	//CALL THE PROCESSLOGIN FUNCTION FROM THE PROCESUSER CONTROLLER
 		  	processUrl(url,handleServerResponseLogin);
 	   }
@@ -316,7 +316,7 @@ function processNewShowroom()
 		   	showroomMessageModal.style.display = 'none';
 		   
 		   	//BUILD THE CONTROLLER URL
-		   	url = 'http://localhost/ci/processShowroom/newShowroom/'+showroom_name+'/'+state;
+		   	url = 'http://localhost/dannunzio/processShowroom/newShowroom/'+showroom_name+'/'+state;
 		   	
 		  	processUrl(url,handleServerResponseNewShowroom);
 	   }
@@ -422,7 +422,7 @@ function processDeleteShowroom(id)
 	if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
 	{
 		
-		url = "http://"+location.host+"/ci/processShowroom/deleteShowroom/"+id;
+		url = "http://"+location.host+"/dannunzio/processShowroom/deleteShowroom/"+id;
 
 		
 		processUrl(url,handleServerResponseDeleteShowroom);
@@ -481,7 +481,7 @@ function processToggleShowroomState(showroom_id,state_id)
 	if (xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
 	{
 		
-		url = "http://"+location.host+"/ci/processShowroom/toggleShowroomState/"+showroom_id+'/'+state_id;
+		url = "http://"+location.host+"/dannunzio/processShowroom/toggleShowroomState/"+showroom_id+'/'+state_id;
 
 		
 		processUrl(url,handleServerResponseToggleShowroomState);

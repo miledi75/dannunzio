@@ -319,31 +319,31 @@
 				  <!-- /kruisje bovenaan -->
 				  <h4 class="modal-title" id="titleModalLabel">Register as new customer</h4>
 			  </div>
-			  <div class="modal-body">
-			  	<form class="form-inline-table" method="POST" action="proces.php">
-					<div class="form-group">
-						<label for="inputName">Name</label>
-						<input type="text" class="form-control" id="inputName" placeholder="Dimaggio">
+			  <form id="newUserForm" class="form-inline-table" method="POST" action="<?= base_url('processUser/newUserFromStore')?>">
+				<div class="modal-body">
+			  		<div class="form-group">
+						<label for="newInputName">Name</label>
+						<input name="newName" type="text" class="form-control" id="newInputName" placeholder="Dimaggio">
 					</div>
 								
 					<div class="form-group">	
-						<label for="inputFirstName">First name</label>
-						<input type="text" class="form-control" id="inputFirstName" placeholder="Miles">
+						<label for="newInputFirstName">First name</label>
+						<input name="newFirstName" type="text" class="form-control" id="newInputFirstName" placeholder="Miles">
 					</div>
 									
 					<div class="form-group">	
-						<label for="inputEmail">Email</label>
-						<input type="email" class="form-control" id="inputEmail" placeholder="me@someplace.com">
+						<label for="newInputEmail">Email</label>
+						<input name="newEmail" type="email" class="form-control" id="newInputEmail" placeholder="me@someplace.com">
 					</div>
 									
 					<div class="form-group">
-						<label for="InputPassword">Password</label>
-						<input type="password" class="form-control" id="InputPassword" placeholder="Password">
+						<label for="newInputPassword">Password</label>
+						<input name="newPassword" type="password" class="form-control" id="newInputPassword" placeholder="Password">
 					</div>
 									
 					<div class="form-group">
-						<label for="InputControlPassword1">Repeat password</label>
-						<input type="password" class="form-control" id="InputControlPassword1" placeholder="Password">
+						<label for="newInputControlPassword">Repeat password</label>
+						<input name="newControlPassword" type="password" class="form-control" id="newInputControlPassword" placeholder="Password">
 					</div>
 									
 					<img id="captcha" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQmRYUNSth8eqGr_wlaNa5MIXdMfu7PZ3RhjktnPkfBN9tk9yVGZQ" height="42" width="100" alt="CAPTCHA Image" />
