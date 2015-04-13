@@ -26,6 +26,10 @@ class processUser extends CI_Controller
 		$password = $this->input->post('newPassword');
 		$controlPassword = $this->input->post('newControlPassword');
 		$captchaCode = $this->input->post('captcha_code');
+		
+		//user_role_id=4 because only buyers can register through the store
+		$N_user = array('userName' => $email,'password' => $password, 'email' => $email, 'user_role_id' => 4);
+		
 	}
 	/**
 	 * adds a new user to the system
