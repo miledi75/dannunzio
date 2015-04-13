@@ -15,9 +15,61 @@ var state;
 
 function registerNewUserFromStore()
 {
+	//HIDING THE MESSAGES
+	$('#createUserMessageModal').html('');
+	$('#createUserMessageModal').css("display", "none");
+	
 	//VALIDATION using JQUERY AND AJAX
 	
-
+	success = true;
+	message = "The following fields need input:<br>";
+	if($('#inputName').val() == "")
+	{
+		
+		message += 'Name';
+		success = false;
+	}
+	
+	if($('#inputSurname').val() == "")
+	{
+		message += ', Surname';
+		success = false;
+	}
+	
+	if($('#inputEmail').val() == "")
+	{
+		message += ', Email';
+		success = false;
+	}
+	
+	if($('#inputPassword1').val() == "")
+	{
+		
+		message += ', Password';
+		success = false;
+	}
+	
+	if($('#inputPassword2').val() == "")
+	{
+		message += ', Retype Password';
+		success = false;
+	}
+	
+	if($('#captchaCode').val() == "")
+	{
+		message += ', Captcha';
+		success = false;
+	}
+	
+	if(success)
+	{
+		alert('form is ready to submit');
+	}
+	else
+	{
+		$('#createUserMessageModal').html(message);
+		$('#createUserMessageModal').css("display", "block");
+	}
 }
 
 
