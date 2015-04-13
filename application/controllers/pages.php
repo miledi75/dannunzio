@@ -18,6 +18,43 @@ class pages extends CI_Controller
 		
 	}
 	
+	function register($message=0)
+	{
+		
+		if($message == 1)//register successful
+		{
+			$data['shopName'] = "D'annunzio art gallery";
+			$data['types'] = $this->artifacts;
+			$data['message'] = "You have registered succesfully.";
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/home', $data);
+			$this->load->view('templates/footer', $data);
+		}
+		elseif ($message == 2) //register failed
+		{
+			$data['shopName'] = "Register as a customer";
+			$data['types'] = array();
+			$data['message'] = "There has been an issue, please try again.";
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/register', $data);
+			$this->load->view('templates/footer', $data);
+		}
+		else 
+		{
+			$data['shopName'] = "Register as a customer";
+			$data['types'] = array();
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('pages/register', $data);
+			$this->load->view('templates/footer', $data);
+		}
+		
+		
+	}
+	
+	
 	public function landing()
 	{
 		$data['shopName'] = "D'annunzio art gallery";
@@ -29,6 +66,7 @@ class pages extends CI_Controller
 	{
 		$data['shopName'] = "D'annunzio art gallery";
 		$data['types'] = $this->artifacts;
+		//$data['message'] = 0;
 		/**$data['cat1'] = "Paintings";
 		$data['cat2'] = "Sculptures";
 		$data['cat3'] = "Lithos";**/

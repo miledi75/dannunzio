@@ -159,7 +159,7 @@
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
-			  	 <button type="button" class="btn btn-info" onclick="redirect('http://localhost/ci/processUser/processLogout')">Yes</button>
+			  	 <button type="button" class="btn btn-info" onclick="redirect('<?=base_url('processUser/processLogout')?>')">Yes</button>
 			  	 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			  </div>
 		</div>
@@ -269,7 +269,7 @@
 				
 				<div class="form-group">	
 						<label for="btnNewUser">First time here?</label>
-						<button type="button" class="btn btn-info btn-sm form-control" id="btnNewUser" data-dismiss="modal" data-toggle="modal" data-target="#registerNewCustomerModal">
+						<button type="button" class="btn btn-info btn-sm form-control" id="btnNewUser" data-dismiss="modal" onclick="redirect('<?=base_url('pages/register')?>')">
 						New user
 						</button>
 				</div>
@@ -309,59 +309,5 @@
 </div>
 <!-- /loginConfirmModal -->
 
-<!-- RegisterNewCustomerModal -->
-<div class="modal fade" data-backdrop="static" id="registerNewCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			  <div class="modal-header">
-				  <!-- kruisje bovenaan -->
-				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				  <!-- /kruisje bovenaan -->
-				  <h4 class="modal-title" id="titleModalLabel">Register as new customer</h4>
-			  </div>
-			  <form id="newUserForm" class="form-inline-table" method="POST" action="<?= base_url('processUser/newUserFromStore')?>">
-				<div class="modal-body">
-			  		<div class="form-group">
-						<label for="newInputName">Name</label>
-						<input name="newName" type="text" class="form-control" id="newInputName" placeholder="Dimaggio">
-					</div>
-								
-					<div class="form-group">	
-						<label for="newInputFirstName">First name</label>
-						<input name="newFirstName" type="text" class="form-control" id="newInputFirstName" placeholder="Miles">
-					</div>
-									
-					<div class="form-group">	
-						<label for="newInputEmail">Email</label>
-						<input name="newEmail" type="email" class="form-control" id="newInputEmail" placeholder="me@someplace.com">
-					</div>
-									
-					<div class="form-group">
-						<label for="newInputPassword">Password</label>
-						<input name="newPassword" type="password" class="form-control" id="newInputPassword" placeholder="Password">
-					</div>
-									
-					<div class="form-group">
-						<label for="newInputControlPassword">Repeat password</label>
-						<input name="newControlPassword" type="password" class="form-control" id="newInputControlPassword" placeholder="Password">
-					</div>
-									
-					<img id="captcha" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQmRYUNSth8eqGr_wlaNa5MIXdMfu7PZ3RhjktnPkfBN9tk9yVGZQ" height="42" width="100" alt="CAPTCHA Image" />
-					<a href="#" onclick="document.getElementById('captcha').src = '././assets/library/vendor/securimage/securimage_show.php?' + Math.random(); return false" class="btn btn-info btn-sm">Show a Different Image</a><br/>
-					<div class="form-group" style="margin-top: 10px;">
-						<input type="text" class="form-control" name="captcha_code" id="captcha_code" placeholder="Prove you are not a machine..." />
-						<span class="help-block" style="display: none;">Prove you are not a machine...</span>	
-					</div>
-									
-							
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-success">Submit</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<!-- /RegisterNewCustomerModal -->
+
 <!-- /Modal forms -->

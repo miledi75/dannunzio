@@ -1,3 +1,15 @@
+
+<?php if(isset($message)):?>
+
+<div class="col-md-4">
+    <div class="alert alert-success">
+
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+		<?=$message ?>
+    </div>
+</div>
+
+<?php endif;?>
 <div class="col-md-9">
    <div class="row carousel-holder">
        <div class="col-md-12">

@@ -158,8 +158,9 @@ class User_model extends CI_Model {
 		$query_user = $this->db->query($sql_user);
 		if($query_user)
 		{
-			
+			$user_id = $this->db->insert_id();
 		}
+		return $user_id;
 	}
 	
 	public function get_user_credentials($login, $password)

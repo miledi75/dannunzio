@@ -9,6 +9,18 @@ var showroom_name;
 var state;
 
 
+/**
+ * REGISTER USER FUNCTIONS
+ */
+
+function registerNewUserFromStore()
+{
+	//VALIDATION using JQUERY AND AJAX
+	
+
+}
+
+
 
 
 /**

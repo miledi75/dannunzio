@@ -72,12 +72,54 @@ class processSales extends CI_Controller
 		echo $response;
 	}
 	
-	function checkoutSales()
+	/*
+	 * registers the sale for approval
+	 */
+	function saleFinished()
+	{
+		echo $user_id = $this->session->userdata('user_id');
+		$success = true;
+		foreach ($this->cart->contents() as $item)
+		{
+			if(!$this->sales_model->registerSale($user_id,$item['id']))
+			{
+				$success = false;
+			}
+		}
+		if($success)
+		{
+			
+			//DESTROY THE CART SESSION
+			$this->cart->destroy();
+			
+			$data['shopName'] = "Checkout finished";
+			$data['types'] = array();
+			
+			$data['message'] = "Your sale request has been registered and will be reviewed by our curator as soon as possible. Thank you for your trust in our art gallery";
+			
+			$this->load->view('templates/header',$data);
+			$this->load->view('pages/sales');
+			$this->load->view('templates/footer');
+		}
+	}
+	
+	
+	function checkoutSales($message = 0)
 	{
 		
-		$data['shopName'] = "D'annunzio art gallery";
-		$data['types'] = $this->artifacts;
+		$data['shopName'] = "Check out your items";
+		$data['types'] = array();
 		
+		switch ($message)
+		{
+			case 0:
+				$data['message'] = 0;
+				break;
+			case 1:
+				$data['message'] = "You have registered succesfully.";
+			default:
+				break;
+		}
 		//DISPLAY THE SUMMARY
 		$this->load->view('templates/header',$data);
 		$this->load->view('pages/checkout');
