@@ -121,6 +121,7 @@ class User_model extends CI_Model {
 	
 	/**
 	 * inserts a user in the database
+	 * only called from the admin module
 	 * @param unknown $ar_user
 	 */
 	public function insert_user($ar_user, $ar_user_adress, $ar_user_data)
@@ -147,6 +148,17 @@ class User_model extends CI_Model {
 				
 				return $query_user_data;
 			}
+		}
+	}
+	
+	function insert_user_from_store($ar_user)
+	{
+		//FILLING THE MAIN USER TABLE
+		$sql_user = $this->db->insert_string('tbl_users', $ar_user);
+		$query_user = $this->db->query($sql_user);
+		if($query_user)
+		{
+			
 		}
 	}
 	
