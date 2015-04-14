@@ -120,6 +120,30 @@ class User_model extends CI_Model {
 	}
 	
 	/**
+	 * gets all the new customers that have to be approved
+	 * = customers that registered on the website
+	 */
+	public function getNewCustomers()
+	{
+		$sql = "SELECT tbl_users.user_id,
+		tbl_user_data.surname,
+		tbl_user_data.name,
+		tbl_user_roles.user_role,
+		tbl_users.email
+		FROM (db_dannunzio.tbl_users tbl_users
+		INNER JOIN db_dannunzio.tbl_user_roles tbl_user_roles
+		ON (tbl_users.user_role_id = tbl_user_roles.user_role_id))
+		INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
+		ON (tbl_users.user_id = tbl_user_data.user_id)
+		WHERE approved=? ORDER BY tbl_user_data.surname";
+		
+		$query = $this->db->query($sql,array(0));
+		
+		return $query->result();
+				
+	}
+	
+	/**
 	 * inserts a user in the database
 	 * only called from the admin module
 	 * @param unknown $ar_user

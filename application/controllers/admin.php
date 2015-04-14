@@ -5,13 +5,15 @@ class admin extends CI_Controller
 	{
 		//LOAD THE SALES MODEL
 		$this->load->model('sales_model');
+		//LOAD THE USER MODEL
+		$this->load->model('user_model');
 		
 		$data['pageTitle'] = "Admin page";
 		
 		//GET THE UNAPPROVED SALES
 		$data['newSales'] = $this->sales_model->getSales(0);
-		
-		$data['newUsers'] = "New users to be approved";
+		//GET THE NEW CUSTOMERS
+		$data['newCustomers'] = $this->user_model->getNewCustomers();
 		$data['newContactRequests'] = "New contact messages";
 		
 		
