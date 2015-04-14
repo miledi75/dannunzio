@@ -16,7 +16,7 @@ class Sales_model extends CI_Model
 	 */
 	function getAllSales()
 	{
-		return $this->db->get().results();
+		return $this->db->get('tbl_sales').result();
 	}
 	
 	/**
