@@ -3,8 +3,14 @@ class admin extends CI_Controller
 {
 	public function home()
 	{
+		//LOAD THE SALES MODEL
+		$this->load->model('sales_model');
+		
 		$data['pageTitle'] = "Admin page";
-		$data['newSales'] = "New sales registered";
+		
+		//GET THE UNAPPROVED SALES
+		$data['newSales'] = $this->sales_model->getSales(0);
+		
 		$data['newUsers'] = "New users to be approved";
 		$data['newContactRequests'] = "New contact messages";
 		

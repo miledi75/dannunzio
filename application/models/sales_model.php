@@ -20,14 +20,35 @@ class Sales_model extends CI_Model
 	}
 	
 	/**
-	 * gets all the sales that haven't been approved yet
+	 * gets the sales corresponding to the flag
+	 * 0 = all unapproved sales
+	 * 1 = all approved sales
+	 * 2 = all closed sales
+	 * to get all sales use function getAllSales()
+	 * @param unknown $flag
 	 * @return string
 	 */
-	function getNewSales()
+	function getSales($flag)
 	{
-		$this->db->where('approved',0);
-		return $this->db->get().results();
+
+		switch ($flag)
+		{
+			case 0:
+				$this->db->where('approved',0);
+				break;
+			case 1:
+				$this->db->where('approved',1);
+				break;
+			case 2:
+				$this->db->where('closed',1);
+				break;
+		}
+		
+		return $this->db->get('tbl_sales')->result();
 	}
+	
+
+	
 	
 	/**
 	 * registers the sale for approval
@@ -54,7 +75,7 @@ class Sales_model extends CI_Model
 			'user_id' 		=> $user_id,
 			'art_object_id' => $art_object_id
 		);
-		return $this->db->insert('tbl_sale',$data);
+		return $this->db->insert('tbl_sales',$data);
 	}
 	
 	

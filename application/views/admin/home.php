@@ -16,15 +16,11 @@
 </div>
 <div class="row">
 	<div class="col-md-4">
-    	<div class="list-group">
-    		<table></table>
-    		<tr>
-    		<td></td>
-    		<td></td>
-    		</tr>
-    		<a href="<?php echo base_url('admin/manageSales')?>" class="list-group-item"><i class="fa fa-buysellads"></i> <?= $newSales ;?></a>
-            <a href="<?php echo base_url('admin/customers')?>" class="list-group-item"><i class="fa fa-user-plus"></i> <?= $newUsers ;?></a>
-            <a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> <?= $newContactRequests ;?></a>
+    		<?php if(count($newSales) > 0):?>
+    		<a href="<?php echo base_url('admin/manageSales')?>" class="list-group-item"><i class="fa fa-buysellads"></i> New sales to approve (<?= count($newSales)?>)</a>
+            <?php endif;?>
+            <a href="<?php echo base_url('admin/customers')?>" class="list-group-item"><i class="fa fa-user-plus"></i> New users to approve</a>
+            <a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> New contact requests</a>
     	</div>
 	</div>
 </div>
