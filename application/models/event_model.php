@@ -47,5 +47,20 @@ class Event_model extends CI_Model
 		
 		return $this->db->insert('tbl_events_registration', $data);
 	}
+	
+	/**
+	 * checks if user is already registered
+	 * @param unknown_type $user_id
+	 * @param unknown_type $event_id
+	 */
+	public function checkIfRegistered($user_id,$event_id)
+	{
+		$sql = "SELECT 
+				count(user_id) as total 
+				FROM tbl_events_registration 
+				WHERE user_id=? AND event_id=?";
+		$query = $this->db->query($sql,array('user_id' => $user_id,'event_id' => $event_id));
+		return $query->result()[0]->total;
+	}
 }
 ?>

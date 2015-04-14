@@ -3,7 +3,7 @@
 class Showroom_model extends CI_Model
 {
 	/**
-	* loads the database core claass
+	* loads the database core class
 	*/
 	public function __construct()
 	{

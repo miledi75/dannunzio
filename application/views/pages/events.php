@@ -1,6 +1,7 @@
+
 <div class="col-md-9">
 <?php if(isset($messageSuccess)):?>
-<div class="alert alert-info alert-dismissible" role="alert"><?= $messageSuccess?>
+<div class="alert alert-success alert-dismissible" role="alert"><?= $messageSuccess?>
 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 </div>
 <?php endif;?>
@@ -17,15 +18,19 @@
   
   <table class="table">
    <?php foreach($events as $event):?>
-   <tr>
-   <td><?= $event->event_name?></td>
-   <td><?= $event->date?></td>
-   <?php if($this->session->userdata('logged_in') == true):?>
-   <td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#registerForEventModal<?= $event->event_id?>">Register</button></td>
-   <?php else:?>
-   <td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#loginModal">Log in to register</button></td>
-   <?php endif;?>
-   </tr>
+	   <tr>
+	   	<td><?= $event->event_name?></td>
+	   	<td><?= $event->date?></td>
+	   		<?php if($this->session->userdata('logged_in') == true):?>
+	   			<?php if(in_array($event->event_id, $registeredEvents)):?>
+	   				<td><button class="btn btn-success btn-sm">Registered</button></td>
+	   			<?php else:?>
+	   				<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#registerForEventModal<?= $event->event_id?>">Register</button></td>
+	   			<?php endif;?>
+	   		<?php else:?>
+	   			<td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#loginModal">Log in to register</button></td>
+	   		<?php endif;?>
+	   </tr>
    <?php endforeach;?>
   </table>
 </div>
