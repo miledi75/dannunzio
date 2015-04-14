@@ -44,7 +44,7 @@
 				 
 				 <div class="form-group">
 					 <label for="inputPassword2">Retype Password:</label>
-				      <input type="password2" name="password2" id="inputPassword2" class="form-control input-sm">
+				      <input type="password" name="password2" id="inputPassword2" class="form-control input-sm">
 				 </div>
 				 
 				 <div class="form-group">

@@ -130,8 +130,7 @@ class processUser extends CI_Controller
 	 */
 	function processLogin($login, $password)
 	{
-		//LOAD THE LIBRARY
-		$this->load->model('user_model');
+		
 		//LOOKUP USER CREDENTIALS
 		$credentials = $this->user_model->get_user_credentials($login,$password);
 		
@@ -181,9 +180,47 @@ class processUser extends CI_Controller
 		echo '</response>';
 	}
 	
+	/**
+	 * Logs out the user
+	 */
 	public function processLogout()
 	{
 		$this->session->sess_destroy();
 		redirect('pages/home');
 	}
+	
+	/**
+	 * checks if username and email are available
+	 * returns:
+	 * 1 = username taken
+	 * 2 = email taken
+	 * 0 = go ahead
+	 */
+	function checkUserNameExists()
+	{
+		$userName = $this->input->get_post('userName');
+		$email = $this->input->get_post('email');
+		$countUsername = $this->user_model->countUsername($userName);
+		
+		if($countUsername[0]->total == 0) //USERNAME IS FREE
+		{
+			//CHECK IF EMAIL IS FREE
+			$countUserEmail = $this->user_model->countUserEMail($email);
+			if($countUserEmail[0]->total == 0) //EMAIL IS FREE
+			{
+				$message = 0;
+				
+			}
+			else //EMAIL IS TAKEN
+			{
+				$message = 2;
+			}
+		}
+		else //USERNAME IS TAKEN
+		{
+			$message = 1;
+		}
+		echo $message;
+	}
+	
 }

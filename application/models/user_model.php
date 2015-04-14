@@ -184,9 +184,20 @@ class User_model extends CI_Model {
 	 */
 	function countUsername($userName)
 	{
-		$sql = "Select count(userName) FROM tbl_users WHERE userName=?";
+		$sql = "Select count(userName) as total FROM tbl_users WHERE userName=?";
 		
 		$query = $this->db->query($sql,array($userName));
+		return $query->result();
+	}
+	
+	/*
+	 * checks if email exists
+	*/
+	function countUserEMail($email)
+	{
+		$sql = "Select count(email) as total FROM tbl_users WHERE email=?";
+	
+		$query = $this->db->query($sql,array($email));
 		return $query->result();
 	}
 }

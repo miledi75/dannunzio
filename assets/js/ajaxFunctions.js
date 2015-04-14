@@ -42,6 +42,13 @@ function registerNewUserFromStore()
 		success = false;
 	}
 	
+	if($('#inputUserName').val() == "")
+	{
+		
+		message += ', Username';
+		success = false;
+	}
+	
 	if($('#inputPassword1').val() == "")
 	{
 		
@@ -61,9 +68,57 @@ function registerNewUserFromStore()
 		success = false;
 	}
 	
+	
+	
 	if(success)
 	{
-		alert('form is ready to submit');
+		/**
+		 * check if passwords match
+		 */
+		if($('#inputPassword1').val() == $('#inputPassword2').val())
+		{
+			/**
+			 * CHECK IF USERNAME AND EMAIL ARE UNIQUE
+			 * USING AJAX REQUEST
+			 */
+			$.post("http://localhost/dannunzio/processUser/checkUserNameExists",
+			{
+				        userName: 	$('#inputUserName').val(),
+				        email:		$('#inputEmail').val()
+			},
+				    function(data, status)
+				    {
+				      
+					   if(status == 'success')
+				       {
+				    	   if(data == 1) //USERNAME TAKEN
+				    	   {
+				    		   message = "This username is already taken!";
+				    		   $('#createUserMessageModal').html(message);
+					   		   $('#createUserMessageModal').css("display", "block");
+					    	   
+				    	   }
+				    	   else if(data == 2) //EMAIL TAKEN
+				    	   {
+				    		   message = "This email is already taken!";
+				    		   $('#createUserMessageModal').html(message);
+					   		   $('#createUserMessageModal').css("display", "block");
+					    	   
+				    	   }
+				    	   else
+				           {
+				    		   $('#newUserForm').submit();
+				           }
+				    	}
+				    });
+		}
+		else
+		{
+			message = "Your passwords do not match!";
+			$('#createUserMessageModal').html(message);
+			$('#createUserMessageModal').css("display", "block");
+		}
+		
 	}
 	else
 	{
