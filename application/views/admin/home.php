@@ -17,19 +17,19 @@
 <div class="row">
 	<div class="col-md-4">
     		<?php if(count($newSales) > 0):?>
-    			<a href="<?php echo base_url('admin/manageSales')?>" class="list-group-item"><i class="fa fa-buysellads"></i> New sales to approve (<?= count($newSales)?>)</a>
+    			<a href="<?php echo base_url('admin/manageSales')?>" class="list-group-item"><i class="fa fa-buysellads"></i> You have new sales to approve (<?= count($newSales)?>)</a>
             <?php else:?>
-            	<a href="<?php echo base_url('admin/manageSales')?>" class="list-group-item"><i class="fa fa-buysellads"></i> No New sales to approve</a>
+            	<a href="<?php echo base_url('admin/manageSales')?>" class="list-group-item"><i class="fa fa-buysellads"></i> You have no New sales to approve</a>
             <?php endif;?>
             <?php if(count($newCustomers) > 0):?>
-            <a href="<?php echo base_url('admin/customers')?>" class="list-group-item"><i class="fa fa-user-plus"></i> New users to approve (<?= count($newCustomers)?>)</a>
+            <a href="<?php echo base_url('admin/customers')?>" class="list-group-item"><i class="fa fa-user-plus"></i> You have new users to approve (<?= count($newCustomers)?>)</a>
             <?php else:?>
-            	<a href="<?php echo base_url('admin/customers')?>" class="list-group-item"><i class="fa fa-user-plus"></i> No new users to approve</a>
+            	<a href="<?php echo base_url('admin/customers')?>" class="list-group-item"><i class="fa fa-user-plus"></i> You have no new users to approve</a>
             <?php endif;?>
             <?php if(count($newMessages) > 0):?>
-            	<a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> New contact requests (<?= count($newMessages)?>)</a>
+            	<a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> You have new contact requests (<?= count($newMessages)?>)</a>
     		<?php else:?>
-    			<a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> No new contact requests</a>
+    			<a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> You have no new contact requests</a>
     		<?php endif;?>
     	</div>
 	</div>
