@@ -125,6 +125,10 @@ class pages extends CI_Controller
 
 	public function events()
 	{
+		//LOAD THE EVENT MODEL
+		$this->load->model('event_model');
+		//GET THE EVENTS
+		$data['events'] = $this->event_model->getEvents();
 		$data['shopName'] = "D'annunzio art gallery";
 		$data['types'] = $this->artifacts;
 	

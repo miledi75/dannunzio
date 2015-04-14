@@ -1,34 +1,34 @@
 <div class="col-md-9">
 <h5>Upcoming events</h5>
-
+<?php if(count($events) > 0):?>
 <div class="table-responsive">
+  
   <table class="table">
- 
+   <?php foreach($events as $event):?>
    <tr>
-   <td>Meet the artist: Mina Di Marco</td>
-   <td>Monday, April 13 20h</td>
-   <td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#registerForEventModal">Register</button></td>
+   <td><?= $event->event_name?></td>
+   <td><?= $event->date?></td>
+   <?php if($this->session->userdata('logged_in') == true):?>
+   <td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#registerForEventModal<?= $event->event_id?>">Register</button></td>
+   <?php else:?>
+   <td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#loginModal">Log in to register</button></td>
+   <?php endif;?>
    </tr>
-   <tr>
-   <td>nocturnal</td>
-   <td>Wednesday, May 14 21h</td>
-   <td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#registerForEventModal">Register</button></td>
-   </tr>
-   <tr>
-   <td>Meet the artist: Luca Di Marco</td>
-   <td>Thursday, June 4 20h</td>
-   <td><button class="btn btn-info btn-sm" data-toggle="modal" data-target="#registerForEventModal">Register</button></td>
-   </tr>
+   <?php endforeach;?>
   </table>
 </div>
-
+<?php else:?>
+Check out this page
+<?php endif;?>
 </div>
 
 <!-- Modal forms -->
 
 <!-- registerForEventModal -->
 
-<div class="modal fade" data-backdrop="static" id="registerForEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<?php foreach($events as $event):?>
+
+<div class="modal fade" data-backdrop="static" id="registerForEventModal<?= $event->event_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -38,7 +38,7 @@
 				<h4 class="modal-title" id="titleModalLabel">Register for event</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-inline-table" method="POST" action="<?= base_url('admin/processRegisterForEvent'); ?>">
+				<form class="form-inline-table" method="POST" action="<?= base_url('admin/processRegisterForEvent/'.$event->event_id); ?>">
 					<div class="form-group">
 						  <label for="select_nr_of_persons">Nr of persons:</label>
 						  <select class="form-control" id="select_nr_of_persons">
@@ -51,12 +51,12 @@
 			</div>
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-success">Register</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			</div>
 			</form>
 		</div>
 	</div>
 </div>
-
+<?php endforeach;?>
 <!-- /registerForEventModal -->
 <!-- /modal Forms -->

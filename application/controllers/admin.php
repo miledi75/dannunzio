@@ -25,6 +25,21 @@ class admin extends CI_Controller
 		$this->load->view('templates/adminFooter', $data);
 	}
 	
+	
+	/**
+	 * processes the registraion for an event
+	 * @param unknown_type $event_id
+	 */
+	public function processRegisterForEvent($event_id)
+	{
+		
+	}
+	
+	/**
+	 * logic for the manage art admin page
+	 * @param unknown_type $page
+	 * @param unknown_type $action
+	 */
 	public function manageArt($page=0,$action='nothing')
 	{
 		//HANDLE NOTIFICATIONS
