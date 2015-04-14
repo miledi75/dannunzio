@@ -154,16 +154,31 @@ class User_model extends CI_Model {
 	/*
 	 * inserts the new user from the store module
 	 */
-	function insert_user_from_store($ar_user)
+	function insert_user_from_store($ar_user, $ar_user_adress, $ar_user_data)
 	{
-		//FILLING THE MAIN USER TABLE
+	//FILLING THE MAIN USER TABLE
 		$sql_user = $this->db->insert_string('tbl_users', $ar_user);
 		$query_user = $this->db->query($sql_user);
+		
 		if($query_user)
 		{
 			$user_id = $this->db->insert_id();
+			
+			//FILLING THE ADDRESS USER TABLE
+			$sql_user_address = $this->db->insert_string('tbl_user_address', $ar_user_adress);
+			$query_user_address = $this->db->query($sql_user_address);
+			if($query_user_address)
+			{
+				$user_address_id = $this->db->insert_id();
+				$ar_user_data['user_id'] = $user_id;
+				$ar_user_data['user_address_id'] = $user_address_id;
+				
+				$sql_user_data = $this->db->insert_string('tbl_user_data', $ar_user_data);
+				$query_user_data = $this->db->query($sql_user_data);
+				
+				return $query_user_data;
+			}
 		}
-		return $user_id;
 	}
 	
 	/**

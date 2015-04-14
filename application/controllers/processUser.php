@@ -37,13 +37,13 @@ class processUser extends CI_Controller
 		
 		
 		//user_role_id=4 because only buyers can register through the store
-		$N_user = array('userName' => $username,'password' => $md5Password, 'email' => $email, 'user_role_id' => $user_role_id);
+		$N_user = array('userName' => $username,'password' => $md5Password, 'email' => $email, 'user_role_id' => $user_role_id, 'approved' => 0);
 		
 		$N_address = array('street' => $street,'number' => $number, 'postal_code' => $postalcode, 'town' => $town, 'country' => $country);
 		
 		$N_user_data = array('name' => $name, 'surname' => $surname, 'cell_phone' => $cell);
 		
-		$insert = $this->user_model->insert_user($N_user,$N_address,$N_user_data);
+		$insert = $this->user_model->insert_user_from_store($N_user,$N_address,$N_user_data);
 		if($insert)
 		{
 			//register successful
