@@ -151,6 +151,9 @@ class User_model extends CI_Model {
 		}
 	}
 	
+	/*
+	 * inserts the new user from the store module
+	 */
 	function insert_user_from_store($ar_user)
 	{
 		//FILLING THE MAIN USER TABLE
@@ -163,11 +166,27 @@ class User_model extends CI_Model {
 		return $user_id;
 	}
 	
+	/**
+	 * gets the user credentials
+	 * @param unknown $login
+	 * @param unknown $password
+	 */
 	public function get_user_credentials($login, $password)
 	{
 		$sql = "Select * FROM tbl_users WHERE userName=?";
 		
 		$query = $this->db->query($sql,array($login));
+		return $query->result();
+	}
+	
+	/*
+	 * checks if userName exists
+	 */
+	function countUsername($userName)
+	{
+		$sql = "Select count(userName) FROM tbl_users WHERE userName=?";
+		
+		$query = $this->db->query($sql,array($userName));
 		return $query->result();
 	}
 }
