@@ -27,12 +27,31 @@ class admin extends CI_Controller
 	
 	
 	/**
-	 * processes the registraion for an event
+	 * processes the registration for an event
 	 * @param unknown_type $event_id
 	 */
-	public function processRegisterForEvent($event_id)
+	public function processRegisterForEvent()
 	{
+		//LOAD THE MODEL
+		$this->load->model('event_model');
+		//GET THE USER ID
+		$user_id 	= $this->session->userdata('user_id');
+		$event_id 	= $this->input->get_post('event_id');
+		$nr_of_persons = $this->input->get_post('nr_of_persons');
 		
+		//SAVE THE REGISTRATION
+		$result = $this->event_model->registerEvent($user_id,$event_id,$nr_of_persons);
+		if($result)
+		{
+			//REGISTRATION SUCCESSFULL
+			$message = 1;
+		}
+		else
+		{
+			//REGISTRATION FAILED
+			$message = 2;
+		}
+		redirect('pages/events/'.$message);
 	}
 	
 	/**

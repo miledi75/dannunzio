@@ -123,7 +123,7 @@ class pages extends CI_Controller
 	}
 	
 
-	public function events()
+	public function events($message = 0)
 	{
 		//LOAD THE EVENT MODEL
 		$this->load->model('event_model');
@@ -131,7 +131,14 @@ class pages extends CI_Controller
 		$data['events'] = $this->event_model->getEvents();
 		$data['shopName'] = "D'annunzio art gallery";
 		$data['types'] = $this->artifacts;
-	
+		if($message == 1)
+		{
+			$data['messageSuccess'] = "You are registered for this event.";	
+		}
+		elseif($message == 2)
+		{
+			$data['messageFailed'] = "Your registration failed! Please try again.";
+		}
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/events', $data);
 		$this->load->view('templates/footer', $data);

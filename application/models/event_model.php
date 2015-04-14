@@ -30,5 +30,22 @@ class Event_model extends CI_Model
 		
 		return $this->db->insert('tbl_events', $data);
 	}
+	
+	/**
+	 * inserts an event registration
+	 * @param unknown_type $user_id
+	 * @param unknown_type $event_id
+	 * @param unknown_type $nr_of_persons
+	 */
+	public function registerEvent($user_id,$event_id,$nr_of_persons)
+	{
+		$data = array(
+				'user_id' 			=> $user_id,
+				'event_id'			=> $event_id,
+				'nr_of_persons'		=> $nr_of_persons
+		);
+		
+		return $this->db->insert('tbl_events_registration', $data);
+	}
 }
 ?>

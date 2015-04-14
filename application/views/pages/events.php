@@ -1,4 +1,16 @@
 <div class="col-md-9">
+<?php if(isset($messageSuccess)):?>
+<div class="alert alert-info alert-dismissible" role="alert"><?= $messageSuccess?>
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+<?php endif;?>
+
+<?php if(isset($messageFailed)):?>
+<div class="alert alert-danger alert-dismissible" role="alert"><?= $messageFailed?>
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+</div>
+<?php endif;?>
+
 <h5>Upcoming events</h5>
 <?php if(count($events) > 0):?>
 <div class="table-responsive">
@@ -37,11 +49,13 @@ Check out this page
 				<!-- /kruisje bovenaan -->
 				<h4 class="modal-title" id="titleModalLabel">Register for event</h4>
 			</div>
+			<form class="form-inline-table" method="POST" action="<?= base_url('admin/processRegisterForEvent'); ?>">
 			<div class="modal-body">
-				<form class="form-inline-table" method="POST" action="<?= base_url('admin/processRegisterForEvent/'.$event->event_id); ?>">
+				
+					<input type="hidden" name="event_id" value="<?=$event->event_id?>" />
 					<div class="form-group">
 						  <label for="select_nr_of_persons">Nr of persons:</label>
-						  <select class="form-control" id="select_nr_of_persons">
+						  <select name="nr_of_persons" class="form-control" id="select_nr_of_persons">
 						    <option>1</option>
 						    <option>2</option>
 						    <option>3</option>
