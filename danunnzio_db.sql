@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `db_dannunzio` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE  IF NOT EXISTS `db_dannunzio` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `db_dannunzio`;
--- MySQL dump 10.13  Distrib 5.6.23, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.5.41, for debian-linux-gnu (i686)
 --
--- Host: localhost    Database: db_dannunzio
+-- Host: 127.0.0.1    Database: db_dannunzio
 -- ------------------------------------------------------
--- Server version	5.6.17
+-- Server version	5.5.41-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -41,7 +41,7 @@ CREATE TABLE `ci_sessions` (
 
 LOCK TABLES `ci_sessions` WRITE;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
-INSERT INTO `ci_sessions` VALUES ('2723b9457cbaa10505bff10e66655ba6','127.0.0.1','Mozilla/5.0 (Windows NT 6.1; rv:37.0) Gecko/20100101 Firefox/37.0',1429004654,'a:4:{s:8:\"username\";s:5:\"kriss\";s:5:\"email\";s:13:\"kdeburg@k.com\";s:9:\"logged_in\";b:1;s:4:\"role\";s:5:\"buyer\";}'),('c382bb9c04ebd8c3c2ce4d4e1e4dc077','127.0.0.1','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36',1429016522,'a:6:{s:9:\"user_data\";s:0:\"\";s:8:\"username\";s:6:\"miledi\";s:5:\"email\";s:20:\"mileto1975@gmail.com\";s:7:\"user_id\";s:1:\"1\";s:9:\"logged_in\";b:1;s:4:\"role\";s:5:\"admin\";}');
+INSERT INTO `ci_sessions` VALUES ('33d7b2dd060ac41aad1a40e94002b30e','127.0.0.1','Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36',1429026565,'a:6:{s:9:\"user_data\";s:0:\"\";s:8:\"username\";s:3:\"kim\";s:5:\"email\";s:11:\"kim@kim.com\";s:7:\"user_id\";s:2:\"45\";s:9:\"logged_in\";b:1;s:4:\"role\";s:5:\"buyer\";}'),('43b66d66f4ed9bd80986b2716c38931e','127.0.0.1','Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36',1429040315,''),('5920c64450f2656381548d9b7f43b0b8','127.0.0.1','Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36',1429023147,'');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `tbl_events` (
   `date` varchar(145) DEFAULT NULL,
   `max_allowed` int(10) DEFAULT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,6 +147,7 @@ CREATE TABLE `tbl_events` (
 
 LOCK TABLES `tbl_events` WRITE;
 /*!40000 ALTER TABLE `tbl_events` DISABLE KEYS */;
+INSERT INTO `tbl_events` VALUES (1,'An evening with the artist: Luca Di Marco','Friday, April 17',20),(2,'An evening with the artist: Mina Di Marco','Friday, April 26',25);
 /*!40000 ALTER TABLE `tbl_events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,8 +162,9 @@ CREATE TABLE `tbl_events_registration` (
   `registration_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) DEFAULT NULL,
   `nr_of_persons` int(10) DEFAULT NULL,
+  `event_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`registration_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,6 +173,7 @@ CREATE TABLE `tbl_events_registration` (
 
 LOCK TABLES `tbl_events_registration` WRITE;
 /*!40000 ALTER TABLE `tbl_events_registration` DISABLE KEYS */;
+INSERT INTO `tbl_events_registration` VALUES (1,45,2,1);
 /*!40000 ALTER TABLE `tbl_events_registration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +216,7 @@ CREATE TABLE `tbl_messages` (
   `from` varchar(145) DEFAULT NULL,
   `title` varchar(145) DEFAULT NULL,
   `body` mediumtext,
-  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date` datetime DEFAULT NULL,
   `read` int(2) DEFAULT '0',
   PRIMARY KEY (`message_id`),
   UNIQUE KEY `message_id_UNIQUE` (`message_id`)
@@ -375,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-14 15:23:31
+-- Dump completed on 2015-04-14 21:44:46
