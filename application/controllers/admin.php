@@ -7,6 +7,8 @@ class admin extends CI_Controller
 		$this->load->model('sales_model');
 		//LOAD THE USER MODEL
 		$this->load->model('user_model');
+		//LOAD THE MESSAGES MODEL
+		$this->load->model('messages_model');
 		
 		$data['pageTitle'] = "Admin page";
 		
@@ -14,7 +16,8 @@ class admin extends CI_Controller
 		$data['newSales'] = $this->sales_model->getSales(0);
 		//GET THE NEW CUSTOMERS
 		$data['newCustomers'] = $this->user_model->getNewCustomers();
-		$data['newContactRequests'] = "New contact messages";
+		//GET THE NEW MESSAGES
+		$data['newMessages'] = $this->messages_model->getNewMessages();
 		
 		
 		$this->load->view('templates/adminHeader', $data);

@@ -26,8 +26,11 @@
             <?php else:?>
             	<a href="<?php echo base_url('admin/customers')?>" class="list-group-item"><i class="fa fa-user-plus"></i> No new users to approve</a>
             <?php endif;?>
-            <a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> New contact requests</a>
-    		
+            <?php if(count($newMessages) > 0):?>
+            	<a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> New contact requests (<?= count($newMessages)?>)</a>
+    		<?php else:?>
+    			<a href="<?php echo base_url('admin/messages')?>" class="list-group-item"><i class="fa fa-info"></i> No new contact requests</a>
+    		<?php endif;?>
     	</div>
 	</div>
 </div>
