@@ -73,6 +73,14 @@ class Event_model extends CI_Model
 		return $query->result()[0]->total;
 	}
 	
+	/**
+	 * updates an event
+	 * @param unknown $eventId
+	 * @param unknown $eventName
+	 * @param unknown $date
+	 * @param unknown $max
+	 * @return  boolean
+	 */
 	public function updateEvent($eventId,$eventName,$date,$max)
 	{
 		$data = array(
@@ -83,6 +91,30 @@ class Event_model extends CI_Model
 		
 		$this->db->where('event_id', $eventId);
 		return $this->db->update('tbl_events', $data);
+	}
+	
+	/**
+	 * gets the registrations of an event
+	 * @param unknown $event_id
+	 */
+	public function getRegistrations($event_id)
+	{
+		$sql = "SELECT tbl_events.event_name,
+			       tbl_user_data.name,
+			       tbl_user_data.surname,
+			       tbl_users.email,
+			       tbl_events_registration.nr_of_persons
+  				FROM ((db_dannunzio.tbl_user_data tbl_user_data
+		         INNER JOIN db_dannunzio.tbl_users tbl_users
+		            ON (tbl_user_data.user_id = tbl_users.user_id))
+		        INNER JOIN
+		        db_dannunzio.tbl_events_registration tbl_events_registration
+		           ON (tbl_events_registration.user_id = tbl_user_data.user_id))
+		       INNER JOIN db_dannunzio.tbl_events tbl_events
+		          ON (tbl_events_registration.event_id = tbl_events.event_id)
+          		WHERE tbl_events.event_id = ?";
+		$query = $this->db->query($sql,array('event_id' => $event_id));
+		return $query->result();
 	}
 }
 ?>

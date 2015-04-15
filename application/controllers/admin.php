@@ -299,6 +299,10 @@ class admin extends CI_Controller
 	
 	
 	
+	/**
+	 * event managment homepage
+	 * @param number $message
+	 */
 	public function manageEvents($message=0)
 	{
 		//LOAD THE MODEL
@@ -341,6 +345,17 @@ class admin extends CI_Controller
 		$this->load->view('templates/adminHeader', $data);
 		$this->load->view('admin/manageEvents');
 		$this->load->view('templates/adminFooter', $data);
+	}
+	
+	/*
+	 * view registrations
+	*/
+	public function viewRegistrations($event_id)
+	{
+		//LOAD THE MODEL
+		$this->load->model('event_model');
+		$registrants = $this->event_model->getRegistrations($event_id);
+		var_dump($registrants);
 	}
 	
 }
