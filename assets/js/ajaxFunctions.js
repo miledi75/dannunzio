@@ -9,6 +9,57 @@ var showroom_name;
 var state;
 
 
+
+/**
+ * process event functions
+ */
+
+function processDeleteEvent(event_id)
+{
+	url = "http://localhost/dannunzio/processEvents/deleteEvent/"+event_id;
+	redirect(url);
+}
+
+
+function processNewEvent()
+{
+	//eventMessageModal
+	//inputEventName
+	//inputDate
+	//inputMax
+	message = "The following fields need input:<br>";
+	success = true;
+	if($('#inputEventName').val() == '')
+	{
+		message += 'Event name';
+		success = false;
+	}
+	
+	if($('#inputDate').val() == '')
+	{
+		message += ', Date';
+		success = false;
+	}
+	
+	if($('#inputMax').val() == '')
+	{
+		message += ', Maximum nr of visitors allowed';
+		success = false;
+	}
+	if(!success)
+	{
+		$('#eventMessageModal').html(message);
+		$('#eventMessageModal').css("display", "block");
+	}
+	else
+	{
+		$('#formCreateEvent').submit();
+	}
+	
+}
+
+
+
 /**
  * REGISTER USER FUNCTIONS
  */

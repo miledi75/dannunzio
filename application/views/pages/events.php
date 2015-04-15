@@ -54,7 +54,7 @@ Check out this page
 				<!-- /kruisje bovenaan -->
 				<h4 class="modal-title" id="titleModalLabel">Register for event</h4>
 			</div>
-			<form class="form-inline-table" method="POST" action="<?= base_url('admin/processRegisterForEvent'); ?>">
+			<form class="form-inline-table" method="POST" action="<?= base_url('processEvents/processRegisterForEvent'); ?>">
 			<div class="modal-body">
 				
 					<input type="hidden" name="event_id" value="<?=$event->event_id?>" />

@@ -130,6 +130,7 @@ class pages extends CI_Controller
 		//GET THE EVENTS
 		$data['events'] = $this->event_model->getEvents();
 		$user_id = $this->session->userdata('user_id');
+		$registered_events = array();
 		foreach($data['events'] as $event)
 		{
 			if($this->event_model->checkIfRegistered($user_id,$event->event_id))
@@ -137,6 +138,7 @@ class pages extends CI_Controller
 				$registered_events[] = $event->event_id;
 			}
 		}
+		
 		$data['registeredEvents'] = $registered_events;
 		$data['shopName'] = "D'annunzio art gallery";
 		$data['types'] = $this->artifacts;

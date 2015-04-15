@@ -32,6 +32,16 @@ class Event_model extends CI_Model
 	}
 	
 	/**
+	 * deletes an event from the database
+	 * @param unknown $eventId
+	 */
+	public function deleteEvent($eventId)
+	{
+		$this->db->where('event_id', $eventId);
+		$this->db->delete('tbl_events');
+	}
+	
+	/**
 	 * inserts an event registration
 	 * @param unknown_type $user_id
 	 * @param unknown_type $event_id

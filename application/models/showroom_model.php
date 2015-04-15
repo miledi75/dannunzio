@@ -116,9 +116,4 @@ class Showroom_model extends CI_Model
 		$this->db->where('state',1);
 		return $this->db->get('tbl_artefact_type');
 	}
-	
-	
-	
-	
-	
 }

@@ -7,16 +7,52 @@
      <div class="row">
 		 <div class="col-md-3">
 		     <div class="list-group">
-		     	<a href="#" class="list-group-item" data-toggle="modal" data-target="#addNewShowroomModal"><?= $cat1 ;?></a>
+		     	<a href="#" class="list-group-item" data-toggle="modal" data-target="#createEventModal"><?= $cat1 ;?></a>
 		     </div>
 	     </div>
      </div>
  
 <!-- end of the side panel -->
 
-<!-- Begin Showroom table -->
+<!-- Begin Event table -->
+	
+	<?php if(isset($messageSuccess)):?>
+	
+	<div class="col-md-4">
+		<div class="alert alert-success alert-dismissible" role="alert"><?= $messageSuccess?>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		</div>
+	</div>
+	<?php endif;?>
+	
+	<?php if(isset($eventDeleted)):?>
+	
+	<div class="col-md-4">
+		<div class="alert alert-success alert-dismissible" role="alert"><?= $eventDeleted?>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		</div>
+	</div>
+	<?php endif;?>
+	
+	<?php if(isset($messageFailed)):?>
+	<div class="col-md-4">
+		 <div class="alert alert-danger alert-dismissible" role="alert"><?= $messageFailed?>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </div>
+	</div>
+	<?php endif;?>
+	
+	<?php if(isset($eventDeletedFailed)):?>
+	<div class="col-md-4">
+		 <div class="alert alert-danger alert-dismissible" role="alert"><?= $eventDeletedFailed?>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </div>
+	</div>
+	<?php endif;?>
+	
 <div class="row">
 <div class="col-md-12">          
+      <?php if(count($events) > 0):?>
       <table class="table table-hover table-responsive">
         <thead>
           <tr>
@@ -26,62 +62,137 @@
           <tr>
         </thead>
         <tbody>
+          <?php foreach ($events as $event):?>
           <tr>
-            <td>Meet the artist: Mina Di Marco</td>
-            <td>Monday, April 13, 20h</td>
-            <td>25</td>
+            <td><?= $event->event_name?></td>
+            <td><?= $event->date?></td>
+            <td><?= $event->max_allowed?></td>
             <td>
 		      <div class="dropdown">
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 		        <span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal">View participants</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteEventModal<?=$event->event_id ?>">Delete</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editEventModal<?=$event->event_id ?>">Edit</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewParticipantsModal<?=$event->event_id ?>">View participants</a></li>
 		      </ul>
 		      </div>
             </td>
           </tr>
-          
-          <tr>
-            <td>Nocturnal</td>
-            <td>Wednesday, May 14, 21h</td>
-            <td>25</td>
-            <td>
-		      <div class="dropdown">
-		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-		        <span class="caret"></span></button>
-		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal">View participants</a></li>
-		      </ul>
-		      </div>
-            </td>
-          </tr>
-          
-          <tr>
-            <td>Meet the artist: Luca Di MArco</td>
-            <td>Thursday, June 4, 20h</td>
-            <td>25</td>
-            <td>
-		      <div class="dropdown">
-		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-		        <span class="caret"></span></button>
-		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal">View participants</a></li>
-		      </ul>
-		      </div>
-            </td>
-          </tr>
-        </tbody>
+          <?php endforeach;?>
+         </tbody>
       </table>
+      <?php else:?>
+      No events planned. Click 'Create event' to make one.
+      <?php endif;?>
       </div>
  
 
    </div>     
-<!-- end art object table -->
+<!-- end Event table -->
 </div>
 <!-- end of container -->
+
+
+<!-- Modals -->
+
+<!-- deleteEventModal -->
+
+<div id="delete" class="modal hide">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+         <h3>Delete</h3>
+    </div>
+    <div class="modal-body">
+        <p>You are about to delete.</p>
+        <p>Do you want to proceed?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYes" class="btn danger">Yes</a>
+      <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </div>
+</div>
+	
+<!-- createEventModal -->
+<div class="modal fade" data-backdrop="static" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Create new event</h4>
+			  </div>
+			  <form name="createEvent" id="formCreateEvent" method="POST" action="<?= base_url('processEvents/createEvent')?>">
+			  <div class="modal-body">
+				 <div class="form-group">
+					<label for="inputEventName">Event Name:</label>
+					<input type="text" class="form-control input-sm"  autofocus name="eventName" id="inputEventName" placeholder="Event...">
+				 </div>
+				 
+				 <div class="form-group">
+					<label for="inputDate">Date:</label>
+					<input type="date" class="form-control input-sm"  name="date" id="inputDate" placeholder="When...?">
+				 </div>
+				 
+				 <div class="form-group">
+					<label for="inputMax">Maximum nr of visitors allowed:</label>
+					<input type="text" class="form-control input-sm"  autofocus name="max" id="inputMax" placeholder="10...">				
+				 </div>
+				 
+				 <div class="form-group">
+				 	<div class="alert alert-danger alert-dismissible" role="alert" id="showroomMessageModal" style="display:none">
+		     		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;dfsdf</span></button>
+				  	  </div>
+				  </div>
+				  <div class="form-group">
+				  	<div class="alert alert-danger alert-dismissible" role="alert" id="eventMessageModal" style="display:none">
+		     		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;dfsdf</span></button>
+				  	</div>
+				 </div>
+				 
+			  </div>
+			  <div class="modal-footer">
+				 <button type="button" class="btn btn-success" onclick="processNewEvent()">Create event</button>
+				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			  </div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /createEventModal -->
+
+
+
+
+
+
+
+<?php foreach($events as $event):?>
+<div class="modal fade" data-backdrop="static" id="deleteEventModal<?=$event->event_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Info</h4>
+			  </div>
+			  <div class="modal-body">
+			  	<p>
+			  	Would you like to cancel this event?
+			  	</p>
+			  </div>
+			  <div class="modal-footer">
+			  	 <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="processDeleteEvent(<?=$event->event_id;?>)">Yes</button>
+			  	 <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+			  </div>
+		</div>
+	</div>
+</div>
+<?php endforeach;?>
+
+<!-- /deleteEventModal -->
+
+<!-- /Modals -->
+

@@ -27,34 +27,6 @@ class admin extends CI_Controller
 	
 	
 	/**
-	 * processes the registration for an event
-	 * @param unknown_type $event_id
-	 */
-	public function processRegisterForEvent()
-	{
-		//LOAD THE MODEL
-		$this->load->model('event_model');
-		//GET THE USER ID
-		$user_id 	= $this->session->userdata('user_id');
-		$event_id 	= $this->input->get_post('event_id');
-		$nr_of_persons = $this->input->get_post('nr_of_persons');
-		
-		//SAVE THE REGISTRATION
-		$result = $this->event_model->registerEvent($user_id,$event_id,$nr_of_persons);
-		if($result)
-		{
-			//REGISTRATION SUCCESSFULL
-			$message = 1;
-		}
-		else
-		{
-			//REGISTRATION FAILED
-			$message = 2;
-		}
-		redirect('pages/events/'.$message);
-	}
-	
-	/**
 	 * logic for the manage art admin page
 	 * @param unknown_type $page
 	 * @param unknown_type $action
@@ -325,14 +297,40 @@ class admin extends CI_Controller
 		$this->load->view('templates/adminFooter', $data);
 	}
 	
-	public function manageEvents()
+	
+	
+	public function manageEvents($message=0)
 	{
+		//LOAD THE MODEL
+		$this->load->model('event_model');
+		//GET THE EVENTS
+		$data['events'] = $this->event_model->getEvents();
+		
+		//SET UP NOTIFICATIONS
+		if($message == 1)
+		{
+			$data['messageSuccess'] = "Event created succesfully";
+		}
+		elseif ($message == 2)
+		{
+			$data['messageFailed'] = "Event creation failed";
+		}
+		elseif ($message == 3)
+		{
+			$data['eventDeleted'] = "Event deleted";
+		}
+		elseif ($message == 4)
+		{
+			$data['eventDeletedFailed'] = "Event deletion failed";
+		}
+		
+		
+		
+		
 		$data['pageTitle'] = "Manage events";
 		$data['cat1'] = "New event";
-		$data['cat2'] = "empty";
-		$data['cat3'] = "empty";
-	
-	
+		
+		
 		$this->load->view('templates/adminHeader', $data);
 		$this->load->view('admin/manageEvents');
 		$this->load->view('templates/adminFooter', $data);
