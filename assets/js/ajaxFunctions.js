@@ -14,6 +14,53 @@ var state;
  * process event functions
  */
 
+/**
+ * checks and performs the event update
+ */
+
+function processEditEvent(event_id)
+{
+	//eventMessageModal
+	//inputEventName
+	//inputDate
+	//inputMax
+	message = "The following fields need input:<br>";
+	success = true;
+	
+	if($('#inputEditEventName'+event_id).val() == '')
+	{
+		message += 'Event name';
+		success = false;
+	}
+	
+	if($('#inputEditDate'+event_id).val() == '')
+	{
+		message += ', Date';
+		success = false;
+	}
+	
+	if($('#inputEditMax'+event_id).val() == '')
+	{
+		message += ', Maximum nr of visitors allowed';
+		success = false;
+	}
+	if(!success)
+	{
+		$('#eventEditMessageModal'+event_id).html(message);
+		$('#eventEditMessageModal'+event_id).css("display", "block");
+	}
+	else
+	{
+		$('#formEditEvent'+event_id).submit();
+	}
+}
+
+
+
+
+/**
+ * deletes the selected event
+ */
 function processDeleteEvent(event_id)
 {
 	url = "http://localhost/dannunzio/processEvents/deleteEvent/"+event_id;
@@ -21,6 +68,9 @@ function processDeleteEvent(event_id)
 }
 
 
+/**
+ * checks fileds and stores the new event
+ */
 function processNewEvent()
 {
 	//eventMessageModal

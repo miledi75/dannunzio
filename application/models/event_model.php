@@ -72,5 +72,17 @@ class Event_model extends CI_Model
 		$query = $this->db->query($sql,array('user_id' => $user_id,'event_id' => $event_id));
 		return $query->result()[0]->total;
 	}
+	
+	public function updateEvent($eventId,$eventName,$date,$max)
+	{
+		$data = array(
+				'event_name' => $eventName,
+				'max_allowed' => $max,
+				'date' => $date
+		);
+		
+		$this->db->where('event_id', $eventId);
+		return $this->db->update('tbl_events', $data);
+	}
 }
 ?>

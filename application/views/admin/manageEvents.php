@@ -50,6 +50,24 @@
 	</div>
 	<?php endif;?>
 	
+	<?php if(isset($eventUpdated)):?>
+	<div class="col-md-4">
+		 <div class="alert alert-success alert-dismissible" role="alert"><?= $eventUpdated?>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </div>
+	</div>
+	<?php endif;?>
+	
+	<?php if(isset($eventUpdatedFailed)):?>
+	<div class="col-md-4">
+		 <div class="alert alert-danger alert-dismissible" role="alert"><?= $eventUpdatedFailed?>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </div>
+	</div>
+	<?php endif;?>
+	
+	
+	
 <div class="row">
 <div class="col-md-12">          
       <?php if(count($events) > 0):?>
@@ -164,11 +182,60 @@
 
 
 
-
-
-
-
+<!-- editEventModal -->
 <?php foreach($events as $event):?>
+<div class="modal fade" data-backdrop="static" id="editEventModal<?=$event->event_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			  <div class="modal-header">
+	              <!-- kruisje bovenaan -->
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				  <!-- /kruisje bovenaan -->
+				  <h4 class="modal-title" id="titleModalLabel">Create new event</h4>
+			  </div>
+			  <form name="editEvent" id="formEditEvent<?=$event->event_id?>" method="POST" action="<?= base_url('processEvents/editEvent')?>">
+			  <input type="hidden" name="eventId<?=$event->event_id?>" value="<?=$event->event_id?>">
+			  <div class="modal-body">
+				 <div class="form-group">
+					<label for="inputEventName">Event Name:</label>
+					<input type="text" class="form-control input-sm"  autofocus name="editEventName<?=$event->event_id?>" id="inputEditEventName<?=$event->event_id?>" value="<?=$event->event_name?>">
+				 </div>
+				 
+				 <div class="form-group">
+					<label for="inputDate">Date:</label>
+					<input type="text" class="form-control input-sm"  name="editDate<?=$event->event_id?>" id="inputEditDate<?=$event->event_id?>" value="<?=$event->date?>">
+				 </div>
+				 
+				 <div class="form-group">
+					<label for="inputMax">Maximum nr of visitors allowed:</label>
+					<input type="text" class="form-control input-sm"  autofocus name="editMax<?=$event->event_id?>" id="inputEditMax<?=$event->event_id?>" value="<?=$event->max_allowed?>">				
+				 </div>
+				 
+				 <div class="form-group">
+				 	<div class="alert alert-danger alert-dismissible" role="alert" id="showroomMessageModal" style="display:none">
+		     		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;dfsdf</span></button>
+				  	  </div>
+				  </div>
+				  <div class="form-group">
+				  	<div class="alert alert-danger alert-dismissible" role="alert" id="eventEditMessageModal<?=$event->event_id?>" style="display:none">
+		     		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;dfsdf</span></button>
+				  	</div>
+				 </div>
+				 
+			  </div>
+			  <div class="modal-footer">
+				 <button type="button" class="btn btn-success" onclick="processEditEvent(<?= $event->event_id?>)">Update event</button>
+				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			  </div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- /editEventModal -->
+
+
+
+
 <div class="modal fade" data-backdrop="static" id="deleteEventModal<?=$event->event_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">

@@ -313,7 +313,7 @@ class admin extends CI_Controller
 		}
 		elseif ($message == 2)
 		{
-			$data['messageFailed'] = "Event creation failed";
+			$data['messageFailed'] = "Event creation failed!";
 		}
 		elseif ($message == 3)
 		{
@@ -321,9 +321,16 @@ class admin extends CI_Controller
 		}
 		elseif ($message == 4)
 		{
-			$data['eventDeletedFailed'] = "Event deletion failed";
+			$data['eventDeletedFailed'] = "Event deletion failed!";
 		}
-		
+		elseif ($message == 5)
+		{
+			$data['eventUpdated'] = "Event Updated";
+		}
+		elseif ($message == 6)
+		{
+			$data['eventUpdatedFailed'] = "Event update failed!";
+		}
 		
 		
 		
