@@ -77,7 +77,7 @@ class processSales extends CI_Controller
 	 */
 	function saleFinished()
 	{
-		echo $user_id = $this->session->userdata('user_id');
+		$user_id = $this->session->userdata('user_id');
 		$success = true;
 		foreach ($this->cart->contents() as $item)
 		{

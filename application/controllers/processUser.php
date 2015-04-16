@@ -11,6 +11,19 @@ class processUser extends CI_Controller
 	}
 	
 	
+	function approveCustomer($user_id)
+	{
+		$approved = $this->user_model->approveCustomer($user_id);
+		if($approved)
+		{
+			redirect(base_url('admin/newCustomers/1'));
+		}
+		else
+		{
+			redirect(base_url('admin/newCustomers/2'));
+		}
+	}
+	
 	/**
 	 * Adds a new user from the online store
 	 */

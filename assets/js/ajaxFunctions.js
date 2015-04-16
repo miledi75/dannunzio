@@ -26,6 +26,21 @@ function approveSale(sale_id)
 }
 
 /**
+ * process customer function
+ */
+
+function approveCustomer(user_id)
+{
+	$('#approveCustomerConfirmModal').modal('show');
+	$('#approveButton').click(function()
+			{
+				url = "http://localhost/dannunzio/processUser/approveCustomer/"+user_id;
+				redirect(url);
+			});
+	
+}
+
+/**
  * checks and performs the event update
  */
 
@@ -262,7 +277,7 @@ function addItemToShoppingcart(title,artist,price,object_id)
 			
 			//ADD TO THE SERVER SESSION
 			url = 'http://localhost/dannunzio/processSales/addToShoppingCartSession';
-			$.post(url,{ title: art_title,artist: art_artist,price: art_price,id: art_object_id },function(data){alert(data);});
+			$.post(url,{ title: art_title,artist: art_artist,price: art_price,id: art_object_id },function(data){});
 			//ADD THE ITEM TO THE SHOPPINGCART MODAL
 			updateShoppingCartCounter(1);
 			$('#shoppingCartTable').prepend(addNewRowToShoppingCartTable(title,artist,price,art_object_id));
@@ -305,10 +320,10 @@ function updateTotal(amount)
 function deleteRowFromShoppingCart(id)
 {
 	url = 'http://localhost/dannunzio/processSales/removeFromShoppingCartSession';
-	$.post(url,{ id: id },function(data){alert(data);});
+	$.post(url,{ id: id },function(data){});
 	amount = parseInt($('#price'+id).html());
 	amount -= amount*2;
-	alert(amount);
+	
 	updateTotal(amount);
 	$('#item'+id).remove();
 	updateShoppingCartCounter(-1);

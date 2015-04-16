@@ -1,3 +1,6 @@
+<?php
+var_dump($newCustomers);
+?>
 
 <!-- start of side panel -->    
 <div class="container">
@@ -26,36 +29,34 @@
 <!-- /notifications -->
 	<div class="col-md-12">          
    <div class="row"></div>
-   <?php if(count($newSales) > 0):?>
+   <?php if(count($newCustomers) > 0):?>
    <table class="table table-hover">
    		<thead>
           <tr>
-            <th>Art object</th>
-            <th>Buyer</th>
+            <th>Customer</th>
             <th>Email</th>
             <th>Approve</th>
           <tr>
         </thead>
         
         <tbody>
-        <?php foreach ($newSales as $sale):?>
+        <?php foreach ($newCustomers as $customer):?>
         <tr>
-	        <td><?php echo $sale->title;?></td>
-	        <td><?php echo "$sale->name $sale->surname";?></td>
-	        <td><a href="mailto:<?=$sale->email?>" class="btn btn-info btn-sm">Send email</a></td>
-	        <td><button class="btn btn-info btn-sm" onclick="approveSale(<?php echo $sale->sales_id;?>)">Approve Sale</button></td>
+	        <td><?php echo "$customer->name $customer->surname";?></td>
+	        <td><a href="mailto:<?=$customer->email?>" class="btn btn-info btn-sm">Send email</a></td>
+	        <td><button class="btn btn-info btn-sm" onclick="approveCustomer(<?php echo $customer->user_id;?>)">Approve customer</button></td>
         </tr>
         <?php endforeach;?>
         </tbody>
    </table>
   <?php else:?>
-   No new sales at the moment.
+   No new customers at the moment.
    <?php endif;?>     
         </div>
     </div> 
  
-<!-- salesApproveConfirmationModal-->
-<div class="modal fade" data-backdrop="static" id="approveSaleConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- customerApproveConfirmationModal-->
+<div class="modal fade" data-backdrop="static" id="approveCustomerConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			  <div class="modal-header">
@@ -66,7 +67,7 @@
 			  </div>
 			  <div class="modal-body">
 			  	<p>
-			  	Approve this sale?
+			  	Approve this customer?
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
@@ -76,5 +77,5 @@
 		</div>
 	</div>
 </div>
-<!-- salesApproveConfirmationModal-->
+<!-- customerApproveConfirmationModal-->
 

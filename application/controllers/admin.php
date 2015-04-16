@@ -299,7 +299,38 @@ class admin extends CI_Controller
 	
 	
 	/**
-	 * 
+	 * new customer approval page
+	 * @param number $message
+	 */
+	function newCustomers($message = 0)
+	{
+		$data['pageTitle'] = "Manage new customers";
+		
+		//LOAD THE MODEL
+		$this->load->model('user_model');
+	
+		
+		//SET THE NOTIFICATIONS
+		if($message == 1) //success
+		{
+			$data['messageSuccess'] = "Customer has been approved";
+		}
+		elseif($message == 2)
+		{
+			$data['messageFailed'] = "Customer approval failed";
+		}
+		
+		
+		$data['newCustomers'] = $this->user_model->getNewCustomers();
+		$this->load->view('templates/adminHeader', $data);
+		$this->load->view('admin/newCustomers');
+		$this->load->view('templates/adminFooter', $data);
+	
+	}
+	
+	
+	/**
+	 * sale manage approval page
 	 */
 	function manageSales($message = 0)
 	{

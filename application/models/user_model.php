@@ -33,7 +33,16 @@ class User_model extends CI_Model {
 	
 	}
 	
-	
+	function approveCustomer($user_id)
+	{
+		$data = array(
+				'approved' => 1,
+				
+		);
+		
+		$this->db->where('user_id', $user_id);
+		return $this->db->update('tbl_users', $data);
+	}
 	
 	
 	/**
@@ -158,6 +167,7 @@ class User_model extends CI_Model {
 		{
 			$user_id = $this->db->insert_id();
 			
+			
 			//FILLING THE ADDRESS USER TABLE
 			$sql_user_address = $this->db->insert_string('tbl_user_address', $ar_user_adress);
 			$query_user_address = $this->db->query($sql_user_address);
@@ -187,7 +197,7 @@ class User_model extends CI_Model {
 		if($query_user)
 		{
 			$user_id = $this->db->insert_id();
-			
+			$this->session->set_userdata('user_id',$user_id);
 			//FILLING THE ADDRESS USER TABLE
 			$sql_user_address = $this->db->insert_string('tbl_user_address', $ar_user_adress);
 			$query_user_address = $this->db->query($sql_user_address);
