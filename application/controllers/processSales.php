@@ -72,7 +72,7 @@ class processSales extends CI_Controller
 		echo $response;
 	}
 	
-	/*
+	/**
 	 * registers the sale for approval
 	 */
 	function saleFinished()
@@ -104,6 +104,10 @@ class processSales extends CI_Controller
 	}
 	
 	
+	/**
+	 * checkout overview page
+	 * @param number $message
+	 */
 	function checkoutSales($message = 0)
 	{
 		
@@ -134,6 +138,19 @@ class processSales extends CI_Controller
 		$response = $this->cart->total_items();
 
 		echo $response;
+	}
+	
+	function approveSale($sale_id)
+	{
+		$approved = $this->sales_model->approveSale($sale_id);
+		if($approved)
+		{
+			redirect("admin/manageSales/1");
+		}
+		else 
+		{
+			redirect("admin/manageSales/2");
+		}
 	}
 	
 	

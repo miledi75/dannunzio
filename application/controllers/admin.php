@@ -298,6 +298,33 @@ class admin extends CI_Controller
 	}
 	
 	
+	/**
+	 * 
+	 */
+	function manageSales($message = 0)
+	{
+		$data['pageTitle'] = "Manage new sales";
+		
+		//LOAD THE SALES MODEL
+		$this->load->model('sales_model');
+		
+		//SET THE NOTIFICATIONS
+		if($message == 1) //success
+		{
+			$data['messageSuccess'] = "Sale has been approved";
+		}
+		elseif($message == 2)
+		{
+			$data['messageFailed'] = "Sale approval failed";
+		}
+		
+		
+		$data['newSales'] = $this->sales_model->getUnapprovedSalesInfo();
+
+		$this->load->view('templates/adminHeader', $data);
+		$this->load->view('admin/newSales');
+		$this->load->view('templates/adminFooter', $data);
+	}
 	
 	/**
 	 * event managment homepage

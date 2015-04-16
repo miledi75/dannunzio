@@ -48,7 +48,25 @@ class Sales_model extends CI_Model
 	}
 	
 
-	
+	function getUnapprovedSalesInfo()
+	{
+		$sql = "SELECT tbl_art_objects.title,
+			       tbl_art_objects.description,
+			       tbl_user_data.name,
+			       tbl_user_data.surname,
+			       tbl_users.email,
+			       tbl_sales.sales_id
+  				FROM ((db_dannunzio.tbl_users tbl_users
+		       INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
+		            ON (tbl_users.user_id = tbl_user_data.user_id))
+		       INNER JOIN db_dannunzio.tbl_sales tbl_sales
+		           ON (tbl_sales.user_id = tbl_users.user_id))
+		       INNER JOIN db_dannunzio.tbl_art_objects tbl_art_objects
+		          ON (tbl_sales.art_object_id = tbl_art_objects.art_object_id)
+		          WHERE tbl_sales.approved = 0";
+		return $this->db->query($sql)->result();
+			
+	}
 	
 	/**
 	 * registers the sale for approval
@@ -78,6 +96,14 @@ class Sales_model extends CI_Model
 		return $this->db->insert('tbl_sales',$data);
 	}
 	
-	
-	
+	function approveSale($sales_id)
+	{
+		$data = array(
+				
+				'approved' => 1
+		);
+		
+		$this->db->where('sales_id', $sales_id);
+		return $this->db->update('tbl_sales', $data);
+	}
 }

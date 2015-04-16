@@ -1,4 +1,4 @@
-<?php var_dump($registrants);?>
+
 <!-- start of side panel -->
 <div class="container">
 <div class="row">

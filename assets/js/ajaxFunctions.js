@@ -11,8 +11,19 @@ var state;
 
 
 /**
- * process event functions
+ * process sales functions
  */
+
+function approveSale(sale_id)
+{
+	$('#approveSaleConfirmModal').modal('show');
+	$('#approveButton').click(function()
+			{
+				url = "http://localhost/dannunzio/processSales/approveSale/"+sale_id;
+				redirect(url);
+			});
+	
+}
 
 /**
  * checks and performs the event update
