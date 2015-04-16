@@ -309,6 +309,11 @@ class admin extends CI_Controller
 		$this->load->model('event_model');
 		//GET THE EVENTS
 		$data['events'] = $this->event_model->getEvents();
+		//GET THE REGISTRATIONS
+		//LOAD THE MODEL
+		$this->load->model('event_model');
+	
+		$data['registrants'] = $this->event_model->getRegistrations();
 		
 		//SET UP NOTIFICATIONS
 		if($message == 1)
@@ -347,17 +352,4 @@ class admin extends CI_Controller
 		$this->load->view('templates/adminFooter', $data);
 	}
 	
-	/*
-	 * view registrations
-	*/
-	public function viewRegistrations($event_id)
-	{
-		//LOAD THE MODEL
-		$this->load->model('event_model');
-		$registrants = $this->event_model->getRegistrations($event_id);
-		var_dump($registrants);
-	}
-	
 }
-
-?>

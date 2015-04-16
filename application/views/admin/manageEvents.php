@@ -1,3 +1,4 @@
+<?php var_dump($registrants);?>
 <!-- start of side panel -->
 <div class="container">
 <div class="row">
@@ -92,7 +93,7 @@
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteEventModal<?=$event->event_id ?>">Delete</a></li>
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editEventModal<?=$event->event_id ?>">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewParticipantsModal<?=$event->event_id ?>">View participants</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#participantsModal<?=$event->event_id ?>">View participants</a></li>
 		      </ul>
 		      </div>
             </td>
@@ -182,8 +183,9 @@
 
 
 
-<!-- editEventModal -->
+
 <?php foreach($events as $event):?>
+<!-- editEventModal -->
 <div class="modal fade" data-backdrop="static" id="editEventModal<?=$event->event_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -235,7 +237,7 @@
 
 
 
-
+<!-- deleteEventModal -->
 <div class="modal fade" data-backdrop="static" id="deleteEventModal<?=$event->event_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
@@ -257,9 +259,52 @@
 		</div>
 	</div>
 </div>
+<!-- /deleteEventModal -->
+
+<!-- viewParticipantsModal -->
+<div class="modal fade" data-backdrop="static" id="participantsModal<?=$event->event_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!-- kruisje bovenaan -->
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<!-- /kruisje bovenaan -->
+				<h4 class="modal-title" id="titleModalLabel">Participants to this event</h4>
+			</div>
+			<div class="modal-body">
+		    	<table id="shoppingCartTable" class="table table-hover table-responsive">
+        		  <thead>
+                	<tr>
+                        		<th>Name</th>
+                        		<th>Nr of persons</th>
+                        		<th>Email</th>
+                    		</tr>
+                  </thead>
+                  <tbody>
+              		<?php foreach ($registrants as $registrant):?>
+              		<?php if($registrant->event_id == $event->event_id):?>
+              		<tr>
+	                	<td><?php echo "$registrant->name $registrant->surname";?></td>
+	                    <td><?php echo $registrant->nr_of_persons;?></td>
+	                    <td><a href="mailto:<?php echo $registrant->email?>" class="btn btn-info btn-sm">Send email</a></td>
+	               </tr>
+	               <?php endif;?>
+	               <?php endforeach;?>
+				  </tbody>
+            	</table>
+        	</div>
+		<div class="modal-footer">
+			<button type="button" data-dismiss="modal" class="btn btn-info">
+	    		 Close
+	        </button>
+	    </div>
+	</div>
+</div>
+</div>
+<!-- /viewParticipantsModal -->
 <?php endforeach;?>
 
-<!-- /deleteEventModal -->
+
 
 <!-- /Modals -->
 

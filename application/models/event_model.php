@@ -97,13 +97,14 @@ class Event_model extends CI_Model
 	 * gets the registrations of an event
 	 * @param unknown $event_id
 	 */
-	public function getRegistrations($event_id)
+	public function getRegistrations()
 	{
 		$sql = "SELECT tbl_events.event_name,
 			       tbl_user_data.name,
 			       tbl_user_data.surname,
 			       tbl_users.email,
-			       tbl_events_registration.nr_of_persons
+			       tbl_events_registration.nr_of_persons,
+				   tbl_events_registration.event_id
   				FROM ((db_dannunzio.tbl_user_data tbl_user_data
 		         INNER JOIN db_dannunzio.tbl_users tbl_users
 		            ON (tbl_user_data.user_id = tbl_users.user_id))
@@ -111,9 +112,8 @@ class Event_model extends CI_Model
 		        db_dannunzio.tbl_events_registration tbl_events_registration
 		           ON (tbl_events_registration.user_id = tbl_user_data.user_id))
 		       INNER JOIN db_dannunzio.tbl_events tbl_events
-		          ON (tbl_events_registration.event_id = tbl_events.event_id)
-          		WHERE tbl_events.event_id = ?";
-		$query = $this->db->query($sql,array('event_id' => $event_id));
+		          ON (tbl_events_registration.event_id = tbl_events.event_id)";
+		$query = $this->db->query($sql);
 		return $query->result();
 	}
 }
