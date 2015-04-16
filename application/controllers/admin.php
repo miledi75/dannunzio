@@ -150,6 +150,37 @@ class admin extends CI_Controller
 		$this->load->view('templates/adminFooter');
 	}
 	
+	public function findCustomer()
+	{
+		$query_cust =  $this->input->post('q_customer');
+		
+		//LOAD THE MODEL
+		$this->load->model('user_model');
+		$users= $this->user_model->findCustomer($query_cust);
+		
+		$data['pageTitle'] = "Manage customers";
+		$data['customers'] = $users;
+		$data['cat1'] = "Add customer";
+		$data['cat2'] = "empty";
+		$data['cat3'] = "empty";
+		
+		$data["links"] = 0;
+		$data['userCreated'] = 0;
+		$data['userDeleted'] = 0;
+		
+		$this->load->view('templates/adminHeader', $data);
+		$this->load->view('admin/manageCustomers');
+		
+		$this->load->view('templates/adminFooter', $data);
+		
+				
+	}
+	
+	/**
+	 * customers management page
+	 * @param number $page
+	 * @param string $action
+	 */
 	public function manageCustomers($page=0,$action='nothing')
 	{
 		$this->load->model('user_model');
@@ -193,7 +224,15 @@ class admin extends CI_Controller
 		{
 			$data['userCreated'] = false;
 		}
-	
+		
+		if($action =='userDeleted')
+		{
+			$data['userDeleted'] = true;
+		}
+		else
+		{
+			$data['userDeleted'] = false;
+		}
 		
 			
 		//LOAD THE VIEWS

@@ -10,7 +10,10 @@ class processUser extends CI_Controller
 		
 	}
 	
-	
+	/**
+	 * approve the customer
+	 * @param unknown $user_id
+	 */
 	function approveCustomer($user_id)
 	{
 		$approved = $this->user_model->approveCustomer($user_id);
@@ -234,6 +237,19 @@ class processUser extends CI_Controller
 			$message = 1;
 		}
 		echo $message;
+	}
+	
+	function deleteUser($user_id)
+	{
+		$delete = $this->user_model->deleteUser($user_id);
+		if($delete)
+		{
+			redirect(base_url('admin/manageCustomers/0/userDeleted'));
+		}
+		else
+		{
+			redirect(base_url('admin/manageCustomers/0/nothing'));
+		}
 	}
 	
 }

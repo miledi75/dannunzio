@@ -5,9 +5,9 @@
 	   	<div class="lead col-md-3"><?php echo $pageTitle;?></div>
 	     <!-- Search box -->
 	     <div class="col-md-3 pull-right">
-			 <form class="navbar-form" role="search">
+			 <form class="navbar-form"  method="POST" action="<?= base_url('admin/findCustomer')?>">
 			 <div class="input-group">
-				 <input type="text" class="form-control" placeholder="find customer..." name="q_art">
+				 <input type="text" class="form-control" placeholder="find customer..." name="q_customer">
 				 <div class="input-group-btn">
 				 	<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				 </div>
@@ -32,6 +32,15 @@
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   User created succesfully!
+</div>
+</div>
+<?php endif; ?>
+
+<?php if ($userDeleted): ?>
+<div class="col-md-3">  
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  User deleted succesfully!
 </div>
 </div>
 <?php endif; ?>
@@ -60,9 +69,9 @@
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 		        <span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal">View extra info</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal<?=$customer->user_id?>">Delete</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal<?=$customer->user_id?>">Edit</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal<?=$customer->user_id?>">View extra info</a></li>
 		      </ul>
 		      </div>
             </td>
@@ -85,8 +94,8 @@
 <!--  user modals -->
 
 <!-- deleteUserModals -->
-
-<div class="modal fade" data-backdrop="static" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<?php foreach ($customers as $customer): ?>
+<div class="modal fade" data-backdrop="static" id="deleteUserModal<?=$customer->user_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			  <div class="modal-header">
@@ -102,14 +111,14 @@
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
-			  	<button type="submit" class="btn btn-danger" data-toggle="modal" data-dismiss="modal" data-target="#deleteConfirmModal">Proceed</button>
+			  	<button type="submit" class="btn btn-danger"  data-dismiss="modal" onclick="deleteUser(<?=$customer->user_id?>)">Proceed</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			  </div>
 	
 		</div>
 	</div>
 </div>
-
+<?php endforeach; ?>
 <!-- /deleteUserModal -->
 
 <!-- createUserModal -->

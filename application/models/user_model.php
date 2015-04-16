@@ -33,6 +33,54 @@ class User_model extends CI_Model {
 	
 	}
 	
+	
+	/**
+	 * find a customer
+	 * @param unknown $qCustomer
+	 */
+	function findCustomer($qCustomer)
+	{
+		$sql ="SELECT tbl_users.user_id,
+			       tbl_user_data.surname,
+			       tbl_user_data.name,
+			       tbl_user_roles.user_role,
+			       tbl_users.email
+			  FROM (db_dannunzio.tbl_users tbl_users
+			        INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
+			           ON (tbl_users.user_id = tbl_user_data.user_id))
+			       INNER JOIN db_dannunzio.tbl_user_roles tbl_user_roles
+			          ON (tbl_users.user_role_id = tbl_user_roles.user_role_id)
+			  WHERE
+			      tbl_users.archived = 0
+			      AND
+			      tbl_users.approved = 1
+			      AND
+			      (tbl_user_data.surname LIKE '%$qCustomer%' OR tbl_user_data.name LIKE '%$qCustomer%' OR tbl_users.email LIKE '%$qCustomer%')
+			      AND
+			      (tbl_users.user_role_id = 3 OR tbl_users.user_role_id = 3)";
+		return $result = $this->db->query($sql)->result();
+	}
+	/**
+	 * archives a user for deletion
+	 * @param unknown $user_id
+	 * @return Ambigous <object, boolean, string, mixed, unknown>
+	 */
+	function deleteUser($user_id)
+	{
+		$data = array(
+				'archived' => 1,
+		
+		);
+		
+		$this->db->where('user_id', $user_id);
+		return $this->db->update('tbl_users', $data);
+	}
+	
+	/**
+	 * approves the customers by setting the flag
+	 * @param unknown $user_id
+	 * @return Ambigous <object, boolean, string, mixed, unknown>
+	 */
 	function approveCustomer($user_id)
 	{
 		$data = array(
@@ -144,12 +192,13 @@ class User_model extends CI_Model {
 		ON (tbl_users.user_role_id = tbl_user_roles.user_role_id))
 		INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
 		ON (tbl_users.user_id = tbl_user_data.user_id)
-		WHERE approved=? ORDER BY tbl_user_data.surname";
+		WHERE approved=? 
+		AND archived=0
+		ORDER BY tbl_user_data.surname";
 		
 		$query = $this->db->query($sql,array(0));
 		
 		return $query->result();
-				
 	}
 	
 	/**

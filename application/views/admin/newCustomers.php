@@ -1,7 +1,3 @@
-<?php
-var_dump($newCustomers);
-?>
-
 <!-- start of side panel -->    
 <div class="container">
     <div class="row">

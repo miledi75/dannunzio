@@ -33,11 +33,20 @@ function approveCustomer(user_id)
 {
 	$('#approveCustomerConfirmModal').modal('show');
 	$('#approveButton').click(function()
-			{
-				url = "http://localhost/dannunzio/processUser/approveCustomer/"+user_id;
-				redirect(url);
-			});
-	
+	{
+		url = "http://localhost/dannunzio/processUser/approveCustomer/"+user_id;
+		redirect(url);
+	});
+}
+
+/**
+ * delete the user
+ * @param user_id
+ */
+function deleteUser(user_id)
+{
+	url = "http://localhost/dannunzio/processUser/deleteUser/"+user_id;
+	redirect(url);
 }
 
 /**
