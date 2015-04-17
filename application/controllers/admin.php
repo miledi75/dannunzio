@@ -35,6 +35,24 @@ class admin extends CI_Controller
 	{
 		//HANDLE NOTIFICATIONS
 		
+		if($action == 'slideshowSuccess')
+		{
+			$data['slideshowSuccess'] = "Image added to slideshow";
+		}
+		if($action == 'slideshowFailed')
+		{
+			$data['slideshowFailed'] = "Image adding to slideshow failed!";
+		}
+		
+		if($action == 'slideshowDeleted')
+		{
+			$data['slideshowSuccess'] = "Image deleted from slideshow";
+		}
+		if($action == 'slideshowDeletedFailed')
+		{
+			$data['slideshowFailed'] = "Image deletion from slideshow failed!";
+		}
+		
 		if($action == 'artObjectCreated')
 		{
 			$data['artObjectCreated'] = true;
@@ -136,6 +154,19 @@ class admin extends CI_Controller
 		$data["links"] = $this->pagination->create_links();
 		//END PAGINATION SETUP
 		
+		//CHECK FOR ITEMS ADDED TO SLIDESHOW IN FUNCTION OF SETTING
+		//THE TOGGLE SWITCH
+		$inSlideshow = array();
+		foreach ($art_objects as $art_object)
+		{
+			if($this->artobject_model->isInSlideshow($art_object->art_object_id))
+			{
+				$inSlideshow[] = $art_object->art_object_id;
+			}
+			
+		}
+				
+		$data['inSlideshow']	= $inSlideshow;
 		$data['pageTitle']		= "Manage art collection";
 		$data['cat1'] 			= "Add new art object";
 		$data['cat2'] 			= "empty";

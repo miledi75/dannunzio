@@ -1,13 +1,51 @@
 <?php
 class Artobject_model extends CI_Model
 {
-	
 	/**
 	 * loads the database core class
 	 */
 	public function __construct()
 	{
 		$this->load->database();
+	}
+	
+	/**
+	 * inserts an artobject id and path in the slideshow table
+	 * @param unknown $art_object_id
+	 * @param unknown $path
+	 * @return Ambigous <object, boolean, string, mixed, unknown>
+	 */
+	public function insertObjectInSlideshow($art_object_id,$path)
+	{
+		$data = array(
+				'art_object_id' => $art_object_id,
+				'path' => $path
+		);
+		
+		return $this->db->insert('tbl_slideshow', $data);
+		
+	}
+	
+	/**
+	 * deletes an item from the slideshow
+	 * @param unknown $art_object_id
+	 * @return bool
+	 */
+	public function deleteFromSlideshow($art_object_id)
+	{
+		return $this->db->delete('tbl_slideshow', array('art_object_id' => $art_object_id));
+	}
+	
+	/**
+	 * 
+	 * @param int $art_object_id
+	 * @return int total
+	 */
+	public function isInSlideshow($art_object_id)
+	{
+		$sql = "Select count(art_object_id) as total FROM tbl_slideshow where art_object_id=?";
+		$query = $this->db->query($sql,array($art_object_id));
+		return $query->result()[0]->total;
 	}
 	
 	/**

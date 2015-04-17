@@ -30,6 +30,24 @@
  
 <div class="row">
 	<!-- NOTIFICATIONS -->
+	<?php if (isset($slideshowSuccess)): ?>
+		<div class="col-md-4">  
+			<div class="alert alert-success alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					<?=$slideshowSuccess?>
+			</div>
+		</div>
+	<?php endif; ?>
+	
+	<?php if (isset($slideshowFailed)): ?>
+		<div class="col-md-4">  
+			<div class="alert alert-danger alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					<?=$slideshowFailed?>
+			</div>
+		</div>
+	<?php endif; ?>
+	
 	<?php if ($artObjectCreated): ?>
 		<div class="col-md-4">  
 			<div class="alert alert-success alert-dismissible" role="alert">
@@ -116,6 +134,11 @@
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteArtObjectModal<?= $art_object->art_object_id?>">Delete</a></li>
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editNewArtObjectModal<?= $art_object->art_object_id?>">Edit</a></li>
 		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewImageModal<?= $art_object->art_object_id?>">View Image</a></li>
+		          <?php if(in_array($art_object->art_object_id, $inSlideshow)):?>
+		          	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#removeFromSlideshowModal<?= $art_object->art_object_id?>">Remove from slideshow</a></li>
+		          <?php else:?>
+		          	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#AddToSlideshowModal<?= $art_object->art_object_id?>">Add to slideshow</a></li>
+		          <?php endif;?>	
 		        </ul>
 		      </div>
             </td>
@@ -380,6 +403,62 @@
 	</div>
 </div>
 <!-- /viewImageModal -->
+
+<!-- AddToSlideshowModal -->
+
+<div class="modal fade" data-backdrop="static" id="AddToSlideshowModal<?= $art_object->art_object_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<form class="form-inline-table" method="POST" action="<?=base_url('/processArtObject/addToSlideshow')?>">
+			<input type="hidden" name="art_object_id" value="<?=$art_object->art_object_id?>">
+			<input type="hidden" name="path" value="<?=base_url('/uploads/')."/$art_object->image_name"?>">
+			<div class="modal-content">
+				  <div class="modal-header">
+		              <!-- kruisje bovenaan -->
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <!-- /kruisje bovenaan -->
+					  <h4 class="modal-title" id="titleModalLabel">Delete art object?</h4>
+				  </div>
+				  <div class="modal-body">
+				  	<p>
+				  	Would you like to add this object to the slideshow?</p>
+				  </div>
+				  <div class="modal-footer">
+				  	<button type="submit" class="btn btn-success" >Proceed</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				  </div>
+			</div>
+		</form>
+	</div>
+</div>	
+<!-- /AddToSlideshowModal -->
+
+<!-- removeFromSlideshowModal -->
+
+<div class="modal fade" data-backdrop="static" id="removeFromSlideshowModal<?= $art_object->art_object_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<form class="form-inline-table" method="POST" action="<?=base_url('/processArtObject/removeFromSlideshow')?>">
+			<input type="hidden" name="art_object_id" value="<?=$art_object->art_object_id?>">
+			
+			<div class="modal-content">
+				  <div class="modal-header">
+		              <!-- kruisje bovenaan -->
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <!-- /kruisje bovenaan -->
+					  <h4 class="modal-title" id="titleModalLabel">Delete art object?</h4>
+				  </div>
+				  <div class="modal-body">
+				  	<p>
+				  	Would you like to remove this object to the slideshow?</p>
+				  </div>
+				  <div class="modal-footer">
+				  	<button type="submit" class="btn btn-success" >Proceed</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				  </div>
+			</div>
+		</form>
+	</div>
+</div>	
+<!-- /AddToSlideshowModal -->
 
 <?php endforeach;?>
 

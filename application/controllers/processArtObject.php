@@ -6,7 +6,50 @@ class processArtObject extends CI_Controller
 		parent::__construct();
 		//LOAD THE MODEL
 		$this->load->model('artobject_model');
+		
 	}
+	
+	/**
+	 * adds artobject to slideshow
+	 */
+	function addToSlideshow()
+	{
+		$art_object_id = $this->input->post('art_object_id');
+		$path = $this->input->post('path');
+		$result = $this->artobject_model->insertObjectInSlideshow($art_object_id,$path);
+		if($result)
+		{
+			$url = base_url('admin/manageArt/0/slideshowSuccess');
+		}
+		else
+		{
+			$url = base_url('admin/manageArt/0/slideshowFailed');
+		}
+		redirect($url);
+		
+	}
+	
+	
+	
+	/**
+	 * removes artobject from slideshow
+	 */
+	function removeFromSlideshow()
+	{
+		$art_object_id = $this->input->post('art_object_id');
+		
+		$result = $this->artobject_model->deleteFromSlideshow($art_object_id);
+		if($result)
+		{
+			$url = base_url('admin/manageArt/0/slideshowDeleted');
+		}
+		else
+		{
+			$url = base_url('admin/manageArt/0/slideshowDeletedFailed');
+		}
+		redirect($url);
+	}
+	
 	/*
 	 * ADDS A NEW ART OBJECT.
 	 * ALSO HANDLES IMAGE RESIZING
