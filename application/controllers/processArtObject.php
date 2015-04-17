@@ -82,7 +82,7 @@ class processArtObject extends CI_Controller
 		);
 		
 		
-		$target_dir = 'C:/Users/miledi/OneDrive/wamp/www/ci/uploads/';
+		$target_dir = 'C:/Users/miledi/OneDrive/wamp/www/dannunzio/uploads/';
 		$N_art_image= array
 		(
 				'image_name' => $image["image"]["name"],
