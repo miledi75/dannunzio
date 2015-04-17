@@ -64,6 +64,13 @@ class pages extends CI_Controller
 	
 	public function home()
 	{
+		//LOAD THE ARTOBJECTS MODEL
+		
+		$this->load->model('artobject_model');
+		
+		$images = $this->artobject_model->getImagesForSLideshow();
+		
+		$data['images'] = $images;
 		$data['shopName'] = "D'annunzio art gallery";
 		$data['types'] = $this->artifacts;
 		//$data['message'] = 0;
