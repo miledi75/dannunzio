@@ -11,6 +11,9 @@ class processShowroom extends CI_Controller
 	
 	/**
 	 * creates a new showroom
+	 * this function is called from an AJAX function
+	 * if a new showroom is created the function returns the
+	 * new showroom ID
 	 * @param unknown $showroom_name
 	 * @param unknown $state
 	 */

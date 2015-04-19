@@ -96,6 +96,12 @@ class Sales_model extends CI_Model
 		return $this->db->insert('tbl_sales',$data);
 	}
 	
+	/**
+	 * sets the approved flag in the sales database
+	 * this means that a sale has been approved by an admin
+	 * and can be processed financially
+	 * @param unknown_type $sales_id
+	 */
 	function approveSale($sales_id)
 	{
 		$data = array(

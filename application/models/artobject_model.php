@@ -36,8 +36,9 @@ class Artobject_model extends CI_Model
 		return $this->db->delete('tbl_slideshow', array('art_object_id' => $art_object_id));
 	}
 	
-	/*
+	/**
 	 * gets the images paths for the slideshow
+	 * @return array
 	 */
 	public function getImagesForSLideshow()
 	{

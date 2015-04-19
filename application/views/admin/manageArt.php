@@ -104,6 +104,8 @@
 	<?php endif; ?>
 	
 <!-- /NOTIFICATIONS -->
+
+<!-- Start of artObject table -->	
 <div class="col-md-12">          
       <table class="table table-hover">
         <thead>

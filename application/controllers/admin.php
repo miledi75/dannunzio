@@ -1,6 +1,11 @@
 <?php
 class admin extends CI_Controller
 {
+	/**
+	 * displays the admin homepage
+	 * loads the new items from the database models
+	 * and passes them to the view
+	 */
 	public function home()
 	{
 		//LOAD THE SALES MODEL
