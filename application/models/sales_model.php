@@ -112,4 +112,23 @@ class Sales_model extends CI_Model
 		$this->db->where('sales_id', $sales_id);
 		return $this->db->update('tbl_sales', $data);
 	}
+	
+	/**
+	 * updates the locked state of an artobject
+	 * 1 == locked for sale
+	 * 0 == released for sale
+	 * @param unknown $artobject_id
+	 * @param unknown $lock
+	 * @return Ambigous <object, boolean, string, mixed, unknown>
+	 */
+	function update_lock_artObject($artobject_id,$lock)
+	{
+		$data = array(
+				'locked_for_sale' => $lock,
+				
+		);
+		
+		$this->db->where('art_object_id', $artobject_id);
+		return $this->db->update('tbl_art_objects', $data);
+	}
 }

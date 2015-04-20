@@ -27,23 +27,31 @@ class processSales extends CI_Controller
 		$title = $this->input->post('title');
 		$artist = $this->input->post('artist');
 		
-		$data = array(
-				'id'      => $art_object_id,
-				'qty'     => 1,
-				'price'   => $price,
-				'name'    => $title,
-				'artist'  =>  $artist
-		);
+		//LOCK ITEM IN DATABASE
+		$locked = $this->sales_model->update_lock_artObject($art_object_id,1);
+		 
 		
-		if($this->cart->insert($data))
+		if($locked)
 		{
-			$response = 1;
+			$data = array(
+					'id'      => $art_object_id,
+					'qty'     => 1,
+					'price'   => $price,
+					'name'    => $title,
+					'artist'  =>  $artist
+			);
+			
+			if($this->cart->insert($data))
+			{
+				$response = 1;
+			}
+			else
+			{
+				$response = 0;
+			}
+			echo $response;
 		}
-		else
-		{
-			$response = 0;
-		}
-		echo $response;
+		
 	}
 	
 	
@@ -55,20 +63,29 @@ class processSales extends CI_Controller
 	{
 		$art_object_id =  $this->input->post('id');
 		
+		//RELEASE THE ARTOBJECT LOCK
+		$locked = $this->sales_model->update_lock_artObject($art_object_id,0);
+		
 		//run through the shoppingcart items and set the quantity to 0
 		$response = 0;
-		foreach ($this->cart->contents() as $item)
+		
+		
+		if($locked)
 		{
-			if($item['id'] == $art_object_id)
+			foreach ($this->cart->contents() as $item)
 			{
-				$data = array(
-					'rowid'   => $item['rowid'],
-					'qty'     => 0
-				);
-				$this->cart->update($data);
-				$response = 1;
+				if($item['id'] == $art_object_id)
+				{
+					$data = array(
+							'rowid'   => $item['rowid'],
+							'qty'     => 0
+					);
+					$this->cart->update($data);
+					$response = 1;
+				}
 			}	
 		}
+		
 		echo $response;
 	}
 	
