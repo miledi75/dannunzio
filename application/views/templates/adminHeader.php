@@ -6,7 +6,7 @@ if(null == $this->session->userdata('logged_in'))
 }
 else 
 {
-	if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'admin')
+	if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'subadmin')
 	{
 		redirect(base_url('pages/home'));
 	}
@@ -67,9 +67,11 @@ else
                     <li>
                         <a href="<?php echo base_url('admin/manageCustomers');?>">Manage customers</a>
                     </li>
+                    <?php if($this->session->userdata('role') == 'admin'):?>
                     <li>
                         <a href="<?php echo base_url('admin/manageUsers');?>">Manage users</a>
                     </li>
+                    <?php endif;?>
 					<li>
                         <a href="<?php echo base_url('admin/manageShowrooms');?>">Manage showrooms</a>
                     </li>
