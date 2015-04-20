@@ -93,7 +93,7 @@ class pages extends CI_Controller
 		$this->load->model('artobject_model');
 		$artObjects = $this->artobject_model->getArtObjectsByArtefactType($showroom);
 		
-		
+		//var_dump($artObjects);
 		$data['shopName'] = "D'annunzio art gallery";
 		$data['types'] = $this->artifacts;
 		$data['artObjects'] = $artObjects;

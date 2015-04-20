@@ -8,12 +8,15 @@ class processSales extends CI_Controller
 	{
 		parent::__construct();
 		
-		//LOAD THE MODELS
+		//LOAD THE SALES MODEL
 		$this->load->model('sales_model');
 		
 		//LOAD SHOWROOM MODEL
 		$this->load->model('showroom_model');
 		$this->artifacts = $this->showroom_model->getPublishedShowrooms();
+		
+		//LOAD ARTOBJECT MODEL
+		$this->load->model('showroom_model');
 	}
 	
 	/**
@@ -91,6 +94,7 @@ class processSales extends CI_Controller
 	
 	/**
 	 * registers the sale for approval
+	 * 
 	 */
 	function saleFinished()
 	{
@@ -102,10 +106,16 @@ class processSales extends CI_Controller
 			{
 				$success = false;
 			}
+			else
+			{
+				if(!$this->sales_model->update_sold_status_artobject($item['id'], 1))
+				{
+					$success = false;
+				}
+			}
 		}
 		if($success)
 		{
-			
 			//DESTROY THE CART SESSION
 			$this->cart->destroy();
 			
@@ -157,6 +167,10 @@ class processSales extends CI_Controller
 		echo $response;
 	}
 	
+	/**
+	 * approve the sale
+	 * @param unknown $sale_id
+	 */
 	function approveSale($sale_id)
 	{
 		$approved = $this->sales_model->approveSale($sale_id);

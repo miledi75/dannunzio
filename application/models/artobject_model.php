@@ -91,7 +91,9 @@ class Artobject_model extends CI_Model
 							tbl_images.image_name,
       						tbl_images.image_path,
 		 					tbl_art_objects.description,
-		 					tbl_art_objects.art_object_id
+		 					tbl_art_objects.art_object_id,
+		 					tbl_art_objects.locked_for_sale,
+		 					tbl_art_objects.sold
   						FROM
 							 (((db_dannunzio.tbl_art_objects tbl_art_objects
           				INNER JOIN db_dannunzio.tbl_art_period tbl_art_period
