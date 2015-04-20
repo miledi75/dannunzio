@@ -1,3 +1,17 @@
+<?php 
+//MAKE SURE ONLY ADMIN AND SUBADMINS ARE ALLOWED
+if(null == $this->session->userdata('logged_in'))
+{
+	redirect(base_url('pages/home'));
+}
+else 
+{
+	if($this->session->userdata('role') != 'admin' && $this->session->userdata('role') != 'admin')
+	{
+		redirect(base_url('pages/home'));
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
