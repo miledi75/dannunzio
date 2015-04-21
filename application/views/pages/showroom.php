@@ -6,7 +6,7 @@
 <?php 
 foreach ($artObjects as $artObject)
 {
-	$artist 		= 	$artObject->name."".$artObject->surname;
+	$artist 		= 	$artObject->name." ".$artObject->surname;
 	$title 			=  	$artObject->title; 
 	$price 			=  	$artObject->price;
 	$art_object_id 	=  	$artObject->art_object_id;

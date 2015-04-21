@@ -163,7 +163,6 @@
 
 <div class="modal fade" data-backdrop="static" id="addNewArtObjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<form class="form-inline-table" method="POST" action="<?=base_url('processArtObject/newArtObject')?>" enctype="multipart/form-data">
 			<div class="modal-content">
 			  <div class="modal-header">
 	              <!-- kruisje bovenaan -->
@@ -171,7 +170,7 @@
 				  <!-- /kruisje bovenaan -->
 				  <h4 class="modal-title" id="titleModalLabel">Add new art object</h4>
 			  </div>
-			  
+			  <form class="form-inline-table" id="newArtobjectForm" method="POST" action="<?=base_url('processArtObject/newArtObject')?>" enctype="multipart/form-data">
 			  <div class="modal-body">
 				 <div class="form-group">
 					<label for="inputTitle">Artwork title</label>
@@ -207,7 +206,7 @@
 				 
 				 <div class="form-group">
 				      <label for="input-month">Date	</label>
-				      <input name="date" id="input-month" class="form-control input-sm" type="month" value="2015-03">
+				      <input name="date" id="input-date" class="form-control input-sm" type="month" value="2015-03">
 				 </div>
 				 <div class="form-group">
 				      <label for="inputPrice">Price</label>
@@ -225,13 +224,22 @@
 	    			 Browse <input id="imgArtObject" class="form-control" type="file" name="image">
 					 </span>
 				 </div>
+				 <div class="form-group">
+				 	<div class="alert alert-danger alert-dismissible" role="alert" id="createArtobjectMessageModal" style="display:none">
+		     		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  						<span aria-hidden="true">&times;</span>
+					</button>
+				 </div>
 				 
+				</form>	 
 			  </div>
 			  <div class="modal-footer">
-				 <button type="submit" class="btn btn-success">Add to collection</button>
+				 <a class="btn btn-success" onclick="registerNewArtObject()">Add to collection</a>
 				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			  </div>
-			</form>
+				
+			  </div>
+			
 		</div>
 	</div>
 </div>

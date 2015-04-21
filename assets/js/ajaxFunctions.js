@@ -143,7 +143,79 @@ function processNewEvent()
 	
 }
 
+/**
+ * register art object functions
+ */
 
+function  registerNewArtObject()
+{
+	//HIDING THE MESSAGES
+	$('#createArtobjectMessageModal').html('');
+	$('#createArtobjectMessageModal').css("display", "none");
+	
+	//VALIDATION using JQUERY AND AJAX
+	success = true;
+	message = "The following fields need input:<br>";
+	
+	if($('#inputTitle').val() == "")
+	{
+		
+		message += 'Title, ';
+		success = false;
+	}
+	
+	if($('#input-date').val() == "")
+	{
+		
+		message += 'Date';
+		success = false;
+	}
+	
+	if($('#inputPrice').val() == "")
+	{
+		
+		message += 'Price, ';
+		success = false;
+	}	
+	
+	if($('#inputDescription').val() == "")
+	{
+		
+		message += 'Description, ';
+		success = false;
+	}	
+	
+	if($('#imgArtObject').val() == "")
+	{
+		
+		message += 'Image, ';
+		success = false;
+	}
+	
+	if(success)
+	{
+		/**
+		 * check if price is > 0
+		 */
+		if(parseFloat($('#inputPrice').val()) > 0)
+		{
+			$('#newArtobjectForm').submit();
+		}
+		else
+		{
+			message = 'Price must be greater than 0';
+			$('#createArtobjectMessageModal').html(message);
+			$('#createArtobjectMessageModal').css("display", "block");
+		}
+	}
+	else
+	{
+		$('#createArtobjectMessageModal').html(message);
+		$('#createArtobjectMessageModal').css("display", "block");
+	}
+	
+	
+}
 
 /**
  * REGISTER USER FUNCTIONS
