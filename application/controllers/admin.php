@@ -224,13 +224,13 @@ class admin extends CI_Controller
 		
 		//COUNTING THE CUSTOMERS
 		
-		$num_of_customers = $this->user_model->countCustomers();
+		$num_of_users = $this->user_model->countCustomers();
 		
 		$this->load->library('pagination');
 		
 		
 		$config['base_url'] = base_url('/admin/manageCustomers/');
-		$config['total_rows'] = $num_of_customers;
+		$config['total_rows'] = $num_of_users;
 		$config['per_page'] = 8;
 		$config["uri_segment"] = 3;
 		$choice = $config["total_rows"] / $config["per_page"];
@@ -284,8 +284,8 @@ class admin extends CI_Controller
 		
 		//COUNTING THE CUSTOMERS
 	
-		$num_of_customers = $this->user_model->countUsers();
-	
+		$num_of_customers = $this->user_model->countUsers()[0]->total;
+		
 		$this->load->library('pagination');
 	
 		$config['base_url'] = base_url('admin/manageUsers/');

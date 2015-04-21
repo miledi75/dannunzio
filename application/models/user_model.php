@@ -99,7 +99,7 @@ class User_model extends CI_Model {
 	public function getUsers($limit,$start)
 	{
 		
-	$sql = "SELECT tbl_users.user_id,
+	echo $sql = "SELECT tbl_users.user_id,
        tbl_user_data.surname,
        tbl_user_data.name,
        tbl_user_roles.user_role,
@@ -109,6 +109,8 @@ class User_model extends CI_Model {
            ON (tbl_users.user_role_id = tbl_user_roles.user_role_id))
        INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
           ON (tbl_users.user_id = tbl_user_data.user_id)
+		WHERE
+		(tbl_users.user_role_id =1 OR tbl_users.user_role_id =2)
 		AND (tbl_users.archived = 0) LIMIT $limit offset $start";
 		
 		$query = $this->db->query($sql);
@@ -122,7 +124,15 @@ class User_model extends CI_Model {
 	 */
 	public function countUsers()
 	{
-		return $this->db->count_all("tbl_users");
+		 $sql = 'SELECT count(user_id) as total
+		 		FROM tbl_users 
+		 		WHERE 
+		 		(user_role_id =1 OR user_role_id =2)
+				AND (tbl_users.archived = 0)';
+		
+		$query = $this->db->query($sql,array(1,2));
+		
+		return $query->result();
 	}
 	
 	/**
@@ -132,7 +142,7 @@ class User_model extends CI_Model {
 	{
 		//GETTING THE CUSTOMERS (BUYERS AND ARTISTS, 3 AND 4)
 		
-		$sql = 'SELECT tbl_users.user_id,
+	 $sql = 'SELECT tbl_users.user_id,
        tbl_user_data.surname,
        tbl_user_data.name,
        tbl_user_roles.user_role,
