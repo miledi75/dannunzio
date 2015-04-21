@@ -21,14 +21,14 @@ class pages extends CI_Controller
 	
 	public function findArtobject()
 	{
-		$query_artObject =  $this->input->post('q_customer');
+		$query_artObject =  $this->input->post('q_art');
 	
 		//LOAD THE MODEL
-		$this->load->model('user_model');
-		$users= $this->user_model->findCustomer($query_cust);
-	
+		$this->load->model('artobject_model');
+		$artObjects= $this->artobject_model->findArtobject($query_artObject);
+		
 		$data['pageTitle'] = "Manage customers";
-		$data['customers'] = $users;
+		$data['artObjects'] = $artObjects;
 		$data['cat1'] = "Add customer";
 		$data['cat2'] = "empty";
 		$data['cat3'] = "empty";
@@ -36,11 +36,14 @@ class pages extends CI_Controller
 		$data["links"] = 0;
 		$data['userCreated'] = 0;
 		$data['userDeleted'] = 0;
+		
+		$data['shopName'] = "Search results";
+		$data['types'] = $this->artifacts;
 	
-		$this->load->view('templates/adminHeader', $data);
-		$this->load->view('admin/manageCustomers');
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/showroom');
 	
-		$this->load->view('templates/adminFooter', $data);
+		$this->load->view('templates/footer', $data);
 	
 	
 	}

@@ -101,7 +101,7 @@
 				    
 			<!-- Search box -->
 			<div class="col-sm-3 col-md-3 pull-right">
-				<form class="navbar-form" role="search">
+				<form class="navbar-form" method="POST" action="<?php echo base_url('pages/findArtobject');?>"role="search">
 					<div class="input-group">
 					    <input type="text" class="form-control form-control" placeholder="Find art..." name="q_art">
 					    <div class="input-group-btn">

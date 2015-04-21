@@ -9,6 +9,44 @@ class Artobject_model extends CI_Model
 		$this->load->database();
 	}
 	
+	function findArtobject($query)
+	{
+		$sql = "SELECT tbl_art_objects.title,
+       						tbl_user_data.name,
+       						tbl_user_data.surname,
+       						tbl_artefact_type.artefact_type,
+       						tbl_art_period.art_period,
+       						tbl_art_objects.price,
+       						tbl_art_objects.date,
+							tbl_images.image_name,
+      						tbl_images.image_path,
+		 					tbl_art_objects.description,
+		 					tbl_art_objects.art_object_id,
+		 					tbl_art_objects.locked_for_sale,
+		 					tbl_art_objects.sold
+  						FROM
+							 (((db_dannunzio.tbl_art_objects tbl_art_objects
+          				INNER JOIN db_dannunzio.tbl_art_period tbl_art_period
+             			ON (tbl_art_objects.art_period_id = tbl_art_period.art_period_id))
+         				INNER JOIN db_dannunzio.tbl_images tbl_images
+            			ON (tbl_art_objects.art_object_id = tbl_images.art_object_id))
+        				INNER JOIN db_dannunzio.tbl_artefact_type tbl_artefact_type
+           				ON (tbl_art_objects.artefact_type_id = tbl_artefact_type.artefact_type_id))
+       					INNER JOIN db_dannunzio.tbl_user_data tbl_user_data
+          				ON (tbl_art_objects.artist_id = tbl_user_data.user_id)
+						WHERE archived=0
+        				AND (tbl_artefact_type.artefact_type LIKE '%$query%')
+        				OR
+        				(tbl_user_data.name LIKE '%$query%')
+        				OR
+        				(tbl_user_data.surName LIKE '%$query%')
+        				OR
+        				(tbl_art_objects.title LIKE '%$query%')
+        				ORDER BY tbl_art_objects.title";
+		$query = $this->db->query($sql,array($query,$query,$query,$query));
+		return $query->result();
+	}
+	
 	/**
 	 * inserts an artobject id and path in the slideshow table
 	 * @param unknown $art_object_id
