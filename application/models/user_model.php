@@ -99,7 +99,7 @@ class User_model extends CI_Model {
 	public function getUsers($limit,$start)
 	{
 		
-	echo $sql = "SELECT tbl_users.user_id,
+	 $sql = "SELECT tbl_users.user_id,
        tbl_user_data.surname,
        tbl_user_data.name,
        tbl_user_roles.user_role,
