@@ -33,7 +33,7 @@
 	
 	
 	<?php 
-	var_dump($this->session->all_userdata());
+	//var_dump($this->session->all_userdata());
 	?>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
