@@ -94,6 +94,51 @@ class processUser extends CI_Controller
 			redirect('pages/register/2');
 		}
 	}
+	
+	/**
+	 * adds a new Customer to the system
+	 * this function gets called from the admin section
+	 */
+	function newCustomer()
+	{
+		//GET POST VARS
+	
+		$name = $this->input->post('name');
+		$surname = $this->input->post('surname');
+		$email = $this->input->post('email');
+		$cell = $this->input->post('cell');
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$street = $this->input->post('street');
+		$number = $this->input->post('number');
+		$postalcode = $this->input->post('postalcode');
+		$town = $this->input->post('town');
+		$country = $this->input->post('country');
+		$user_role_id = $this->input->post('user_role_id');
+	
+	
+	
+		$N_user = array('userName' => $username,'password' => $password, 'email' => $email, 'user_role_id' => $user_role_id);
+	
+		$N_address = array('street' => $street,'number' => $number, 'postal_code' => $postalcode, 'town' => $town, 'country' => $country);
+	
+		$N_user_data = array('name' => $name, 'surname' => $surname, 'cell_phone' => $cell);
+	
+		$insert = $this->user_model->insert_user($N_user,$N_address,$N_user_data);
+		if($insert)
+		{
+			//ARTIST OR BUYER = REDIRECT TO CUSTOMER PAGE
+			if($user_role_id == 3 || $user_role_id == 4)
+			{
+				redirect('/admin/manageCustomers/0/userCreated', 'refresh');
+			}
+			else //ADMIN OR SUBADMIN = REDIRECT TO USERS PAGE
+			{
+				redirect('/admin/manageCustomers/0/userCreated', 'refresh');
+			}
+		}
+	}
+	
 	/**
 	 * adds a new user to the system
 	 * this function gets called from the admin section
@@ -129,11 +174,11 @@ class processUser extends CI_Controller
 			//ARTIST OR BUYER = REDIRECT TO CUSTOMER PAGE
 			if($user_role_id == 3 || $user_role_id == 4) 
 			{
-				redirect('/admin/manageCustomers/0/userCreated', 'refresh');
+				redirect('/admin/manageUsers/0/userCreated', 'refresh');
 			}
 			else //ADMIN OR SUBADMIN = REDIRECT TO USERS PAGE
 			{
-				redirect('/admin/manageCustomers/0/userCreated', 'refresh');
+				redirect('/admin/manageUsers/0/userCreated', 'refresh');
 			}
 		}
 	}
@@ -240,6 +285,19 @@ class processUser extends CI_Controller
 	}
 	
 	function deleteUser($user_id)
+	{
+		$delete = $this->user_model->deleteUser($user_id);
+		if($delete)
+		{
+			redirect(base_url('admin/manageUsers/0/userDeleted'));
+		}
+		else
+		{
+			redirect(base_url('admin/manageUsers/0/nothing'));
+		}
+	}
+	
+	function deleteCustomer($user_id)
 	{
 		$delete = $this->user_model->deleteUser($user_id);
 		if($delete)

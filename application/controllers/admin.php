@@ -319,7 +319,14 @@ class admin extends CI_Controller
 			$data['userCreated'] = false;
 		}
 	
-	
+		if($action =='userDeleted')
+		{
+			$data['userDeleted'] = true;
+		}
+		else
+		{
+			$data['userDeleted'] = false;
+		}
 			
 	
 		$this->load->view('templates/adminHeader', $data);

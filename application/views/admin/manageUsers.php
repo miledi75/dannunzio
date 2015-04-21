@@ -35,6 +35,14 @@
 </div>
 </div>
 <?php endif; ?>
+<?php if ($userDeleted): ?>
+<div class="col-md-3">  
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  User deleted succesfully!
+</div>
+</div>
+<?php endif; ?>
 <div class="col-md-12">          
    <table class="table table-hover">
    		<thead>
@@ -60,9 +68,9 @@
 		        <button class="btn btn-sm dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
 		        <span class="caret"></span></button>
 		        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal">Delete</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal">Edit</a></li>
-		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal">View extra info</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#deleteUserModal<?=$customer->user_id?>">Delete</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#editUserModal<?=$customer->user_id?>">Edit</a></li>
+		          <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#viewExtraInfoUserModal<?=$customer->user_id?>	">View extra info</a></li>
 		      </ul>
 		      </div>
             </td>
@@ -85,8 +93,8 @@
 <!--  user modals -->
 
 <!-- deleteUserModals -->
-
-<div class="modal fade" data-backdrop="static" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<?php foreach ($customers as $customer): ?>
+<div class="modal fade" data-backdrop="static" id="deleteUserModal<?=$customer->user_id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			  <div class="modal-header">
@@ -102,14 +110,14 @@
 			  	</p>
 			  </div>
 			  <div class="modal-footer">
-			  	<button type="submit" class="btn btn-danger" data-toggle="modal" data-dismiss="modal" data-target="#deleteConfirmModal">Proceed</button>
+			  	<button type="submit" class="btn btn-danger"  data-dismiss="modal" onclick="deleteUser(<?=$customer->user_id?>)">Proceed</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			  </div>
 	
 		</div>
 	</div>
 </div>
-
+<?php endforeach; ?>
 <!-- /deleteUserModal -->
 
 <!-- createUserModal -->
@@ -123,7 +131,7 @@
 				  <!-- /kruisje bovenaan -->
 				  <h4 class="modal-title" id="titleModalLabel">Add new User</h4>
 			  </div>
-			  <form class="form-inline-table" method="POST" action="<?=base_url('processUser/newUser');?>">
+			  <form class="form-inline-table" id="createUserForm" method="POST" action="<?=base_url('processUser/newUser');?>">
 			  <div class="modal-body">
 				 <div class="form-group">
 					<label for="inputType">User type:</label>
@@ -188,9 +196,16 @@
 					 <label for="inputCountry">Country:</label>
 					 <input type="text" name="country" id="inputCountry" class="form-control input-sm">
 				 </div>
+				 <div class="form-group">
+				 	<div class="alert alert-danger alert-dismissible" role="alert" id="createUserMessageModal" style="display:none">
+		     		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+				</div>
 			  </div>
 			  <div class="modal-footer">
-				 <button type="submit" class="btn btn-success">Create User</button>
+				 <a type="submit" class="btn btn-success" onclick="registerUser()">Create User</a>
 				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			  </div>
 			</form>

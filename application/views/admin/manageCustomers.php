@@ -31,7 +31,7 @@
 <div class="col-md-3">  
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  User created succesfully!
+  Customer created succesfully!
 </div>
 </div>
 <?php endif; ?>
@@ -40,7 +40,7 @@
 <div class="col-md-3">  
 <div class="alert alert-success alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  User deleted succesfully!
+  Customer deleted succesfully!
 </div>
 </div>
 <?php endif; ?>
@@ -132,7 +132,7 @@
 				  <!-- /kruisje bovenaan -->
 				  <h4 class="modal-title" id="titleModalLabel">Add new Customer</h4>
 			  </div>
-			  <form class="form-inline-table" method="POST" action="<?=base_url('processUser/newUser');?>">
+			  <form class="form-inline-table" id="createCustomerForm" method="POST" action="<?=base_url('processUser/newCustomer');?>">
 			  <div class="modal-body">
 				 <div class="form-group">
 					<label for="inputType">User type:</label>
@@ -197,9 +197,16 @@
 					 <label for="inputCountry">Country:</label>
 					 <input type="text" name="country" id="inputCountry" class="form-control input-sm">
 				 </div>
+				 <div class="form-group">
+				 	<div class="alert alert-danger alert-dismissible" role="alert" id="createUserMessageModal" style="display:none">
+		     		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+				</div>
 			  </div>
 			  <div class="modal-footer">
-				 <button type="submit" class="btn btn-success">Create User</button>
+				 <a class="btn btn-success" onclick="registerCustomer()">Create User</a>
 				 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			  </div>
 			</form>

@@ -50,6 +50,17 @@ function deleteUser(user_id)
 }
 
 /**
+ * delete the user
+ * @param user_id
+ */
+function deleteCustomer(user_id)
+{
+	url = "http://localhost/dannunzio/processUser/deleteCustomer/"+user_id;
+	redirect(url);
+}
+
+
+/**
  * checks and performs the event update
  */
 
@@ -221,6 +232,221 @@ function  registerNewArtObject()
  * REGISTER USER FUNCTIONS
  */
 
+
+function registerCustomer()
+{
+	//HIDING THE MESSAGES
+	$('#createUserMessageModal').html('');
+	$('#createUserMessageModal').css("display", "none");
+	
+//VALIDATION using JQUERY AND AJAX
+	
+	success = true;
+	message = "The following fields need input:<br>";
+	if($('#inputName').val() == "")
+	{
+		
+		message += 'Name';
+		success = false;
+	}
+	
+	if($('#inputSurname').val() == "")
+	{
+		message += ', Surname';
+		success = false;
+	}
+	
+	if($('#inputEmail').val() == "")
+	{
+		message += ', Email';
+		success = false;
+	}
+	
+	if($('#inputUserName').val() == "")
+	{
+		
+		message += ', Username';
+		success = false;
+	}
+	
+	if($('#inputPassword').val() == "")
+	{
+		
+		message += ', Password';
+		success = false;
+	}
+	
+	if($('#inputPassword2').val() == "")
+	{
+		message += ', Retype Password';
+		success = false;
+	}
+	if(success)
+	{
+		/**
+		 * check if passwords match
+		 */
+		if($('#inputPassword').val() == $('#inputPassword2').val())
+		{
+			/**
+			 * CHECK IF USERNAME AND EMAIL ARE UNIQUE
+			 * USING AJAX REQUEST
+			 */
+			$.post("http://localhost/dannunzio/processUser/checkUserNameExists",
+			{
+				        userName: 	$('#inputUserName').val(),
+				        email:		$('#inputEmail').val()
+			},
+				    function(data, status)
+				    {
+				      
+					   if(status == 'success')
+				       {
+				    	   if(data == 1) //USERNAME TAKEN
+				    	   {
+				    		   message = "This username is already taken!";
+				    		   $('#createUserMessageModal').html(message);
+					   		   $('#createUserMessageModal').css("display", "block");
+					    	   
+				    	   }
+				    	   else if(data == 2) //EMAIL TAKEN
+				    	   {
+				    		   message = "This email is already taken!";
+				    		   $('#createUserMessageModal').html(message);
+					   		   $('#createUserMessageModal').css("display", "block");
+					    	   
+				    	   }
+				    	   else
+				           {
+				    		   $('#createCustomerForm').submit();
+				           }
+				    	}
+				    });
+		}
+		else
+		{
+			message = "Your passwords do not match!";
+			$('#createUserMessageModal').html(message);
+			$('#createUserMessageModal').css("display", "block");
+		}
+		
+	}
+	else
+	{
+		$('#createUserMessageModal').html(message);
+		$('#createUserMessageModal').css("display", "block");
+	}
+	
+}
+
+
+function registerUser()
+{
+	//HIDING THE MESSAGES
+	$('#createUserMessageModal').html('');
+	$('#createUserMessageModal').css("display", "none");
+	
+//VALIDATION using JQUERY AND AJAX
+	
+	success = true;
+	message = "The following fields need input:<br>";
+	if($('#inputName').val() == "")
+	{
+		
+		message += 'Name';
+		success = false;
+	}
+	
+	if($('#inputSurname').val() == "")
+	{
+		message += ', Surname';
+		success = false;
+	}
+	
+	if($('#inputEmail').val() == "")
+	{
+		message += ', Email';
+		success = false;
+	}
+	
+	if($('#inputUserName').val() == "")
+	{
+		
+		message += ', Username';
+		success = false;
+	}
+	
+	if($('#inputPassword').val() == "")
+	{
+		
+		message += ', Password';
+		success = false;
+	}
+	
+	if($('#inputPassword2').val() == "")
+	{
+		message += ', Retype Password';
+		success = false;
+	}
+	if(success)
+	{
+		/**
+		 * check if passwords match
+		 */
+		if($('#inputPassword').val() == $('#inputPassword2').val())
+		{
+			/**
+			 * CHECK IF USERNAME AND EMAIL ARE UNIQUE
+			 * USING AJAX REQUEST
+			 */
+			$.post("http://localhost/dannunzio/processUser/checkUserNameExists",
+			{
+				        userName: 	$('#inputUserName').val(),
+				        email:		$('#inputEmail').val()
+			},
+				    function(data, status)
+				    {
+				      
+					   if(status == 'success')
+				       {
+				    	   if(data == 1) //USERNAME TAKEN
+				    	   {
+				    		   message = "This username is already taken!";
+				    		   $('#createUserMessageModal').html(message);
+					   		   $('#createUserMessageModal').css("display", "block");
+					    	   
+				    	   }
+				    	   else if(data == 2) //EMAIL TAKEN
+				    	   {
+				    		   message = "This email is already taken!";
+				    		   $('#createUserMessageModal').html(message);
+					   		   $('#createUserMessageModal').css("display", "block");
+					    	   
+				    	   }
+				    	   else
+				           {
+				    		   $('#createUserForm').submit();
+				           }
+				    	}
+				    });
+		}
+		else
+		{
+			message = "The passwords do not match!";
+			$('#createUserMessageModal').html(message);
+			$('#createUserMessageModal').css("display", "block");
+		}
+		
+	}
+	else
+	{
+		$('#createUserMessageModal').html(message);
+		$('#createUserMessageModal').css("display", "block");
+	}
+	
+}
+
+
 function registerNewUserFromStore()
 {
 	//HIDING THE MESSAGES
@@ -275,6 +501,8 @@ function registerNewUserFromStore()
 		message += ', Captcha';
 		success = false;
 	}
+	
+	
 	
 	
 	
